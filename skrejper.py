@@ -30,7 +30,8 @@ UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
 # Prva verzija je koristila 1 za "polupansion" i 9 za "all inclusive" — oboje pogresno,
 # pa su hoteli sa samo dorucakom bili oznaceni kao polupansion. Zato dole stoji
 # samoprovera koja svaki put potvrdi znacenje koda iz same stranice.
-PANSION = {"PP": ("9", "polupansion", "Breakfast & dinner included"),
+PANSION = {"ND": ("1", "noćenje s doručkom", "Breakfast included"),
+           "PP": ("9", "polupansion", "Breakfast & dinner included"),
            "FB": ("3", "pun pansion", "All meals included"),
            "AI": ("4", "all inclusive", "All-inclusive")}
 

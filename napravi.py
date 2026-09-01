@@ -23,6 +23,24 @@ if not det_put.exists():
 else:
     det = json.loads(det_put.read_text("utf-8"))
 
+# Booking-ov filter "Breakfast included" (mealplan=1) je NADSKUP: vraca i hotele
+# cija je najjeftinija ponuda polupansion ili all inclusive, jer i oni ukljucuju
+# dorucak. Zato se pansion NE izvodi iz filtera nego iz teksta na samoj kartici.
+TEKST_U_PANSION = {
+    "all-inclusive": "AI", "all inclusive": "AI",
+    "all meals included": "FB", "full board": "FB",
+    "breakfast & dinner included": "PP", "half board": "PP",
+    "breakfast included": "ND",
+    "self catering": "NA",
+}
+
+
+def pansion_od(p):
+    """Pravi pansion ponude: prvo tekst sa kartice, pa filter kao rezerva."""
+    t = (p.get("pansionTekst") or "").strip().lower()
+    return TEKST_U_PANSION.get(t) or p["pansion"]
+
+
 # --- spoji po hotelu -----------------------------------------------------------
 h = {}
 for p in pon["ponude"]:
@@ -34,10 +52,10 @@ for p in pon["ponude"]:
     })
     # najbliza pretraga pobedjuje kao "mesto" hotela
     r["gradovi"][p["grad"]] = p["udaljenost"]
-    c = p["cena"]
-    if c and (p["pansion"] not in r["cene"] or c < r["cene"][p["pansion"]]):
-        r["cene"][p["pansion"]] = c
-        r["soba"][p["pansion"]] = p["soba"]
+    c, pan = p["cena"], pansion_od(p)
+    if c and (pan not in r["cene"] or c < r["cene"][pan]):
+        r["cene"][pan] = c
+        r["soba"][pan] = p["soba"]
     r["plazaBlizu"] |= p["plazaBlizu"]
     r["takseUkljucene"] &= p["takseUkljucene"]
     for f in ("ocena", "brOcena", "zvezdice"):
@@ -130,6 +148,11 @@ TEZINE = {"ocena": 0.34, "cena": 0.18, "plaza": 0.18, "centar": 0.10,
           "zivost": 0.10, "pansion": 0.10}
 
 
+# Koliko pansion vredi za njihov zadatak. Dorucak nije bezvredan (ostaje im budzet
+# za taverne), ali polupansion i AI resavaju vecere — zato je stepenovano.
+BOD_PANSION = {"AI": 1.0, "FB": 0.9, "PP": 0.7, "ND": 0.4, "NA": 0.25}
+
+
 def preporuka(cena, ocena, brOcena, plazaM, centarM, zivost, imaAI, uBudzetu):
     d = {
         # 6.5 je "prolazno" na Booking-u, 9.6 je prakticni maksimum
@@ -139,7 +162,7 @@ def preporuka(cena, ocena, brOcena, plazaM, centarM, zivost, imaAI, uBudzetu):
         "plaza":   skala(plazaM, 0, 800),
         "centar":  skala(centarM, 0, 1200),
         "zivost":  (zivost - 1) / 4,
-        "pansion": 1.0 if imaAI else 0.65,
+        "pansion": imaAI,      # vec stepenovano u pozivu
     }
     # Nedostajuci podatak ne kaznjava i ne nagradjuje - dobija sredinu.
     bodovi = sum(TEZINE[k] * (0.5 if v is None else v) for k, v in d.items())
@@ -180,8 +203,10 @@ for rec in h.values():
         continue                 # hoteli van mesta se ne prikazuju (odluka korisnika)
     if centarM is None:
         centarM = round(off * 1000)
+    najboljiPansion = max(rec["cene"], key=lambda k: BOD_PANSION.get(k, 0.3))
     bodovi, razrada = preporuka(naj, rec["ocena"], rec["brOcena"], plazaM,
-                                centarM, m["zivost"], "AI" in rec["cene"],
+                                centarM, m["zivost"],
+                                BOD_PANSION.get(najboljiPansion, 0.3),
                                 naj <= BUDZET)
     link = rec["link"] or f"https://www.booking.com/searchresults.html?ss={up.quote_plus(rec['hotel'])}"
     sep = "&" if "?" in link else "?"
@@ -195,6 +220,7 @@ for rec in h.values():
         "bodovi": bodovi, "razrada": razrada,
         "zvezdice": rec["zvezdice"], "ocena": rec["ocena"], "brOcena": rec["brOcena"],
         "cene": rec["cene"], "najniza": naj, "soba": rec["soba"],
+        "najboljiPansion": najboljiPansion,
         "udaljenostOdCentra": udaljTekst,
         "plazaBlizu": rec["plazaBlizu"], "takseUkljucene": rec["takseUkljucene"],
         "uBudzetu": naj <= BUDZET,
@@ -252,12 +278,15 @@ for fajl, atr in (("podaci.js", "src"), ("app.js", "src"), ("stil.css", "href"))
                   '%s="%s?v=%s"' % (atr, fajl, verzija), html)
 ih.write_text(html, "utf-8")
 
+from collections import Counter
+raspodela = Counter(k for r in out for k in r["cene"])
 ai = [r for r in out if "AI" in r["cene"]]
 bezPlaze = [r for r in out if r["plazaM"] is None]
 print(f"podaci.js: {len(out)} hotela iz {len({r['grad'] for r in out})} mesta")
 print(f"  u budžetu (≤{BUDZET} €): {sum(r['uBudzetu'] for r in out)}")
 print(f"  ima all inclusive: {len(ai)}, od toga u budžetu: {sum(r['uBudzetu'] for r in ai)}")
 print(f"  verzija zalepljena na index.html: ?v={verzija}")
+print(f"  po pansionu: " + ", ".join(f"{k}={v}" for k, v in sorted(raspodela.items())))
 print(f"  bez podatka o plaži: {len(bezPlaze)}"
       + ("   <-- SVI! detalji.json nije uvezan" if len(bezPlaze) == len(out) else ""))
 if NEPOZNATA:

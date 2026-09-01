@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Grčka 05.–13.09.2026 — pregled za mamu i tatu</title>
-<link rel="stylesheet" href="stil.css?v=202609011950">
+<link rel="stylesheet" href="stil.css?v=202609011958">
 </head>
 <body>
 <div class="wrap">
@@ -31,15 +31,25 @@
     ispravljeno i skrejper <strong>sam proverava</strong> značenje koda na svakoj strani i prekida
     rad ako se ne poklapa. Uz to, pansion se čita i sa same kartice hotela: svih 293 ponude se
     poklapaju sa filterom, bez izuzetka.</p>
-    <p><strong>Zbog toga je lista mnogo kraća nego pre.</strong> Pravi polupansion i all inclusive
-    su znatno rjeđi od doručka: ostalo je 22 hotela umesto 79, a u budžetu 3 umesto „21“.
-    Onaj prvi broj je bio pogrešan, ovaj je tačan.</p>
+    <p><strong>Doručak je namerno vraćen na listu</strong> — ako se odluče da večeraju po
+    tavernama, to je često i bolja varijanta: ostaje im budžet za jelo, a u mestu kao Hanioti ili
+    Paralija restorani su nadohvat ruke. Samo je sada <em>tačno označeno</em> šta je šta.
+    Pansion se čita <strong>iz teksta na samoj kartici hotela</strong>, ne iz filtera — jer je
+    Booking-ov filter „Breakfast included“ nadskup: vraća i hotele čija je najjeftinija ponuda
+    polupansion ili all inclusive, pošto i oni uključuju doručak.</p>
+    <p>Gde hotel ima <strong>više opcija</strong>, kartica prikazuje obe cene i razliku između
+    njih — tako se odmah vidi koliko večere realno koštaju kod tog hotela.</p>
     <p><strong>Cene su stvarne, pročitane sa Booking-a za tačno ove datume</strong> — nisu procena
     i nisu „od“ cene. Pretraga sa upisanim datumima vraća samo ono što je slobodno, a objekti
     označeni <em>sold out</em> su prepoznati po kartici i izbačeni. Znači: hotel na ovoj listi je
     <strong>bio slobodan za 05.–13.09. u trenutku čitanja</strong>. Ali cene i slobodne sobe se
     menjaju iz sata u sat — pre uplate proveri klikom na link.</p>
   </div>
+
+  <h3>Filter je po defaultu na 1.100 €</h3>
+  <p>Kad se strana otvori, <strong>uključen je filter „Samo u budžetu“</strong> — vidi se samo ono
+    što staje u 1.100 € za 8 noći za dvoje. Skuplji hoteli nisu izbačeni, samo su sklonjeni:
+    isključi tu kućicu i pojave se svi, sa oznakom <em>„preko budžeta“</em>.</p>
 
   <h3>All inclusive ne staje u budžet — i to je važno</h3>
   <p>Na Booking-u za ove datume <strong>najjeftiniji all inclusive je 1.978 €</strong> za dvoje
@@ -147,7 +157,7 @@
   </div>
 
   <div class="red">
-    <label><input type="checkbox" id="samo-budzet"> Samo u budžetu (do 1.100 €)</label>
+    <label><input type="checkbox" id="samo-budzet" checked> Samo u budžetu (do 1.100 €)</label>
     <label><input type="checkbox" id="samo-u-mestu"> Samo u samom mestu (ne okolina)</label>
   </div>
 
@@ -195,7 +205,7 @@
 
 </div>
 
-<script src="podaci.js?v=202609011950"></script>
+<script src="podaci.js?v=202609011958"></script>
 <script>
 // Statistika na vrhu se računa iz podataka, da ne može da se raziđe sa listom.
 (function () {
@@ -207,8 +217,10 @@
   document.getElementById("prikupljeno").textContent = PRIKUPLJENO;
   document.getElementById("hdr-prikupljeno").textContent = PRIKUPLJENO;
   document.getElementById("statistika").innerHTML = [
-    [HOTELI.length, "hotela sa pravim polupansionom ili all inclusive", ""],
-    [uB.length, "od njih u budžetu do 1.100 € za 8 noći", uB.length ? "dobro" : "lose"],
+    [uB.length, "hotela u budžetu do 1.100 € za 8 noći (od " + HOTELI.length + " ukupno)",
+      uB.length ? "dobro" : "lose"],
+    [HOTELI.filter(h => h.cene.PP && h.cene.PP <= BUDZET).length,
+      "od njih sa polupansionom u budžetu", ""],
     [aiB.length, "all inclusive u budžetu (najjeftiniji AI je " +
       Math.min(...ai.map(h => h.cene.AI)).toLocaleString("sr-RS") + " €)", aiB.length ? "dobro" : "lose"],
     [naj.toLocaleString("sr-RS") + " €", "najniža cena na listi, za dvoje", ""],
@@ -218,12 +230,12 @@
     plaza: "blizina plaže (0 m = pun broj, 800 m i dalje = nula)",
     centar: "blizina centra mesta (0 m = pun broj, 1,2 km i dalje = nula)",
     zivost: "živost mesta — da im ne bude dosadno",
-    pansion: "pansion (all inclusive vredi više od polupansiona)" };
+    pansion: "pansion — all inclusive 100%, pun pansion 90%, polupansion 70%, samo doručak 40%" };
   document.getElementById("tezine-lista").innerHTML = Object.entries(TEZINE)
     .sort((a, b) => b[1] - a[1])
     .map(([k, v]) => `<li><strong>${Math.round(v * 100)}%</strong> — ${IME[k]}</li>`).join("");
 })();
 </script>
-<script src="app.js?v=202609011950"></script>
+<script src="app.js?v=202609011958"></script>
 </body>
 </html>

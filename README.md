@@ -56,8 +56,15 @@ koristila je `mealplan=1` kao „polupansion“ i `mealplan=9` kao „all inclus
 | `mealplan=9` | **Breakfast & dinner included** (polupansion) |
 | `mealplan=999` | Self catering |
 
-Posledica greške: hoteli sa samo doručkom bili su prikazani kao polupansion, i lista je izgledala
-skoro četiri puta bogatija nego što jeste (79 hotela, „21 u budžetu“ — stvarno 22 i 3).
+Posledica greške: hoteli sa samo doručkom bili su prikazani kao polupansion.
+
+**Doručak je posle namerno vraćen na listu** (Boris: „ostavi doručak opcije možda se odluče“) — ako
+se odluče da večeraju po tavernama, ostaje im budžet za jelo. Samo je sada tačno označeno šta je šta.
+
+**Pansion se NE izvodi iz filtera nego iz teksta na kartici hotela.** Booking-ov
+„Breakfast included“ je **nadskup**: od 297 ponuda koje taj filter vrati, 63 su stvarno polupansion
+i 18 all inclusive, jer i oni uključuju doručak. Zato `napravi.py` mapira `pansionTekst` sa kartice
+u pansion (`TEKST_U_PANSION`), a filter koristi samo kao rezervu.
 
 Dve zaštite da se ne ponovi:
 
@@ -70,6 +77,12 @@ Dve zaštite da se ne ponovi:
 Pun pansion je pretražen u svih 17 mesta i **nema ni jedan slobodan hotel** za ove datume, zato se
 taj čip i ne pojavljuje — čipovi za pansion se prave iz podataka, da se nikad ne nudi filter koji
 daje nulu.
+
+## Podrazumevani filter
+
+Strana se otvara sa **uključenim filterom „Samo u budžetu“** (do 1.100 €) — 21 od 79 hotela.
+Skuplji nisu izbačeni, samo sklonjeni; isključivanjem kućice se pojave svi, sa oznakom
+„preko budžeta“.
 
 ## All inclusive ne staje u budžet
 
@@ -92,7 +105,7 @@ Svaki hotel dobija 0–100 bodova, i razrada je vidljiva na kartici pod *„Zaš
 | 18% | blizina plaže (0 m = pun broj, 800 m i dalje = nula) |
 | 10% | blizina centra mesta (0 m = pun broj, 1,2 km i dalje = nula) |
 | 10% | živost mesta (ručna ocena iz `mesta.json`) |
-| 10% | pansion (all inclusive 1,0 · polupansion 0,65) |
+| 10% | pansion — all inclusive 1,0 · pun pansion 0,9 · polupansion 0,7 · samo doručak 0,4 |
 
 Kažnjavanja: **preko budžeta → bodovi prepolovljeni** (hotel se vidi ali pada nisko);
 **manje od 40 ocena → −15%**, jer ocena od 20 ljudi ne vredi kao ocena od 400.
@@ -170,12 +183,21 @@ Cene stare za dan-dva. Osvežavanje:
 Novo mesto: dodaj u `GRADOVI` u `skrejper.py` (km izračunaj OSRM-om, ne prepisuj sa sajta hotela)
 i u `mesta.json` (`ime`, `km`, `vozOko`, `zivost`, `tekst`).
 
+`napravi.py` lepi `?v=<datum prikupljanja>` na `podaci.js`, `app.js` i `stil.css` u `index.html` —
+bez toga pretraživač servira stari `podaci.js` iz keša (Pages šalje `max-age=600`) i strana pokazuje
+jučerašnje hotele. U headeru se prikazuje datum prikupljanja, da se odmah vidi koja je verzija.
+
+Ako Pages zaglavi i ne rebuild-uje, proveri da `.nojekyll` postoji — bez njega Pages provlači sajt
+kroz Jekyll i build je znao da stoji 20+ minuta.
+
 `kes/`, `ponude.json` i `detalji.json` su međurezultati — ako ne treba da idu na GitHub, dodaj ih u `.gitignore`.
 
 ## Zamke na koje se naletelo
 
 Sve su bile prave greške u podacima, ne u kodu — i sve su ostavile trag u skriptama:
 
+- **Filter `mealplan=1` je nadskup, ne „samo doručak“** — vraća i polupansion i all inclusive.
+  Pansion se mora čitati sa kartice, ne iz filtera po kome je hotel nađen.
 - **Booking-ovi `mealplan` kodovi nisu ono što izgledaju** — vidi sekciju o pansionu gore. Ovo je
   bila najskuplja greška: oznaka je vađena iz prozora *ispred* poklapanja, pa su vrednosti zamenjene.
   Uvek uzimaj oznaku koja stoji POSLE inputa, u istom `<label>`.
