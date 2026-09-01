@@ -25,18 +25,20 @@ const OSOBA = 2;
 const BUDZET = 1100;
 const PRIKUPLJENO = "2026-09-01 18:28";
 
+const TEZINE = {"ocena": 0.34, "cena": 0.18, "plaza": 0.18, "centar": 0.1, "zivost": 0.1, "pansion": 0.1};
+
 const MESTA = {
- "Sozopoli": {
-  "km": 48,
-  "vozOko": "47 min",
-  "zivost": 2,
-  "tekst": "Malo primorsko naselje pored Nea Plagije, uglavnom apartmani i vile, po nekoliko taverni. Mirno i blizu Solunu, ali MANJE od Nea Kalikratije — pada na kriterijumu „da im ne bude dosadno“."
+ "Nea Kalikratija": {
+  "km": 42,
+  "vozOko": "42 min",
+  "zivost": 4,
+  "tekst": "Mesto u kome su već bili i mera za sve ostalo. Pravo naselje koje živi i van sezone: duga šetnica uz more, puno taverni, pekara i kafića, ambulanta, pijaca. Najbliže Solunu od svega na listi — može se otići u grad na pola dana i vratiti na spavanje. Plaže su korektne ali ne kao na Kasandri: voda je u Termajskom zalivu, plića i manje prozirna."
  },
- "Nea Moudania": {
-  "km": 61,
-  "vozOko": "56 min",
-  "zivost": 5,
-  "tekst": "Pravi gradić (oko 10.000 ljudi), najveće naselje na ulazu u Halkidiki. Najbolji izbor restorana, kafića i radnji od svih mesta na listi, radi cele godine. Ali to je grad a ne letovalište — plaža je osrednja i nije glavna stvar mesta. Dobra baza za auto, slabije za „sedi na plaži 8 dana“."
+ "Nea Potidea": {
+  "km": 68,
+  "vozOko": "63 min",
+  "zivost": 2,
+  "tekst": "Na samom grlu Kasandre, kod prokopanog kanala iz antike — kanal i ostaci Potidejinog zida su lepa kratka šetnja. Selo je malo, ali TU SU VELIKI ALL INCLUSIVE HOTELI, i to je jedini all inclusive kraj koji je realno blizu Solunu (68 km umesto 110). Van hotela nema mnogo restorana — život je u hotelu, što uz all inclusive i nije mana."
  },
  "Paralia Katerinis": {
   "km": 73,
@@ -44,11 +46,11 @@ const MESTA = {
   "zivost": 5,
   "tekst": "Druga strana zaliva, Pierija, ispod Olimpa. Ogromna pešačka zona sa stotinama restorana, kafića i radnji — najveća vreva na celoj listi i tradicionalno puna naših ljudi, pa se svuda progovori srpski. Dve mane: more je plitko i manje prozirno nego na Kasandri, i hoteli su tu skoro svi noćenje s doručkom, malo ih je sa polupansionom ili all inclusive."
  },
- "Nea Fokea": {
-  "km": 81,
-  "vozOko": "76 min",
-  "zivost": 2,
-  "tekst": "Malo selo sa vizantijskom kulom na rtu i simpatičnom lučicom — lepo za oko, ali mirno i manje od Nea Kalikratije."
+ "Olimpik Bič": {
+  "km": 76,
+  "vozOko": "61 min",
+  "zivost": 4,
+  "tekst": "Olimpik Bič, produžetak Paralije Katerinis ka jugu i praktično isti kraj — šetnica sa restoranima i radnjama, mirnije i malo pristupačnije od same Paralije. Blizu Solunu (76 km) i puno naših ljudi. Isto ograničenje kao Paralija: more je plitko i manje prozirno nego na Kasandri."
  },
  "Sani": {
   "km": 84,
@@ -62,11 +64,41 @@ const MESTA = {
   "zivost": 2,
   "tekst": "Početak Sitonije, borovi do same plaže, mirno i familijarno. Nekoliko taverni i osnovne radnje — tiše i manje od Nea Kalikratije."
  },
+ "Afitos": {
+  "km": 86,
+  "vozOko": "78 min",
+  "zivost": 4,
+  "tekst": "Jedno od najlepših mesta na Kasandri i jedino koje je sačuvalo staru arhitekturu — kamene kuće, uske kaldrmisane ulice, i taverne na samoj ivici litice sa pogledom na more i Olimp u daljini. Selo je na visini, pa se do plaže silazi (i penje). Uveče je živo, puno restorana i kafića, ali bez bučnog noćnog života kao Kalitea. Po živosti otprilike kao Nea Kalikratija, a po lepoti mesta iznad svega ostalog na listi."
+ },
+ "Mola Kaliva": {
+  "km": 86,
+  "vozOko": "78 min",
+  "zivost": 2,
+  "tekst": "Obalni deo ispod Afitosa — plaže i hoteli, bez pravog centra. Prednost je što je Afitos, jedno od najlepših sela na Kasandri, na par minuta autom."
+ },
+ "Kalives": {
+  "km": 87,
+  "vozOko": "88 min",
+  "zivost": 2,
+  "tekst": "Mali primorski kraj pored Psakudije, pretežno hoteli i apartmani. Lepe plaže, ali mesta kao takvog skoro da nema — za restorane se ide u Psakudiju ili Gerakini."
+ },
+ "Psakoudia": {
+  "km": 88,
+  "vozOko": "89 min",
+  "zivost": 2,
+  "tekst": "Mirno letovalište na ulazu u Sitoniju, borovi i duga plaža, familijarno. Malo taverni, tiše i manje od Nea Kalikratije."
+ },
  "Kriopigi": {
   "km": 89,
   "vozOko": "82 min",
   "zivost": 3,
   "tekst": "Selo na brdu iznad obale, sa lepim pogledom i tavernama u gornjem delu. Šarmantno, ali između hotela na plaži i sela je ozbiljan uspon — nije za svakodnevnu šetnju gore-dole peške."
+ },
+ "Fourka": {
+  "km": 95,
+  "vozOko": "101 min",
+  "zivost": 2,
+  "tekst": "Malo mesto na zapadnoj obali Kasandre, uglavnom apartmani i nekoliko taverni. Duga peščana plaža i mirnije veče — manje od Nea Kalikratije."
  },
  "Kalitea": {
   "km": 96,
@@ -80,6 +112,12 @@ const MESTA = {
   "zivost": 3,
   "tekst": "Srednje veliko letovalište sa dugom plažom i solidnim izborom taverni, mirnije od Haniotija i Kalitee ali nikako dosadno. Dobar kompromis između vreve i mira."
  },
+ "Nea Skioni": {
+  "km": 108,
+  "vozOko": "104 min",
+  "zivost": 3,
+  "tekst": "Ribarsko selo na jugozapadu Kasandre sa lučicom i nekoliko taverni uz more. Mirnije i manje od Nea Kalikratije, ali ima svoj centar i život — nije samo hotelski kraj. Voda je ovde bistra, plaže mnogo lepše nego u Termajskom zalivu."
+ },
  "Hanioti": {
   "km": 109,
   "vozOko": "103 min",
@@ -92,52 +130,234 @@ const MESTA = {
   "zivost": 4,
   "tekst": "Pravo mesto sa starim gornjim selom od kamenih kuća, dugom plažom i dobrim izborom taverni — po veličini i živosti otprilike kao Nea Kalikratija ili malo iznad. Odatle su najlepši izleti po Sitoniji."
  },
+ "Ormos Panagias": {
+  "km": 112,
+  "vozOko": "110 min",
+  "zivost": 2,
+  "tekst": "Mala luka u Sitoniji odakle idu brodići na krstarenje oko Svete Gore — to je glavni razlog da se dođe. Nekoliko riblјih taverni na vodi, inače mirno."
+ },
  "Pefkohori": {
   "km": 113,
   "vozOko": "107 min",
   "zivost": 5,
   "tekst": "Po karakteru gotovo isto što i Hanioti — duga plaža, živa šetnica, puno restorana i kafića. Najdalje mesto na listi. Iz njega su lepi izleti do juga poluostrva (Hruso, Loutra)."
+ },
+ "Paliouri": {
+  "km": 116,
+  "vozOko": "117 min",
+  "zivost": 2,
+  "tekst": "Malo tradicionalno selo na jugu Kasandre, iznad obale. Mirno, sa par taverni; za veći izbor se ide u Pefkohori. Jedno od najdaljih mesta na listi."
+ },
+ "Vourvourou": {
+  "km": 116,
+  "vozOko": "114 min",
+  "zivost": 2,
+  "tekst": "Jedan od najlepših delova Sitonije — plitka bistra laguna i ostrvca Dijaporos. Mesto je malo i raštrkano, sa par taverni; dolazi se zbog vode i prirode, ne zbog vreve."
  }
 };
 
 const HOTELI = [
  {
-  "id": "viraggas-traditional-hotel",
-  "hotel": "Viraggas Traditional hotel",
-  "grad": "Metamorfosi",
-  "mesto": "Metamorfosi",
-  "km": 85,
-  "vozOko": "81 min",
-  "zivost": 2,
-  "uMestu": false,
-  "odCentraKm": 16.9,
-  "kmOpis": "68–102 km",
-  "zvezdice": 4,
-  "ocena": 9.4,
-  "brOcena": 94,
+  "id": "aris",
+  "hotel": "Aris",
+  "grad": "Paralia Katerinis",
+  "mesto": "Paralia Katerinis",
+  "km": 73,
+  "vozOko": "56 min",
+  "zivost": 5,
+  "plazaM": 1,
+  "centarM": 300,
+  "naPlazi": true,
+  "centarMesto": "Paralia Katerinis",
+  "aerodromKm": 91,
+  "bodovi": 79,
+  "razrada": {
+   "ocena": 100,
+   "cena": 15,
+   "plaza": 100,
+   "centar": 75,
+   "zivost": 100,
+   "pansion": 65
+  },
+  "zvezdice": 2,
+  "ocena": 9.6,
+  "brOcena": 90,
   "cene": {
-   "PP": 716
+   "PP": 1023
   },
-  "najniza": 716,
+  "najniza": 1023,
   "soba": {
-   "PP": "Double Room with Terrace"
+   "PP": "Triple Room with Garden View"
   },
-  "udaljenostOdCentra": "16.9 km from Metamorfosi",
-  "plazaBlizu": false,
+  "udaljenostOdCentra": "300 m from centre",
+  "plazaBlizu": true,
   "takseUkljucene": true,
   "uBudzetu": true,
   "linkovi": [
    {
     "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/viraggas.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+    "url": "https://www.booking.com/hotel/gr/aris-paralia-katerinis.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
    },
    {
     "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Viraggas+Traditional+hotel+Metamorfosi+Greece&qs=CAE&ap=MABoAA"
+    "url": "https://www.google.com/travel/search?q=Aris+Paralia+Katerinis+Greece&qs=CAE&ap=MABoAA"
    },
    {
     "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Viraggas+Traditional+hotel+Metamorfosi+Greece&dr-20260905-20260913=&rc-2="
+    "url": "https://www.trivago.com/en-US/srl?query=Aris+Paralia+Katerinis+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "hanioti-hotel",
+  "hotel": "Hanioti hotel",
+  "grad": "Hanioti",
+  "mesto": "Hanioti",
+  "km": 109,
+  "vozOko": "103 min",
+  "zivost": 5,
+  "plazaM": 100,
+  "centarM": 50,
+  "naPlazi": true,
+  "centarMesto": "Hanioti",
+  "aerodromKm": 87,
+  "bodovi": 77,
+  "razrada": {
+   "ocena": 90,
+   "cena": 27,
+   "plaza": 88,
+   "centar": 96,
+   "zivost": 100,
+   "pansion": 65
+  },
+  "zvezdice": 2,
+  "ocena": 9.3,
+  "brOcena": 375,
+  "cene": {
+   "PP": 967
+  },
+  "najniza": 967,
+  "soba": {
+   "PP": "Twin Room"
+  },
+  "udaljenostOdCentra": "50 m from centre",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": true,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/hanioti.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Hanioti+hotel+Hanioti+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Hanioti+hotel+Hanioti+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "parthenon-art-executive-wing-seaside-collection",
+  "hotel": "Parthenon Art Executive Wing-Seaside Collection",
+  "grad": "Olympiaki Akti",
+  "mesto": "Olimpik Bič",
+  "km": 76,
+  "vozOko": "61 min",
+  "zivost": 4,
+  "plazaM": 50,
+  "centarM": 100,
+  "naPlazi": true,
+  "centarMesto": "Olympiaki Akti",
+  "aerodromKm": 98,
+  "bodovi": 73,
+  "razrada": {
+   "ocena": 94,
+   "cena": 4,
+   "plaza": 94,
+   "centar": 92,
+   "zivost": 75,
+   "pansion": 65
+  },
+  "zvezdice": 1,
+  "ocena": 9.4,
+  "brOcena": 63,
+  "cene": {
+   "PP": 1078
+  },
+  "najniza": 1078,
+  "soba": {
+   "PP": "Superior Triple Room"
+  },
+  "udaljenostOdCentra": "3.3 km from Paralia Katerinis",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": true,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/parthenon-art-boutique-apartments.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Parthenon+Art+Executive+Wing-Seaside+Collection+Olimpik+Bi%C4%8D+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Parthenon+Art+Executive+Wing-Seaside+Collection+Olimpik+Bi%C4%8D+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "olympus-jankaea",
+  "hotel": "Olympus Jankaea",
+  "grad": "Paralia Katerinis",
+  "mesto": "Paralia Katerinis",
+  "km": 73,
+  "vozOko": "56 min",
+  "zivost": 5,
+  "plazaM": 350,
+  "centarM": 200,
+  "naPlazi": true,
+  "centarMesto": "Paralia Katerinis",
+  "aerodromKm": 91,
+  "bodovi": 72,
+  "razrada": {
+   "ocena": 100,
+   "cena": 16,
+   "plaza": 56,
+   "centar": 83,
+   "zivost": 100,
+   "pansion": 65
+  },
+  "zvezdice": 3,
+  "ocena": 9.6,
+  "brOcena": 44,
+  "cene": {
+   "PP": 1021
+  },
+  "najniza": 1021,
+  "soba": {
+   "PP": "Deluxe Room"
+  },
+  "udaljenostOdCentra": "250 m from centre",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": true,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/olympus-jankaea.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Olympus+Jankaea+Paralia+Katerinis+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Olympus+Jankaea+Paralia+Katerinis+Greece&dr-20260905-20260913=&rc-2="
    }
   ]
  },
@@ -149,9 +369,20 @@ const HOTELI = [
   "km": 73,
   "vozOko": "56 min",
   "zivost": 5,
-  "uMestu": true,
-  "odCentraKm": 0.15,
-  "kmOpis": "73 km",
+  "plazaM": 200,
+  "centarM": 100,
+  "naPlazi": true,
+  "centarMesto": "Paralia Katerinis",
+  "aerodromKm": 91,
+  "bodovi": 71,
+  "razrada": {
+   "ocena": 58,
+   "cena": 66,
+   "plaza": 75,
+   "centar": 92,
+   "zivost": 100,
+   "pansion": 65
+  },
   "zvezdice": 2,
   "ocena": 8.3,
   "brOcena": 214,
@@ -182,98 +413,129 @@ const HOTELI = [
   ]
  },
  {
-  "id": "olympus-mediterranean-boutique-hotel",
-  "hotel": "Olympus Mediterranean Boutique Hotel",
+  "id": "hotel-vizantio",
+  "hotel": "Hotel Vizantio",
   "grad": "Paralia Katerinis",
   "mesto": "Paralia Katerinis",
   "km": 73,
   "vozOko": "56 min",
   "zivost": 5,
-  "uMestu": false,
-  "odCentraKm": 20.0,
-  "kmOpis": "53–93 km",
-  "zvezdice": 4,
-  "ocena": 8.4,
-  "brOcena": 849,
-  "cene": {
-   "PP": 785
+  "plazaM": 450,
+  "centarM": 100,
+  "naPlazi": true,
+  "centarMesto": "Paralia Katerinis",
+  "aerodromKm": 91,
+  "bodovi": 71,
+  "razrada": {
+   "ocena": 87,
+   "cena": 45,
+   "plaza": 44,
+   "centar": 92,
+   "zivost": 100,
+   "pansion": 65
   },
-  "najniza": 785,
-  "soba": {
-   "PP": "Double or Twin Room"
-  },
-  "udaljenostOdCentra": "20 km from Paralia Katerinis",
-  "plazaBlizu": false,
-  "takseUkljucene": true,
-  "uBudzetu": true,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/olympus-mediterranean.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Olympus+Mediterranean+Boutique+Hotel+Paralia+Katerinis+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Olympus+Mediterranean+Boutique+Hotel+Paralia+Katerinis+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "coral-blue-beach-hotel-gerakini",
-  "hotel": "Coral Blue Beach Hotel Gerakini",
-  "grad": "Nea Moudania",
-  "mesto": "Nea Moudania",
-  "km": 61,
-  "vozOko": "56 min",
-  "zivost": 5,
-  "uMestu": false,
-  "odCentraKm": 13.2,
-  "kmOpis": "48–74 km",
   "zvezdice": 3,
-  "ocena": 5.5,
-  "brOcena": 245,
+  "ocena": 9.2,
+  "brOcena": 242,
   "cene": {
-   "PP": 795,
-   "AI": 1008
+   "PP": 873
   },
-  "najniza": 795,
+  "najniza": 873,
   "soba": {
-   "PP": "Superior Double or Twin Room",
-   "AI": "Superior Double or Twin Room"
+   "PP": "Studio Ground Floor"
   },
-  "udaljenostOdCentra": "13.2 km from Nea Moudania",
+  "udaljenostOdCentra": "150 m from centre",
   "plazaBlizu": true,
   "takseUkljucene": true,
   "uBudzetu": true,
   "linkovi": [
    {
     "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/coral-blue-beach.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+    "url": "https://www.booking.com/hotel/gr/bizantio.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
    },
    {
     "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Coral+Blue+Beach+Hotel+Gerakini+Nea+Moudania+Greece&qs=CAE&ap=MABoAA"
+    "url": "https://www.google.com/travel/search?q=Hotel+Vizantio+Paralia+Katerinis+Greece&qs=CAE&ap=MABoAA"
    },
    {
     "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Coral+Blue+Beach+Hotel+Gerakini+Nea+Moudania+Greece&dr-20260905-20260913=&rc-2="
+    "url": "https://www.trivago.com/en-US/srl?query=Hotel+Vizantio+Paralia+Katerinis+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "delfini",
+  "hotel": "Delfini",
+  "grad": "Kallithea Halkidiki",
+  "mesto": "Kalitea",
+  "km": 96,
+  "vozOko": "103 min",
+  "zivost": 5,
+  "plazaM": 0,
+  "centarM": 700,
+  "naPlazi": true,
+  "centarMesto": "Kallithea Halkidikis",
+  "aerodromKm": 71,
+  "bodovi": 67,
+  "razrada": {
+   "ocena": 71,
+   "cena": 21,
+   "plaza": 100,
+   "centar": 42,
+   "zivost": 100,
+   "pansion": 65
+  },
+  "zvezdice": 2,
+  "ocena": 8.7,
+  "brOcena": 281,
+  "cene": {
+   "PP": 994
+  },
+  "najniza": 994,
+  "soba": {
+   "PP": "Twin Room"
+  },
+  "udaljenostOdCentra": "0.7 km from centre",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": true,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/delfini-kallithea-halkidikis.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Delfini+Kalitea+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Delfini+Kalitea+Greece&dr-20260905-20260913=&rc-2="
    }
   ]
  },
  {
   "id": "iris-hotel",
   "hotel": "Iris Hotel",
-  "grad": "Sozopoli",
-  "mesto": "Sozopoli",
-  "km": 48,
-  "vozOko": "47 min",
-  "zivost": 2,
-  "uMestu": false,
-  "odCentraKm": 7.8,
-  "kmOpis": "40–56 km",
+  "grad": "Nea Kallikratia",
+  "mesto": "Nea Kalikratija",
+  "km": 42,
+  "vozOko": "42 min",
+  "zivost": 4,
+  "plazaM": 250,
+  "centarM": 300,
+  "naPlazi": true,
+  "centarMesto": "Nea Kalikratia",
+  "aerodromKm": 26,
+  "bodovi": 63,
+  "razrada": {
+   "ocena": 55,
+   "cena": 57,
+   "plaza": 69,
+   "centar": 75,
+   "zivost": 75,
+   "pansion": 65
+  },
   "zvezdice": 2,
   "ocena": 8.2,
   "brOcena": 152,
@@ -295,91 +557,11 @@ const HOTELI = [
    },
    {
     "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Iris+Hotel+Sozopoli+Greece&qs=CAE&ap=MABoAA"
+    "url": "https://www.google.com/travel/search?q=Iris+Hotel+Nea+Kalikratija+Greece&qs=CAE&ap=MABoAA"
    },
    {
     "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Iris+Hotel+Sozopoli+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "hotel-calypso",
-  "hotel": "Hotel Calypso",
-  "grad": "Hanioti",
-  "mesto": "Hanioti",
-  "km": 109,
-  "vozOko": "103 min",
-  "zivost": 5,
-  "uMestu": true,
-  "odCentraKm": 0.15,
-  "kmOpis": "109 km",
-  "zvezdice": 2,
-  "ocena": 7.8,
-  "brOcena": 357,
-  "cene": {
-   "PP": 837
-  },
-  "najniza": 837,
-  "soba": {
-   "PP": "Double Room with Sea or Pool View"
-  },
-  "udaljenostOdCentra": "150 m from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": true,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/calypso-hanioti.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Hotel+Calypso+Hanioti+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Hotel+Calypso+Hanioti+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "giannis-foteini",
-  "hotel": "Giannis & Foteini",
-  "grad": "Kallithea Halkidiki",
-  "mesto": "Kalitea",
-  "km": 96,
-  "vozOko": "103 min",
-  "zivost": 5,
-  "uMestu": true,
-  "odCentraKm": 2.7,
-  "kmOpis": "96 km",
-  "zvezdice": 1,
-  "ocena": 7.5,
-  "brOcena": 240,
-  "cene": {
-   "PP": 839
-  },
-  "najniza": 839,
-  "soba": {
-   "PP": "Double Room"
-  },
-  "udaljenostOdCentra": "2.7 km from Kallithea Halkidikis",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": true,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/giannis.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Giannis+%26+Foteini+Kalitea+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Giannis+%26+Foteini+Kalitea+Greece&dr-20260905-20260913=&rc-2="
+    "url": "https://www.trivago.com/en-US/srl?query=Iris+Hotel+Nea+Kalikratija+Greece&dr-20260905-20260913=&rc-2="
    }
   ]
  },
@@ -391,9 +573,20 @@ const HOTELI = [
   "km": 109,
   "vozOko": "103 min",
   "zivost": 5,
-  "uMestu": true,
-  "odCentraKm": 0.03,
-  "kmOpis": "109 km",
+  "plazaM": 200,
+  "centarM": 50,
+  "naPlazi": true,
+  "centarMesto": "Hanioti",
+  "aerodromKm": 87,
+  "bodovi": 63,
+  "razrada": {
+   "ocena": 42,
+   "cena": 49,
+   "plaza": 75,
+   "centar": 96,
+   "zivost": 100,
+   "pansion": 65
+  },
   "zvezdice": 3,
   "ocena": 7.8,
   "brOcena": 116,
@@ -424,6 +617,365 @@ const HOTELI = [
   ]
  },
  {
+  "id": "alexandrina",
+  "hotel": "Alexandrina",
+  "grad": "Mola Kalyva",
+  "mesto": "Mola Kaliva",
+  "km": 86,
+  "vozOko": "78 min",
+  "zivost": 2,
+  "plazaM": 150,
+  "centarM": 2600,
+  "naPlazi": true,
+  "centarMesto": "Mola Kalyva",
+  "aerodromKm": 89,
+  "bodovi": 60,
+  "razrada": {
+   "ocena": 100,
+   "cena": 11,
+   "plaza": 81,
+   "centar": 0,
+   "zivost": 25,
+   "pansion": 65
+  },
+  "zvezdice": 4,
+  "ocena": 9.7,
+  "brOcena": 161,
+  "cene": {
+   "PP": 1046
+  },
+  "najniza": 1046,
+  "soba": {
+   "PP": "Standard Double Room"
+  },
+  "udaljenostOdCentra": "6.6 km from Polykhrono",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": true,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/alexandrina.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Alexandrina+Mola+Kaliva+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Alexandrina+Mola+Kaliva+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "hotel-calypso",
+  "hotel": "Hotel Calypso",
+  "grad": "Hanioti",
+  "mesto": "Hanioti",
+  "km": 109,
+  "vozOko": "103 min",
+  "zivost": 5,
+  "plazaM": 350,
+  "centarM": 100,
+  "naPlazi": true,
+  "centarMesto": "Hanioti",
+  "aerodromKm": 87,
+  "bodovi": 60,
+  "razrada": {
+   "ocena": 42,
+   "cena": 53,
+   "plaza": 56,
+   "centar": 92,
+   "zivost": 100,
+   "pansion": 65
+  },
+  "zvezdice": 2,
+  "ocena": 7.8,
+  "brOcena": 357,
+  "cene": {
+   "PP": 837
+  },
+  "najniza": 837,
+  "soba": {
+   "PP": "Double Room with Sea or Pool View"
+  },
+  "udaljenostOdCentra": "150 m from centre",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": true,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/calypso-hanioti.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Hotel+Calypso+Hanioti+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Hotel+Calypso+Hanioti+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "villa-cariatis",
+  "hotel": "VILLA CARIATIS",
+  "grad": "Nea Kallikratia",
+  "mesto": "Nea Kalikratija",
+  "km": 42,
+  "vozOko": "42 min",
+  "zivost": 4,
+  "plazaM": 150,
+  "centarM": 300,
+  "naPlazi": true,
+  "centarMesto": "Nea Kalikratia",
+  "aerodromKm": 27,
+  "bodovi": 59,
+  "razrada": {
+   "ocena": 58,
+   "cena": 18,
+   "plaza": 81,
+   "centar": 75,
+   "zivost": 75,
+   "pansion": 65
+  },
+  "zvezdice": 2,
+  "ocena": 8.3,
+  "brOcena": 330,
+  "cene": {
+   "PP": 1010
+  },
+  "najniza": 1010,
+  "soba": {
+   "PP": "Standard Double or Twin Room with Balcony"
+  },
+  "udaljenostOdCentra": "7.7 km from Sozopoli",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": true,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/villa-cariatis-nea-kallikratia1.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=VILLA+CARIATIS+Nea+Kalikratija+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=VILLA+CARIATIS+Nea+Kalikratija+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "rahoni-cronwell-hotel-by-diomedes-group",
+  "hotel": "Rahoni Cronwell Hotel by Diomedes Group",
+  "grad": "Nea Skioni",
+  "mesto": "Nea Skioni",
+  "km": 108,
+  "vozOko": "104 min",
+  "zivost": 3,
+  "plazaM": 350,
+  "centarM": 400,
+  "naPlazi": true,
+  "centarMesto": "Nea Skioni",
+  "aerodromKm": 94,
+  "bodovi": 55,
+  "razrada": {
+   "ocena": 55,
+   "cena": 24,
+   "plaza": 56,
+   "centar": 67,
+   "zivost": 50,
+   "pansion": 100
+  },
+  "zvezdice": 5,
+  "ocena": 8.2,
+  "brOcena": 131,
+  "cene": {
+   "AI": 981,
+   "PP": 1083
+  },
+  "najniza": 981,
+  "soba": {
+   "AI": "Family Room",
+   "PP": "Family Room"
+  },
+  "udaljenostOdCentra": "7 km from Hanioti",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": true,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/rahoni-cronwell-by-diomedes-group.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Rahoni+Cronwell+Hotel+by+Diomedes+Group+Nea+Skioni+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Rahoni+Cronwell+Hotel+by+Diomedes+Group+Nea+Skioni+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "hotel-giannoulis",
+  "hotel": "Hotel Giannoulis",
+  "grad": "Paralia Katerinis",
+  "mesto": "Paralia Katerinis",
+  "km": 73,
+  "vozOko": "56 min",
+  "zivost": 5,
+  "plazaM": 650,
+  "centarM": 2300,
+  "naPlazi": true,
+  "centarMesto": "Paralia Katerinis",
+  "aerodromKm": 93,
+  "bodovi": 52,
+  "razrada": {
+   "ocena": 87,
+   "cena": 14,
+   "plaza": 19,
+   "centar": 0,
+   "zivost": 100,
+   "pansion": 65
+  },
+  "zvezdice": 3,
+  "ocena": 9.2,
+  "brOcena": 377,
+  "cene": {
+   "PP": 1032
+  },
+  "najniza": 1032,
+  "soba": {
+   "PP": "Economy Double Room"
+  },
+  "udaljenostOdCentra": "2.3 km from centre",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": true,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/giannoulis-paralia.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Hotel+Giannoulis+Paralia+Katerinis+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Hotel+Giannoulis+Paralia+Katerinis+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "lemon-garden",
+  "hotel": "Lemon Garden",
+  "grad": "Pefkochori",
+  "mesto": "Pefkohori",
+  "km": 113,
+  "vozOko": "107 min",
+  "zivost": 5,
+  "plazaM": 550,
+  "centarM": 300,
+  "naPlazi": true,
+  "centarMesto": "Pefkohori",
+  "aerodromKm": 91,
+  "bodovi": 48,
+  "razrada": {
+   "ocena": 42,
+   "cena": 22,
+   "plaza": 31,
+   "centar": 75,
+   "zivost": 100,
+   "pansion": 65
+  },
+  "zvezdice": 3,
+  "ocena": 7.8,
+  "brOcena": 53,
+  "cene": {
+   "PP": 988
+  },
+  "najniza": 988,
+  "soba": {
+   "PP": "Studio (2 Adults)"
+  },
+  "udaljenostOdCentra": "300 m from centre",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": true,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/lemon-garden.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Lemon+Garden+Pefkohori+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Lemon+Garden+Pefkohori+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "melite-luxury-rooms-apartments",
+  "hotel": "Melite Luxury Rooms & Apartments",
+  "grad": "Paliouri",
+  "mesto": "Paliouri",
+  "km": 116,
+  "vozOko": "117 min",
+  "zivost": 2,
+  "plazaM": 2300,
+  "centarM": 300,
+  "naPlazi": true,
+  "centarMesto": "Paliouri",
+  "aerodromKm": null,
+  "bodovi": 48,
+  "razrada": {
+   "ocena": 90,
+   "cena": 2,
+   "plaza": 0,
+   "centar": 75,
+   "zivost": 25,
+   "pansion": 65
+  },
+  "zvezdice": 4,
+  "ocena": 9.3,
+  "brOcena": 363,
+  "cene": {
+   "PP": 1090
+  },
+  "najniza": 1090,
+  "soba": {
+   "PP": "Deluxe Semi-Basement Room"
+  },
+  "udaljenostOdCentra": "6.8 km from Pefkohori",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": true,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/melite-luxury-paliouri.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Melite+Luxury+Rooms+%26+Apartments+Paliouri+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Melite+Luxury+Rooms+%26+Apartments+Paliouri+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
   "id": "haris-hotel-by-diomedes-group",
   "hotel": "Haris Hotel by Diomedes Group",
   "grad": "Hanioti",
@@ -431,9 +983,20 @@ const HOTELI = [
   "km": 109,
   "vozOko": "103 min",
   "zivost": 5,
-  "uMestu": true,
-  "odCentraKm": 0.9,
-  "kmOpis": "109 km",
+  "plazaM": 350,
+  "centarM": 800,
+  "naPlazi": true,
+  "centarMesto": "Hanioti",
+  "aerodromKm": 86,
+  "bodovi": 46,
+  "razrada": {
+   "ocena": 13,
+   "cena": 46,
+   "plaza": 56,
+   "centar": 33,
+   "zivost": 100,
+   "pansion": 100
+  },
   "zvezdice": 3,
   "ocena": 6.9,
   "brOcena": 274,
@@ -466,96 +1029,27 @@ const HOTELI = [
   ]
  },
  {
-  "id": "hotel-vizantio",
-  "hotel": "Hotel Vizantio",
-  "grad": "Paralia Katerinis",
-  "mesto": "Paralia Katerinis",
-  "km": 73,
-  "vozOko": "56 min",
-  "zivost": 5,
-  "uMestu": true,
-  "odCentraKm": 0.15,
-  "kmOpis": "73 km",
-  "zvezdice": 3,
-  "ocena": 9.2,
-  "brOcena": 242,
-  "cene": {
-   "PP": 873
-  },
-  "najniza": 873,
-  "soba": {
-   "PP": "Studio Ground Floor"
-  },
-  "udaljenostOdCentra": "150 m from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": true,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/bizantio.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Hotel+Vizantio+Paralia+Katerinis+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Hotel+Vizantio+Paralia+Katerinis+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "blue-dream-poseidi",
-  "hotel": "Blue Dream Poseidi",
-  "grad": "Sani",
-  "mesto": "Sani",
-  "km": 84,
-  "vozOko": "83 min",
-  "zivost": 1,
-  "uMestu": false,
-  "odCentraKm": 15.5,
-  "kmOpis": "68–100 km",
-  "zvezdice": 3,
-  "ocena": 9.2,
-  "brOcena": 38,
-  "cene": {
-   "PP": 886
-  },
-  "najniza": 886,
-  "soba": {
-   "PP": "One-Bedroom Apartment"
-  },
-  "udaljenostOdCentra": "15.5 km from Sani Beach",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": true,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/blue-dream-poseidi.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Blue+Dream+Poseidi+Sani+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Blue+Dream+Poseidi+Sani+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
   "id": "pefkon-suites",
   "hotel": "Pefkon Suites",
-  "grad": "Nea Fokea",
-  "mesto": "Nea Fokea",
-  "km": 81,
-  "vozOko": "76 min",
-  "zivost": 2,
-  "uMestu": true,
-  "odCentraKm": 3.0,
-  "kmOpis": "81 km",
+  "grad": "Afitos",
+  "mesto": "Afitos",
+  "km": 86,
+  "vozOko": "78 min",
+  "zivost": 4,
+  "plazaM": 700,
+  "centarM": 1600,
+  "naPlazi": true,
+  "centarMesto": "Afitos",
+  "aerodromKm": 67,
+  "bodovi": 45,
+  "razrada": {
+   "ocena": 61,
+   "cena": 42,
+   "plaza": 12,
+   "centar": 0,
+   "zivost": 75,
+   "pansion": 65
+  },
   "zvezdice": null,
   "ocena": 8.4,
   "brOcena": 388,
@@ -577,373 +1071,62 @@ const HOTELI = [
    },
    {
     "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Pefkon+Suites+Nea+Fokea+Greece&qs=CAE&ap=MABoAA"
+    "url": "https://www.google.com/travel/search?q=Pefkon+Suites+Afitos+Greece&qs=CAE&ap=MABoAA"
    },
    {
     "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Pefkon+Suites+Nea+Fokea+Greece&dr-20260905-20260913=&rc-2="
+    "url": "https://www.trivago.com/en-US/srl?query=Pefkon+Suites+Afitos+Greece&dr-20260905-20260913=&rc-2="
    }
   ]
  },
  {
-  "id": "hanioti-hotel",
-  "hotel": "Hanioti hotel",
-  "grad": "Hanioti",
-  "mesto": "Hanioti",
-  "km": 109,
-  "vozOko": "103 min",
-  "zivost": 5,
-  "uMestu": true,
-  "odCentraKm": 0.05,
-  "kmOpis": "109 km",
-  "zvezdice": 2,
-  "ocena": 9.3,
-  "brOcena": 375,
-  "cene": {
-   "PP": 967
+  "id": "giannis-foteini",
+  "hotel": "Giannis & Foteini",
+  "grad": "Afitos",
+  "mesto": "Afitos",
+  "km": 86,
+  "vozOko": "78 min",
+  "zivost": 4,
+  "plazaM": 650,
+  "centarM": 500,
+  "naPlazi": true,
+  "centarMesto": "Afitos",
+  "aerodromKm": 69,
+  "bodovi": 44,
+  "razrada": {
+   "ocena": 32,
+   "cena": 52,
+   "plaza": 19,
+   "centar": 58,
+   "zivost": 75,
+   "pansion": 65
   },
-  "najniza": 967,
-  "soba": {
-   "PP": "Twin Room"
-  },
-  "udaljenostOdCentra": "50 m from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": true,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/hanioti.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Hanioti+hotel+Hanioti+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Hanioti+hotel+Hanioti+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "rahoni-cronwell-hotel-by-diomedes-group",
-  "hotel": "Rahoni Cronwell Hotel by Diomedes Group",
-  "grad": "Hanioti",
-  "mesto": "Hanioti",
-  "km": 109,
-  "vozOko": "103 min",
-  "zivost": 5,
-  "uMestu": false,
-  "odCentraKm": 7.0,
-  "kmOpis": "102–116 km",
-  "zvezdice": 5,
-  "ocena": 8.2,
-  "brOcena": 131,
-  "cene": {
-   "AI": 981,
-   "PP": 1083
-  },
-  "najniza": 981,
-  "soba": {
-   "AI": "Family Room",
-   "PP": "Family Room"
-  },
-  "udaljenostOdCentra": "7 km from Hanioti",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": true,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/rahoni-cronwell-by-diomedes-group.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Rahoni+Cronwell+Hotel+by+Diomedes+Group+Hanioti+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Rahoni+Cronwell+Hotel+by+Diomedes+Group+Hanioti+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "aristotelis-hotel",
-  "hotel": "Aristotelis Hotel",
-  "grad": "Kriopigi",
-  "mesto": "Kriopigi",
-  "km": 89,
-  "vozOko": "82 min",
-  "zivost": 3,
-  "uMestu": false,
-  "odCentraKm": 8.3,
-  "kmOpis": "81–97 km",
   "zvezdice": 1,
-  "ocena": 7.9,
-  "brOcena": 178,
+  "ocena": 7.5,
+  "brOcena": 240,
   "cene": {
-   "PP": 982
+   "PP": 839
   },
-  "najniza": 982,
+  "najniza": 839,
   "soba": {
    "PP": "Double Room"
   },
-  "udaljenostOdCentra": "8.3 km from Kriopigi",
+  "udaljenostOdCentra": "2.7 km from Kallithea Halkidikis",
   "plazaBlizu": true,
   "takseUkljucene": true,
   "uBudzetu": true,
   "linkovi": [
    {
     "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/aristoteles.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+    "url": "https://www.booking.com/hotel/gr/giannis.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
    },
    {
     "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Aristotelis+Hotel+Kriopigi+Greece&qs=CAE&ap=MABoAA"
+    "url": "https://www.google.com/travel/search?q=Giannis+%26+Foteini+Afitos+Greece&qs=CAE&ap=MABoAA"
    },
    {
     "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Aristotelis+Hotel+Kriopigi+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "lemon-garden",
-  "hotel": "Lemon Garden",
-  "grad": "Pefkochori",
-  "mesto": "Pefkohori",
-  "km": 113,
-  "vozOko": "107 min",
-  "zivost": 5,
-  "uMestu": true,
-  "odCentraKm": 0.3,
-  "kmOpis": "113 km",
-  "zvezdice": 3,
-  "ocena": 7.8,
-  "brOcena": 53,
-  "cene": {
-   "PP": 988
-  },
-  "najniza": 988,
-  "soba": {
-   "PP": "Studio (2 Adults)"
-  },
-  "udaljenostOdCentra": "300 m from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": true,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/lemon-garden.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Lemon+Garden+Pefkohori+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Lemon+Garden+Pefkohori+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "skion-palace-beach-hotel",
-  "hotel": "Skion Palace Beach Hotel",
-  "grad": "Polychrono",
-  "mesto": "Polihrono",
-  "km": 105,
-  "vozOko": "99 min",
-  "zivost": 3,
-  "uMestu": false,
-  "odCentraKm": 6.7,
-  "kmOpis": "98–112 km",
-  "zvezdice": 4,
-  "ocena": 4.5,
-  "brOcena": 93,
-  "cene": {
-   "PP": 992
-  },
-  "najniza": 992,
-  "soba": {
-   "PP": "Double Room with Garden View"
-  },
-  "udaljenostOdCentra": "6.7 km from Polykhrono",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": true,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/skion-palace-beach-nea-skioni.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Skion+Palace+Beach+Hotel+Polihrono+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Skion+Palace+Beach+Hotel+Polihrono+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "delfini",
-  "hotel": "Delfini",
-  "grad": "Kallithea Halkidiki",
-  "mesto": "Kalitea",
-  "km": 96,
-  "vozOko": "103 min",
-  "zivost": 5,
-  "uMestu": true,
-  "odCentraKm": 0.7,
-  "kmOpis": "96 km",
-  "zvezdice": 2,
-  "ocena": 8.7,
-  "brOcena": 281,
-  "cene": {
-   "PP": 994
-  },
-  "najniza": 994,
-  "soba": {
-   "PP": "Twin Room"
-  },
-  "udaljenostOdCentra": "0.7 km from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": true,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/delfini-kallithea-halkidikis.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Delfini+Kalitea+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Delfini+Kalitea+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "villa-cariatis",
-  "hotel": "VILLA CARIATIS",
-  "grad": "Sozopoli",
-  "mesto": "Sozopoli",
-  "km": 48,
-  "vozOko": "47 min",
-  "zivost": 2,
-  "uMestu": false,
-  "odCentraKm": 7.7,
-  "kmOpis": "40–56 km",
-  "zvezdice": 2,
-  "ocena": 8.3,
-  "brOcena": 330,
-  "cene": {
-   "PP": 1010
-  },
-  "najniza": 1010,
-  "soba": {
-   "PP": "Standard Double or Twin Room with Balcony"
-  },
-  "udaljenostOdCentra": "7.7 km from Sozopoli",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": true,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/villa-cariatis-nea-kallikratia1.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=VILLA+CARIATIS+Sozopoli+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=VILLA+CARIATIS+Sozopoli+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "koukos-inn",
-  "hotel": "Koukos Inn",
-  "grad": "Paralia Katerinis",
-  "mesto": "Paralia Katerinis",
-  "km": 73,
-  "vozOko": "56 min",
-  "zivost": 5,
-  "uMestu": false,
-  "odCentraKm": 13.9,
-  "kmOpis": "59–87 km",
-  "zvezdice": 3,
-  "ocena": 9.2,
-  "brOcena": 26,
-  "cene": {
-   "PP": 1018
-  },
-  "najniza": 1018,
-  "soba": {
-   "PP": "Deluxe Bungalow"
-  },
-  "udaljenostOdCentra": "13.9 km from Paralia Katerinis",
-  "plazaBlizu": false,
-  "takseUkljucene": true,
-  "uBudzetu": true,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/koukos-inn.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Koukos+Inn+Paralia+Katerinis+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Koukos+Inn+Paralia+Katerinis+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "olympus-jankaea",
-  "hotel": "Olympus Jankaea",
-  "grad": "Paralia Katerinis",
-  "mesto": "Paralia Katerinis",
-  "km": 73,
-  "vozOko": "56 min",
-  "zivost": 5,
-  "uMestu": true,
-  "odCentraKm": 0.25,
-  "kmOpis": "73 km",
-  "zvezdice": 3,
-  "ocena": 9.6,
-  "brOcena": 44,
-  "cene": {
-   "PP": 1021
-  },
-  "najniza": 1021,
-  "soba": {
-   "PP": "Deluxe Room"
-  },
-  "udaljenostOdCentra": "250 m from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": true,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/olympus-jankaea.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Olympus+Jankaea+Paralia+Katerinis+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Olympus+Jankaea+Paralia+Katerinis+Greece&dr-20260905-20260913=&rc-2="
+    "url": "https://www.trivago.com/en-US/srl?query=Giannis+%26+Foteini+Afitos+Greece&dr-20260905-20260913=&rc-2="
    }
   ]
  },
@@ -955,9 +1138,20 @@ const HOTELI = [
   "km": 89,
   "vozOko": "82 min",
   "zivost": 3,
-  "uMestu": true,
-  "odCentraKm": 0.6,
-  "kmOpis": "89 km",
+  "plazaM": 950,
+  "centarM": 600,
+  "naPlazi": true,
+  "centarMesto": "Kriopigi",
+  "aerodromKm": 78,
+  "bodovi": 41,
+  "razrada": {
+   "ocena": 55,
+   "cena": 16,
+   "plaza": 0,
+   "centar": 50,
+   "zivost": 50,
+   "pansion": 100
+  },
   "zvezdice": 3,
   "ocena": 8.2,
   "brOcena": 304,
@@ -990,1780 +1184,53 @@ const HOTELI = [
   ]
  },
  {
-  "id": "aris",
-  "hotel": "Aris",
-  "grad": "Paralia Katerinis",
-  "mesto": "Paralia Katerinis",
-  "km": 73,
-  "vozOko": "56 min",
-  "zivost": 5,
-  "uMestu": true,
-  "odCentraKm": 0.3,
-  "kmOpis": "73 km",
-  "zvezdice": 2,
-  "ocena": 9.6,
-  "brOcena": 90,
-  "cene": {
-   "PP": 1023
-  },
-  "najniza": 1023,
-  "soba": {
-   "PP": "Triple Room with Garden View"
-  },
-  "udaljenostOdCentra": "300 m from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": true,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/aris-paralia-katerinis.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Aris+Paralia+Katerinis+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Aris+Paralia+Katerinis+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "hotel-dias-apartment",
-  "hotel": "Hotel Dias Apartment",
-  "grad": "Paralia Katerinis",
-  "mesto": "Paralia Katerinis",
-  "km": 73,
-  "vozOko": "56 min",
-  "zivost": 5,
-  "uMestu": false,
-  "odCentraKm": 16.2,
-  "kmOpis": "57–89 km",
-  "zvezdice": 1,
-  "ocena": 8.0,
-  "brOcena": 274,
-  "cene": {
-   "PP": 1030
-  },
-  "najniza": 1030,
-  "soba": {
-   "PP": "Suite with Sea View"
-  },
-  "udaljenostOdCentra": "16.2 km from Paralia Katerinis",
-  "plazaBlizu": false,
-  "takseUkljucene": true,
-  "uBudzetu": true,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/dias-makrigialos.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Hotel+Dias+Apartment+Paralia+Katerinis+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Hotel+Dias+Apartment+Paralia+Katerinis+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "hotel-giannoulis",
-  "hotel": "Hotel Giannoulis",
-  "grad": "Paralia Katerinis",
-  "mesto": "Paralia Katerinis",
-  "km": 73,
-  "vozOko": "56 min",
-  "zivost": 5,
-  "uMestu": true,
-  "odCentraKm": 2.3,
-  "kmOpis": "73 km",
-  "zvezdice": 3,
-  "ocena": 9.2,
-  "brOcena": 377,
-  "cene": {
-   "PP": 1032
-  },
-  "najniza": 1032,
-  "soba": {
-   "PP": "Economy Double Room"
-  },
-  "udaljenostOdCentra": "2.3 km from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": true,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/giannoulis-paralia.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Hotel+Giannoulis+Paralia+Katerinis+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Hotel+Giannoulis+Paralia+Katerinis+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "alexandrina",
-  "hotel": "Alexandrina",
-  "grad": "Polychrono",
-  "mesto": "Polihrono",
-  "km": 105,
-  "vozOko": "99 min",
-  "zivost": 3,
-  "uMestu": false,
-  "odCentraKm": 6.6,
-  "kmOpis": "98–112 km",
-  "zvezdice": 4,
-  "ocena": 9.7,
-  "brOcena": 161,
-  "cene": {
-   "PP": 1046
-  },
-  "najniza": 1046,
-  "soba": {
-   "PP": "Standard Double Room"
-  },
-  "udaljenostOdCentra": "6.6 km from Polykhrono",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": true,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/alexandrina.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Alexandrina+Polihrono+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Alexandrina+Polihrono+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "parthenon-art-executive-wing-seaside-collection",
-  "hotel": "Parthenon Art Executive Wing-Seaside Collection",
-  "grad": "Paralia Katerinis",
-  "mesto": "Paralia Katerinis",
-  "km": 73,
-  "vozOko": "56 min",
-  "zivost": 5,
-  "uMestu": false,
-  "odCentraKm": 3.3,
-  "kmOpis": "70–76 km",
-  "zvezdice": 1,
-  "ocena": 9.4,
-  "brOcena": 63,
-  "cene": {
-   "PP": 1078
-  },
-  "najniza": 1078,
-  "soba": {
-   "PP": "Superior Triple Room"
-  },
-  "udaljenostOdCentra": "3.3 km from Paralia Katerinis",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": true,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/parthenon-art-boutique-apartments.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Parthenon+Art+Executive+Wing-Seaside+Collection+Paralia+Katerinis+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Parthenon+Art+Executive+Wing-Seaside+Collection+Paralia+Katerinis+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "estelle-hotel",
-  "hotel": "Estelle Hotel",
-  "grad": "Nea Moudania",
-  "mesto": "Nea Moudania",
-  "km": 61,
-  "vozOko": "56 min",
-  "zivost": 5,
-  "uMestu": false,
-  "odCentraKm": 14.2,
-  "kmOpis": "47–75 km",
-  "zvezdice": 2,
-  "ocena": 9.6,
-  "brOcena": 65,
-  "cene": {
-   "PP": 1085
-  },
-  "najniza": 1085,
-  "soba": {
-   "PP": "Triple Room"
-  },
-  "udaljenostOdCentra": "14.2 km from Nea Moudania",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": true,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/estelle.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Estelle+Hotel+Nea+Moudania+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Estelle+Hotel+Nea+Moudania+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "melite-luxury-rooms-apartments",
-  "hotel": "Melite Luxury Rooms & Apartments",
-  "grad": "Pefkochori",
-  "mesto": "Pefkohori",
-  "km": 113,
-  "vozOko": "107 min",
-  "zivost": 5,
-  "uMestu": false,
-  "odCentraKm": 6.8,
-  "kmOpis": "106–120 km",
-  "zvezdice": 4,
-  "ocena": 9.3,
-  "brOcena": 363,
-  "cene": {
-   "PP": 1090
-  },
-  "najniza": 1090,
-  "soba": {
-   "PP": "Deluxe Semi-Basement Room"
-  },
-  "udaljenostOdCentra": "6.8 km from Pefkohori",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": true,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/melite-luxury-paliouri.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Melite+Luxury+Rooms+%26+Apartments+Pefkohori+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Melite+Luxury+Rooms+%26+Apartments+Pefkohori+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "sun-hotel",
-  "hotel": "Sun Hotel",
-  "grad": "Polychrono",
-  "mesto": "Polihrono",
-  "km": 105,
-  "vozOko": "99 min",
-  "zivost": 3,
-  "uMestu": true,
-  "odCentraKm": 0.15,
-  "kmOpis": "105 km",
-  "zvezdice": 3,
-  "ocena": 8.8,
-  "brOcena": 266,
-  "cene": {
-   "PP": 1108
-  },
-  "najniza": 1108,
-  "soba": {
-   "PP": "Family Room with Bunk Bed"
-  },
-  "udaljenostOdCentra": "150 m from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/sunset-ouranoupolis.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Sun+Hotel+Polihrono+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Sun+Hotel+Polihrono+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "xenios-port-marina-hotel",
-  "hotel": "Xenios Port Marina Hotel",
-  "grad": "Pefkochori",
-  "mesto": "Pefkohori",
-  "km": 113,
-  "vozOko": "107 min",
-  "zivost": 5,
-  "uMestu": false,
-  "odCentraKm": 3.7,
-  "kmOpis": "109–117 km",
-  "zvezdice": 3,
-  "ocena": 6.9,
-  "brOcena": 276,
-  "cene": {
-   "AI": 1118,
-   "PP": 1230
-  },
-  "najniza": 1118,
-  "soba": {
-   "AI": "Double Room with Sea View",
-   "PP": "Double Room with Sea View"
-  },
-  "udaljenostOdCentra": "3.7 km from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/port-marina.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Xenios+Port+Marina+Hotel+Pefkohori+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Xenios+Port+Marina+Hotel+Pefkohori+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "loutra-beach-hotel",
-  "hotel": "Loutra Beach Hotel",
-  "grad": "Pefkochori",
-  "mesto": "Pefkohori",
-  "km": 113,
-  "vozOko": "107 min",
-  "zivost": 5,
-  "uMestu": false,
-  "odCentraKm": 7.2,
-  "kmOpis": "106–120 km",
-  "zvezdice": 3,
-  "ocena": 8.3,
-  "brOcena": 62,
-  "cene": {
-   "PP": 1127
-  },
-  "najniza": 1127,
-  "soba": {
-   "PP": "Family Room"
-  },
-  "udaljenostOdCentra": "7.2 km from Pefkohori",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/loutra-beach-loutra-agias-paraskeues1.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Loutra+Beach+Hotel+Pefkohori+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Loutra+Beach+Hotel+Pefkohori+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "calda-resort",
-  "hotel": "Calda Resort",
-  "grad": "Nea Moudania",
-  "mesto": "Nea Moudania",
-  "km": 61,
-  "vozOko": "56 min",
-  "zivost": 5,
-  "uMestu": false,
-  "odCentraKm": 10.5,
-  "kmOpis": "50–72 km",
-  "zvezdice": 4,
-  "ocena": 9.2,
-  "brOcena": 270,
-  "cene": {
-   "PP": 1145
-  },
-  "najniza": 1145,
-  "soba": {
-   "PP": "Deluxe Quadruple Room"
-  },
-  "udaljenostOdCentra": "10.5 km from Nea Moudania",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/calda-resort.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Calda+Resort+Nea+Moudania+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Calda+Resort+Nea+Moudania+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "ampelia-hotel-kassandra",
-  "hotel": "Ampelia Hotel Kassandra",
-  "grad": "Hanioti",
-  "mesto": "Hanioti",
-  "km": 109,
-  "vozOko": "103 min",
-  "zivost": 5,
-  "uMestu": true,
-  "odCentraKm": 1.0,
-  "kmOpis": "109 km",
-  "zvezdice": 3,
-  "ocena": 8.8,
-  "brOcena": 201,
-  "cene": {
-   "PP": 1154
-  },
-  "najniza": 1154,
-  "soba": {
-   "PP": "Comfort Room with Balcony"
-  },
-  "udaljenostOdCentra": "1 km from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/ampelia-studios.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Ampelia+Hotel+Kassandra+Hanioti+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Ampelia+Hotel+Kassandra+Hanioti+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "xenios-dolphin-beach-hotel",
-  "hotel": "Xenios Dolphin Beach Hotel",
-  "grad": "Kriopigi",
-  "mesto": "Kriopigi",
-  "km": 89,
-  "vozOko": "82 min",
-  "zivost": 3,
-  "uMestu": false,
-  "odCentraKm": 11.3,
-  "kmOpis": "78–100 km",
-  "zvezdice": 3,
-  "ocena": 6.7,
-  "brOcena": 219,
-  "cene": {
-   "PP": 1299,
-   "AI": 1181
-  },
-  "najniza": 1181,
-  "soba": {
-   "PP": "Superior Double Room with Side Sea View",
-   "AI": "Superior Double Room with Side Sea View"
-  },
-  "udaljenostOdCentra": "11.3 km from Kriopigi",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/dolphin-beach.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Xenios+Dolphin+Beach+Hotel+Kriopigi+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Xenios+Dolphin+Beach+Hotel+Kriopigi+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "g-mare-boutique-hotel",
-  "hotel": "G Mare Boutique Hotel",
-  "grad": "Nikiti",
-  "mesto": "Nikiti",
-  "km": 110,
-  "vozOko": "111 min",
-  "zivost": 4,
-  "uMestu": false,
-  "odCentraKm": 17.6,
-  "kmOpis": "92–128 km",
-  "zvezdice": 3,
-  "ocena": 9.4,
-  "brOcena": 167,
-  "cene": {
-   "PP": 1183
-  },
-  "najniza": 1183,
-  "soba": {
-   "PP": "Standard Double Room"
-  },
-  "udaljenostOdCentra": "17.6 km from Nikiti",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/g-mare-boutique.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=G+Mare+Boutique+Hotel+Nikiti+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=G+Mare+Boutique+Hotel+Nikiti+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "maria-s-house-hotel",
-  "hotel": "Maria's House Hotel",
-  "grad": "Metamorfosi",
-  "mesto": "Metamorfosi",
-  "km": 85,
-  "vozOko": "81 min",
+  "id": "aristotelis-hotel",
+  "hotel": "Aristotelis Hotel",
+  "grad": "Fourka",
+  "mesto": "Fourka",
+  "km": 95,
+  "vozOko": "101 min",
   "zivost": 2,
-  "uMestu": true,
-  "odCentraKm": 0.9,
-  "kmOpis": "85 km",
-  "zvezdice": 3,
-  "ocena": 8.6,
-  "brOcena": 132,
+  "plazaM": 450,
+  "centarM": 2500,
+  "naPlazi": true,
+  "centarMesto": "Fourka",
+  "aerodromKm": 81,
+  "bodovi": 36,
+  "razrada": {
+   "ocena": 45,
+   "cena": 24,
+   "plaza": 44,
+   "centar": 0,
+   "zivost": 25,
+   "pansion": 65
+  },
+  "zvezdice": 1,
+  "ocena": 7.9,
+  "brOcena": 178,
   "cene": {
-   "PP": 1199
+   "PP": 982
   },
-  "najniza": 1199,
-  "soba": {
-   "PP": "Standard Twin Room (2-3 Adults)"
-  },
-  "udaljenostOdCentra": "0.9 km from centre",
-  "plazaBlizu": false,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/maria-s-hous.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Maria%27s+House+Hotel+Metamorfosi+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Maria%27s+House+Hotel+Metamorfosi+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "xenios-possidi-paradise-hotel",
-  "hotel": "Xenios Possidi Paradise Hotel",
-  "grad": "Kriopigi",
-  "mesto": "Kriopigi",
-  "km": 89,
-  "vozOko": "82 min",
-  "zivost": 3,
-  "uMestu": false,
-  "odCentraKm": 11.2,
-  "kmOpis": "78–100 km",
-  "zvezdice": 4,
-  "ocena": 6.4,
-  "brOcena": 160,
-  "cene": {
-   "AI": 1227,
-   "PP": 1227
-  },
-  "najniza": 1227,
-  "soba": {
-   "AI": "Family Room No View",
-   "PP": "Family Room No View"
-  },
-  "udaljenostOdCentra": "11.2 km from Kriopigi",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/possidi-paradise.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Xenios+Possidi+Paradise+Hotel+Kriopigi+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Xenios+Possidi+Paradise+Hotel+Kriopigi+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "peloton-inn",
-  "hotel": "Peloton Inn",
-  "grad": "Paralia Katerinis",
-  "mesto": "Paralia Katerinis",
-  "km": 73,
-  "vozOko": "56 min",
-  "zivost": 5,
-  "uMestu": true,
-  "odCentraKm": 0.7,
-  "kmOpis": "73 km",
-  "zvezdice": 3,
-  "ocena": 9.7,
-  "brOcena": 201,
-  "cene": {
-   "PP": 1230
-  },
-  "najniza": 1230,
-  "soba": {
-   "PP": "Superior Family Room"
-  },
-  "udaljenostOdCentra": "0.7 km from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/peloton-inn.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Peloton+Inn+Paralia+Katerinis+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Peloton+Inn+Paralia+Katerinis+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "sunway-hotel",
-  "hotel": "Sunway Hotel",
-  "grad": "Kallithea Halkidiki",
-  "mesto": "Kalitea",
-  "km": 96,
-  "vozOko": "103 min",
-  "zivost": 5,
-  "uMestu": true,
-  "odCentraKm": 0.6,
-  "kmOpis": "96 km",
-  "zvezdice": null,
-  "ocena": 8.5,
-  "brOcena": 131,
-  "cene": {
-   "PP": 1237
-  },
-  "najniza": 1237,
-  "soba": {
-   "PP": "Economy Twin Room"
-  },
-  "udaljenostOdCentra": "0.6 km from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/sunway-kallithea-khalkidikes12.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Sunway+Hotel+Kalitea+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Sunway+Hotel+Kalitea+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "blue-sea-boutique-apartments",
-  "hotel": "Blue Sea Boutique Apartments",
-  "grad": "Paralia Katerinis",
-  "mesto": "Paralia Katerinis",
-  "km": 73,
-  "vozOko": "56 min",
-  "zivost": 5,
-  "uMestu": false,
-  "odCentraKm": 3.2,
-  "kmOpis": "70–76 km",
-  "zvezdice": 3,
-  "ocena": 8.2,
-  "brOcena": 26,
-  "cene": {
-   "PP": 1237
-  },
-  "najniza": 1237,
-  "soba": {
-   "PP": "Deluxe Triple Room"
-  },
-  "udaljenostOdCentra": "3.2 km from Paralia Katerinis",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/marianna-rooms.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Blue+Sea+Boutique+Apartments+Paralia+Katerinis+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Blue+Sea+Boutique+Apartments+Paralia+Katerinis+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "hotel-sweet-home",
-  "hotel": "Hotel Sweet Home",
-  "grad": "Nikiti",
-  "mesto": "Nikiti",
-  "km": 110,
-  "vozOko": "111 min",
-  "zivost": 4,
-  "uMestu": false,
-  "odCentraKm": 17.2,
-  "kmOpis": "93–127 km",
-  "zvezdice": 4,
-  "ocena": 9.3,
-  "brOcena": 259,
-  "cene": {
-   "PP": 1256
-  },
-  "najniza": 1256,
-  "soba": {
-   "PP": "Deluxe Double or Twin Room"
-  },
-  "udaljenostOdCentra": "17.2 km from Nikiti",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/hotel-sweet-home.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Hotel+Sweet+Home+Nikiti+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Hotel+Sweet+Home+Nikiti+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "simon-king",
-  "hotel": "Simon King",
-  "grad": "Nikiti",
-  "mesto": "Nikiti",
-  "km": 110,
-  "vozOko": "111 min",
-  "zivost": 4,
-  "uMestu": false,
-  "odCentraKm": 11.6,
-  "kmOpis": "98–122 km",
-  "zvezdice": 3,
-  "ocena": 8.1,
-  "brOcena": 301,
-  "cene": {
-   "PP": 1258
-  },
-  "najniza": 1258,
-  "soba": {
-   "PP": "One-Bedroom Apartment (5 Adults) - Ground Floor"
-  },
-  "udaljenostOdCentra": "11.6 km from Nikiti",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/simon-king.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Simon+King+Nikiti+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Simon+King+Nikiti+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "sarantis-hotel",
-  "hotel": "Sarantis Hotel",
-  "grad": "Hanioti",
-  "mesto": "Hanioti",
-  "km": 109,
-  "vozOko": "103 min",
-  "zivost": 5,
-  "uMestu": true,
-  "odCentraKm": 0.25,
-  "kmOpis": "109 km",
-  "zvezdice": 3,
-  "ocena": 8.7,
-  "brOcena": 340,
-  "cene": {
-   "PP": 1273
-  },
-  "najniza": 1273,
-  "soba": {
-   "PP": "Twin Room"
-  },
-  "udaljenostOdCentra": "250 m from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/sarantis.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Sarantis+Hotel+Hanioti+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Sarantis+Hotel+Hanioti+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "arya-hotel",
-  "hotel": "Arya Hotel",
-  "grad": "Hanioti",
-  "mesto": "Hanioti",
-  "km": 109,
-  "vozOko": "103 min",
-  "zivost": 5,
-  "uMestu": true,
-  "odCentraKm": 0.8,
-  "kmOpis": "109 km",
-  "zvezdice": 3,
-  "ocena": 8.6,
-  "brOcena": 448,
-  "cene": {
-   "AI": 1278,
-   "PP": 1406
-  },
-  "najniza": 1278,
-  "soba": {
-   "AI": "Deluxe Double Room",
-   "PP": "Deluxe Double Room"
-  },
-  "udaljenostOdCentra": "0.8 km from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/arya.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Arya+Hotel+Hanioti+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Arya+Hotel+Hanioti+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "aloni-hotel-pefkochori",
-  "hotel": "Aloni Hotel Pefkochori",
-  "grad": "Pefkochori",
-  "mesto": "Pefkohori",
-  "km": 113,
-  "vozOko": "107 min",
-  "zivost": 5,
-  "uMestu": true,
-  "odCentraKm": 0.6,
-  "kmOpis": "113 km",
-  "zvezdice": 4,
-  "ocena": 8.5,
-  "brOcena": 335,
-  "cene": {
-   "PP": 1283
-  },
-  "najniza": 1283,
-  "soba": {
-   "PP": "Superior Triple Room"
-  },
-  "udaljenostOdCentra": "0.6 km from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/aloni-pefkohori-halkidiki.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Aloni+Hotel+Pefkochori+Pefkohori+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Aloni+Hotel+Pefkochori+Pefkohori+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "isalos-gerakini",
-  "hotel": "ISALOS GERAKiNi",
-  "grad": "Metamorfosi",
-  "mesto": "Metamorfosi",
-  "km": 85,
-  "vozOko": "81 min",
-  "zivost": 2,
-  "uMestu": false,
-  "odCentraKm": 13.7,
-  "kmOpis": "71–99 km",
-  "zvezdice": null,
-  "ocena": 9.5,
-  "brOcena": 147,
-  "cene": {
-   "PP": 1284
-  },
-  "najniza": 1284,
-  "soba": {
-   "PP": "Family Studio"
-  },
-  "udaljenostOdCentra": "13.7 km from Metamorfosi",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/isalos-paralia-gerakinis.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=ISALOS+GERAKiNi+Metamorfosi+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=ISALOS+GERAKiNi+Metamorfosi+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "stratos-hotel",
-  "hotel": "Stratos Hotel",
-  "grad": "Kallithea Halkidiki",
-  "mesto": "Kalitea",
-  "km": 96,
-  "vozOko": "103 min",
-  "zivost": 5,
-  "uMestu": false,
-  "odCentraKm": 3.1,
-  "kmOpis": "93–99 km",
-  "zvezdice": 3,
-  "ocena": 9.1,
-  "brOcena": 383,
-  "cene": {
-   "PP": 1312
-  },
-  "najniza": 1312,
-  "soba": {
-   "PP": "Family Suite"
-  },
-  "udaljenostOdCentra": "3.1 km from Kallithea Halkidikis",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/stratos.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Stratos+Hotel+Kalitea+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Stratos+Hotel+Kalitea+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "lagaria-hotel",
-  "hotel": "Lagaria Hotel",
-  "grad": "Kallithea Halkidiki",
-  "mesto": "Kalitea",
-  "km": 96,
-  "vozOko": "103 min",
-  "zivost": 5,
-  "uMestu": true,
-  "odCentraKm": 2.6,
-  "kmOpis": "96 km",
-  "zvezdice": 4,
-  "ocena": 8.9,
-  "brOcena": 652,
-  "cene": {
-   "PP": 1319
-  },
-  "najniza": 1319,
-  "soba": {
-   "PP": "Flexible Room"
-  },
-  "udaljenostOdCentra": "2.6 km from Kallithea Halkidikis",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/lagaria-palace.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Lagaria+Hotel+Kalitea+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Lagaria+Hotel+Kalitea+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "asteras-studios",
-  "hotel": "ASTERAS STUDIOS",
-  "grad": "Paralia Katerinis",
-  "mesto": "Paralia Katerinis",
-  "km": 73,
-  "vozOko": "56 min",
-  "zivost": 5,
-  "uMestu": true,
-  "odCentraKm": 0.7,
-  "kmOpis": "73 km",
-  "zvezdice": 4,
-  "ocena": 9.0,
-  "brOcena": 201,
-  "cene": {
-   "PP": 1321
-  },
-  "najniza": 1321,
-  "soba": {
-   "PP": "Triple Room"
-  },
-  "udaljenostOdCentra": "0.7 km from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/asteras-studios.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=ASTERAS+STUDIOS+Paralia+Katerinis+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=ASTERAS+STUDIOS+Paralia+Katerinis+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "meli-boutique-afitos",
-  "hotel": "Meli Boutique Afitos",
-  "grad": "Kallithea Halkidiki",
-  "mesto": "Kalitea",
-  "km": 96,
-  "vozOko": "103 min",
-  "zivost": 5,
-  "uMestu": false,
-  "odCentraKm": 3.3,
-  "kmOpis": "93–99 km",
-  "zvezdice": 3,
-  "ocena": 9.5,
-  "brOcena": 75,
-  "cene": {
-   "PP": 1325
-  },
-  "najniza": 1325,
-  "soba": {
-   "PP": "Deluxe Double Room"
-  },
-  "udaljenostOdCentra": "3.3 km from Kallithea Halkidikis",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/meli-boutique-afitos.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Meli+Boutique+Afitos+Kalitea+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Meli+Boutique+Afitos+Kalitea+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "angelina-hotel",
-  "hotel": "Angelina Hotel",
-  "grad": "Nikiti",
-  "mesto": "Nikiti",
-  "km": 110,
-  "vozOko": "111 min",
-  "zivost": 4,
-  "uMestu": false,
-  "odCentraKm": 5.5,
-  "kmOpis": "104–116 km",
-  "zvezdice": 2,
-  "ocena": 8.1,
-  "brOcena": 131,
-  "cene": {
-   "PP": 1350
-  },
-  "najniza": 1350,
-  "soba": {
-   "PP": "Triple Room with Garden View"
-  },
-  "udaljenostOdCentra": "5.5 km from Nikiti",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/aggelos-ormos-panagias.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Angelina+Hotel+Nikiti+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Angelina+Hotel+Nikiti+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "hotel-pilalidis",
-  "hotel": "Hotel Pilalidis",
-  "grad": "Pefkochori",
-  "mesto": "Pefkohori",
-  "km": 113,
-  "vozOko": "107 min",
-  "zivost": 5,
-  "uMestu": true,
-  "odCentraKm": 0.7,
-  "kmOpis": "113 km",
-  "zvezdice": 3,
-  "ocena": 9.3,
-  "brOcena": 504,
-  "cene": {
-   "PP": 1360
-  },
-  "najniza": 1360,
-  "soba": {
-   "PP": "Superior Double Room with Garden View"
-  },
-  "udaljenostOdCentra": "0.7 km from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/pilalidis.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Hotel+Pilalidis+Pefkohori+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Hotel+Pilalidis+Pefkohori+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "alterra-vita",
-  "hotel": "Alterra Vita",
-  "grad": "Nikiti",
-  "mesto": "Nikiti",
-  "km": 110,
-  "vozOko": "111 min",
-  "zivost": 4,
-  "uMestu": false,
-  "odCentraKm": 16.1,
-  "kmOpis": "94–126 km",
-  "zvezdice": 3,
-  "ocena": 9.6,
-  "brOcena": 55,
-  "cene": {
-   "PP": 1362
-  },
-  "najniza": 1362,
+  "najniza": 982,
   "soba": {
    "PP": "Double Room"
   },
-  "udaljenostOdCentra": "16.1 km from Nikiti",
+  "udaljenostOdCentra": "8.3 km from Kriopigi",
   "plazaBlizu": true,
   "takseUkljucene": true,
-  "uBudzetu": false,
+  "uBudzetu": true,
   "linkovi": [
    {
     "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/alterra-vita.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+    "url": "https://www.booking.com/hotel/gr/aristoteles.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
    },
    {
     "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Alterra+Vita+Nikiti+Greece&qs=CAE&ap=MABoAA"
+    "url": "https://www.google.com/travel/search?q=Aristotelis+Hotel+Fourka+Greece&qs=CAE&ap=MABoAA"
    },
    {
     "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Alterra+Vita+Nikiti+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "core-hotel",
-  "hotel": "Core Hotel",
-  "grad": "Polychrono",
-  "mesto": "Polihrono",
-  "km": 105,
-  "vozOko": "99 min",
-  "zivost": 3,
-  "uMestu": true,
-  "odCentraKm": 0.15,
-  "kmOpis": "105 km",
-  "zvezdice": 4,
-  "ocena": 7.9,
-  "brOcena": 193,
-  "cene": {
-   "PP": 1370
-  },
-  "najniza": 1370,
-  "soba": {
-   "PP": "Classic One-Bedroom Suite"
-  },
-  "udaljenostOdCentra": "150 m from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/core-resorts.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Core+Hotel+Polihrono+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Core+Hotel+Polihrono+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "georgalas-sun-beach-resort",
-  "hotel": "Georgalas Sun Beach Resort",
-  "grad": "Sozopoli",
-  "mesto": "Sozopoli",
-  "km": 48,
-  "vozOko": "47 min",
-  "zivost": 2,
-  "uMestu": false,
-  "odCentraKm": 4.4,
-  "kmOpis": "44–52 km",
-  "zvezdice": 3,
-  "ocena": 8.9,
-  "brOcena": 824,
-  "cene": {
-   "PP": 1386
-  },
-  "najniza": 1386,
-  "soba": {
-   "PP": "Superior Double Room"
-  },
-  "udaljenostOdCentra": "4.4 km from Sozopoli",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/georgalas-chalkidiki.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Georgalas+Sun+Beach+Resort+Sozopoli+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Georgalas+Sun+Beach+Resort+Sozopoli+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "hotel-alkyon",
-  "hotel": "Hotel Alkyon",
-  "grad": "Paralia Katerinis",
-  "mesto": "Paralia Katerinis",
-  "km": 73,
-  "vozOko": "56 min",
-  "zivost": 5,
-  "uMestu": true,
-  "odCentraKm": 0.25,
-  "kmOpis": "73 km",
-  "zvezdice": 3,
-  "ocena": 9.0,
-  "brOcena": 392,
-  "cene": {
-   "PP": 1400
-  },
-  "najniza": 1400,
-  "soba": {
-   "PP": "Triple Room with Side Seaview and Square view"
-  },
-  "udaljenostOdCentra": "250 m from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/alkyon-paralia.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Hotel+Alkyon+Paralia+Katerinis+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Hotel+Alkyon+Paralia+Katerinis+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "xenios-anastasia-resort-spa",
-  "hotel": "Xenios Anastasia Resort & Spa",
-  "grad": "Polychrono",
-  "mesto": "Polihrono",
-  "km": 105,
-  "vozOko": "99 min",
-  "zivost": 3,
-  "uMestu": false,
-  "odCentraKm": 6.6,
-  "kmOpis": "98–112 km",
-  "zvezdice": 5,
-  "ocena": 6.0,
-  "brOcena": 228,
-  "cene": {
-   "AI": 1405,
-   "PP": 1538
-  },
-  "najniza": 1405,
-  "soba": {
-   "AI": "Double Room Limited Mountain View",
-   "PP": "Double Room Limited Mountain View"
-  },
-  "udaljenostOdCentra": "6.6 km from Polykhrono",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/anastasia-resort-amp-spa.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Xenios+Anastasia+Resort+%26+Spa+Polihrono+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Xenios+Anastasia+Resort+%26+Spa+Polihrono+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "amari-hotel",
-  "hotel": "Amari Hotel",
-  "grad": "Metamorfosi",
-  "mesto": "Metamorfosi",
-  "km": 85,
-  "vozOko": "81 min",
-  "zivost": 2,
-  "uMestu": true,
-  "odCentraKm": 1.0,
-  "kmOpis": "85 km",
-  "zvezdice": 3,
-  "ocena": 9.6,
-  "brOcena": 134,
-  "cene": {
-   "PP": 1417,
-   "AI": 1417
-  },
-  "najniza": 1417,
-  "soba": {
-   "PP": "One-Bedroom Apartment (2 - 4 Adults)",
-   "AI": "One-Bedroom Apartment (2 - 4 Adults)"
-  },
-  "udaljenostOdCentra": "1 km from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/amari.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Amari+Hotel+Metamorfosi+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Amari+Hotel+Metamorfosi+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "hotel-paradise",
-  "hotel": "Hotel Paradise",
-  "grad": "Kriopigi",
-  "mesto": "Kriopigi",
-  "km": 89,
-  "vozOko": "82 min",
-  "zivost": 3,
-  "uMestu": true,
-  "odCentraKm": 1.3,
-  "kmOpis": "89 km",
-  "zvezdice": 3,
-  "ocena": 8.2,
-  "brOcena": 229,
-  "cene": {
-   "PP": 1440,
-   "AI": 1440
-  },
-  "najniza": 1440,
-  "soba": {
-   "PP": "Quadruple Room with Sea View",
-   "AI": "Quadruple Room with Sea View"
-  },
-  "udaljenostOdCentra": "1.3 km from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/paradise-kriopigi-halkidiki.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Hotel+Paradise+Kriopigi+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Hotel+Paradise+Kriopigi+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "falena-luxury-rooms",
-  "hotel": "Falena Luxury Rooms",
-  "grad": "Nea Moudania",
-  "mesto": "Nea Moudania",
-  "km": 61,
-  "vozOko": "56 min",
-  "zivost": 5,
-  "uMestu": false,
-  "odCentraKm": 10.8,
-  "kmOpis": "50–72 km",
-  "zvezdice": 4,
-  "ocena": 9.5,
-  "brOcena": 131,
-  "cene": {
-   "PP": 1444
-  },
-  "najniza": 1444,
-  "soba": {
-   "PP": "Double Room"
-  },
-  "udaljenostOdCentra": "10.8 km from Nea Moudania",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/falena-luxury-rooms.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Falena+Luxury+Rooms+Nea+Moudania+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Falena+Luxury+Rooms+Nea+Moudania+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "cosmopolitan-hotel-by-ghh",
-  "hotel": "Cosmopolitan Hotel by GHH",
-  "grad": "Paralia Katerinis",
-  "mesto": "Paralia Katerinis",
-  "km": 73,
-  "vozOko": "56 min",
-  "zivost": 5,
-  "uMestu": true,
-  "odCentraKm": 0.9,
-  "kmOpis": "73 km",
-  "zvezdice": 4,
-  "ocena": 8.6,
-  "brOcena": 426,
-  "cene": {
-   "PP": 1444,
-   "AI": 1743
-  },
-  "najniza": 1444,
-  "soba": {
-   "PP": "Family Room",
-   "AI": "Family Room"
-  },
-  "udaljenostOdCentra": "0.9 km from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/cosmopolitan-paralia-katerinis.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Cosmopolitan+Hotel+by+GHH+Paralia+Katerinis+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Cosmopolitan+Hotel+by+GHH+Paralia+Katerinis+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "hotel-villa-sevasti",
-  "hotel": "Hotel Villa Sevasti",
-  "grad": "Paralia Katerinis",
-  "mesto": "Paralia Katerinis",
-  "km": 73,
-  "vozOko": "56 min",
-  "zivost": 5,
-  "uMestu": false,
-  "odCentraKm": 10.8,
-  "kmOpis": "62–84 km",
-  "zvezdice": 4,
-  "ocena": 9.4,
-  "brOcena": 74,
-  "cene": {
-   "PP": 1463
-  },
-  "najniza": 1463,
-  "soba": {
-   "PP": "Deluxe Triple Room with Sea View"
-  },
-  "udaljenostOdCentra": "10.8 km from Paralia Katerinis",
-  "plazaBlizu": false,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/villa-sevasti.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Hotel+Villa+Sevasti+Paralia+Katerinis+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Hotel+Villa+Sevasti+Paralia+Katerinis+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "golden-beach-hotel",
-  "hotel": "Golden Beach Hotel",
-  "grad": "Metamorfosi",
-  "mesto": "Metamorfosi",
-  "km": 85,
-  "vozOko": "81 min",
-  "zivost": 2,
-  "uMestu": true,
-  "odCentraKm": 0.2,
-  "kmOpis": "85 km",
-  "zvezdice": 3,
-  "ocena": 7.9,
-  "brOcena": 44,
-  "cene": {
-   "PP": 1496,
-   "AI": 1496
-  },
-  "najniza": 1496,
-  "soba": {
-   "PP": "One-Bedroom Family Apartment",
-   "AI": "One-Bedroom Family Apartment"
-  },
-  "udaljenostOdCentra": "200 m from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/golden-beach-metamorfosi.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Golden+Beach+Hotel+Metamorfosi+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Golden+Beach+Hotel+Metamorfosi+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "possidi-hiliadou-boutique-resort",
-  "hotel": "Possidi Hiliadou Boutique Resort",
-  "grad": "Sani",
-  "mesto": "Sani",
-  "km": 84,
-  "vozOko": "83 min",
-  "zivost": 1,
-  "uMestu": false,
-  "odCentraKm": 14.3,
-  "kmOpis": "70–98 km",
-  "zvezdice": 4,
-  "ocena": 9.6,
-  "brOcena": 90,
-  "cene": {
-   "PP": 1496
-  },
-  "najniza": 1496,
-  "soba": {
-   "PP": "Deluxe Family Room"
-  },
-  "udaljenostOdCentra": "14.3 km from Sani Beach",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/possidi-hiliadou.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Possidi+Hiliadou+Boutique+Resort+Sani+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Possidi+Hiliadou+Boutique+Resort+Sani+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "akritas-hotel-pefkochori",
-  "hotel": "Akritas Hotel Pefkochori",
-  "grad": "Pefkochori",
-  "mesto": "Pefkohori",
-  "km": 113,
-  "vozOko": "107 min",
-  "zivost": 5,
-  "uMestu": true,
-  "odCentraKm": 0.35,
-  "kmOpis": "113 km",
-  "zvezdice": 3,
-  "ocena": 8.9,
-  "brOcena": 644,
-  "cene": {
-   "PP": 1506
-  },
-  "najniza": 1506,
-  "soba": {
-   "PP": "Family Room with Bathroom"
-  },
-  "udaljenostOdCentra": "350 m from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/akritas-pefkohori.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Akritas+Hotel+Pefkochori+Pefkohori+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Akritas+Hotel+Pefkochori+Pefkohori+Greece&dr-20260905-20260913=&rc-2="
+    "url": "https://www.trivago.com/en-US/srl?query=Aristotelis+Hotel+Fourka+Greece&dr-20260905-20260913=&rc-2="
    }
   ]
  },
@@ -2775,9 +1242,20 @@ const HOTELI = [
   "km": 73,
   "vozOko": "56 min",
   "zivost": 5,
-  "uMestu": true,
-  "odCentraKm": 0.7,
-  "kmOpis": "73 km",
+  "plazaM": 0,
+  "centarM": 600,
+  "naPlazi": true,
+  "centarMesto": "Paralia Katerinis",
+  "aerodromKm": 91,
+  "bodovi": 33,
+  "razrada": {
+   "ocena": 100,
+   "cena": 0,
+   "plaza": 100,
+   "centar": 50,
+   "zivost": 100,
+   "pansion": 65
+  },
   "zvezdice": 4,
   "ocena": 9.6,
   "brOcena": 278,
@@ -2808,16 +1286,180 @@ const HOTELI = [
   ]
  },
  {
-  "id": "zoi-girni-seaside-hotel",
-  "hotel": "ZOI Girni - Seaside Hotel",
+  "id": "akteon-girni",
+  "hotel": "AKTEON GIRNI",
   "grad": "Paralia Katerinis",
   "mesto": "Paralia Katerinis",
   "km": 73,
   "vozOko": "56 min",
   "zivost": 5,
-  "uMestu": false,
-  "odCentraKm": 3.1,
-  "kmOpis": "70–76 km",
+  "plazaM": 0,
+  "centarM": 300,
+  "naPlazi": true,
+  "centarMesto": "Paralia Katerinis",
+  "aerodromKm": 92,
+  "bodovi": 33,
+  "razrada": {
+   "ocena": 94,
+   "cena": 0,
+   "plaza": 100,
+   "centar": 75,
+   "zivost": 100,
+   "pansion": 65
+  },
+  "zvezdice": 3,
+  "ocena": 9.4,
+  "brOcena": 368,
+  "cene": {
+   "PP": 1951
+  },
+  "najniza": 1951,
+  "soba": {
+   "PP": "Family Room with Sea View"
+  },
+  "udaljenostOdCentra": "350 m from centre",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/akteon-girni.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=AKTEON+GIRNI+Paralia+Katerinis+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=AKTEON+GIRNI+Paralia+Katerinis+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "ostria-sea-side-hotel",
+  "hotel": "Ostria Sea Side Hotel",
+  "grad": "Hanioti",
+  "mesto": "Hanioti",
+  "km": 109,
+  "vozOko": "103 min",
+  "zivost": 5,
+  "plazaM": 40,
+  "centarM": 200,
+  "naPlazi": true,
+  "centarMesto": "Hanioti",
+  "aerodromKm": 87,
+  "bodovi": 33,
+  "razrada": {
+   "ocena": 90,
+   "cena": 0,
+   "plaza": 95,
+   "centar": 83,
+   "zivost": 100,
+   "pansion": 65
+  },
+  "zvezdice": 4,
+  "ocena": 9.3,
+  "brOcena": 427,
+  "cene": {
+   "PP": 2702
+  },
+  "najniza": 2702,
+  "soba": {
+   "PP": "FAMILY SUITE GARDEN VIEW"
+  },
+  "udaljenostOdCentra": "300 m from centre",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/ostria-sea-side.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Ostria+Sea+Side+Hotel+Hanioti+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Ostria+Sea+Side+Hotel+Hanioti+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "hotel-alkyon",
+  "hotel": "Hotel Alkyon",
+  "grad": "Paralia Katerinis",
+  "mesto": "Paralia Katerinis",
+  "km": 73,
+  "vozOko": "56 min",
+  "zivost": 5,
+  "plazaM": 0,
+  "centarM": 200,
+  "naPlazi": true,
+  "centarMesto": "Paralia Katerinis",
+  "aerodromKm": 91,
+  "bodovi": 32,
+  "razrada": {
+   "ocena": 81,
+   "cena": 0,
+   "plaza": 100,
+   "centar": 83,
+   "zivost": 100,
+   "pansion": 65
+  },
+  "zvezdice": 3,
+  "ocena": 9.0,
+  "brOcena": 392,
+  "cene": {
+   "PP": 1400
+  },
+  "najniza": 1400,
+  "soba": {
+   "PP": "Triple Room with Side Seaview and Square view"
+  },
+  "udaljenostOdCentra": "250 m from centre",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/alkyon-paralia.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Hotel+Alkyon+Paralia+Katerinis+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Hotel+Alkyon+Paralia+Katerinis+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "zoi-girni-seaside-hotel",
+  "hotel": "ZOI Girni - Seaside Hotel",
+  "grad": "Olympiaki Akti",
+  "mesto": "Olimpik Bič",
+  "km": 76,
+  "vozOko": "61 min",
+  "zivost": 4,
+  "plazaM": 50,
+  "centarM": 200,
+  "naPlazi": true,
+  "centarMesto": "Olympiaki Akti",
+  "aerodromKm": 94,
+  "bodovi": 32,
+  "razrada": {
+   "ocena": 81,
+   "cena": 0,
+   "plaza": 94,
+   "centar": 83,
+   "zivost": 75,
+   "pansion": 100
+  },
   "zvezdice": 3,
   "ocena": 9.0,
   "brOcena": 47,
@@ -2841,453 +1483,11 @@ const HOTELI = [
    },
    {
     "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=ZOI+Girni+-+Seaside+Hotel+Paralia+Katerinis+Greece&qs=CAE&ap=MABoAA"
+    "url": "https://www.google.com/travel/search?q=ZOI+Girni+-+Seaside+Hotel+Olimpik+Bi%C4%8D+Greece&qs=CAE&ap=MABoAA"
    },
    {
     "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=ZOI+Girni+-+Seaside+Hotel+Paralia+Katerinis+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "krotiri-resort",
-  "hotel": "Krotiri Resort",
-  "grad": "Nikiti",
-  "mesto": "Nikiti",
-  "km": 110,
-  "vozOko": "111 min",
-  "zivost": 4,
-  "uMestu": false,
-  "odCentraKm": 7.6,
-  "kmOpis": "102–118 km",
-  "zvezdice": 5,
-  "ocena": 8.8,
-  "brOcena": 208,
-  "cene": {
-   "PP": 1570
-  },
-  "najniza": 1570,
-  "soba": {
-   "PP": "Superior Double Room"
-  },
-  "udaljenostOdCentra": "7.6 km from Nikiti",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/krotiri-resort.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Krotiri+Resort+Nikiti+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Krotiri+Resort+Nikiti+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "evripidis-hotel-afitos",
-  "hotel": "Evripidis Hotel Afitos",
-  "grad": "Kallithea Halkidiki",
-  "mesto": "Kalitea",
-  "km": 96,
-  "vozOko": "103 min",
-  "zivost": 5,
-  "uMestu": true,
-  "odCentraKm": 0.9,
-  "kmOpis": "96 km",
-  "zvezdice": 1,
-  "ocena": 9.2,
-  "brOcena": 84,
-  "cene": {
-   "PP": 1578
-  },
-  "najniza": 1578,
-  "soba": {
-   "PP": "One-Bedroom Apartment with Balcony and Sea View"
-  },
-  "udaljenostOdCentra": "0.9 km from Kallithea Halkidikis",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/ksenodokheio-euripides.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Evripidis+Hotel+Afitos+Kalitea+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Evripidis+Hotel+Afitos+Kalitea+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "athos-cape",
-  "hotel": "ATHOS CAPE",
-  "grad": "Nikiti",
-  "mesto": "Nikiti",
-  "km": 110,
-  "vozOko": "111 min",
-  "zivost": 4,
-  "uMestu": false,
-  "odCentraKm": 13.1,
-  "kmOpis": "97–123 km",
-  "zvezdice": 3,
-  "ocena": 8.8,
-  "brOcena": 119,
-  "cene": {
-   "PP": 1589
-  },
-  "najniza": 1589,
-  "soba": {
-   "PP": "Studio with Sea View"
-  },
-  "udaljenostOdCentra": "13.1 km from Nikiti",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/athos-cape.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=ATHOS+CAPE+Nikiti+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=ATHOS+CAPE+Nikiti+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "alkion-hotel",
-  "hotel": "Alkion Hotel",
-  "grad": "Kriopigi",
-  "mesto": "Kriopigi",
-  "km": 89,
-  "vozOko": "82 min",
-  "zivost": 3,
-  "uMestu": true,
-  "odCentraKm": 0.1,
-  "kmOpis": "89 km",
-  "zvezdice": 4,
-  "ocena": 8.8,
-  "brOcena": 164,
-  "cene": {
-   "PP": 1605
-  },
-  "najniza": 1605,
-  "soba": {
-   "PP": "Superior Double Room"
-  },
-  "udaljenostOdCentra": "100 m from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/alkion-kriopigi.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Alkion+Hotel+Kriopigi+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Alkion+Hotel+Kriopigi+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "old-nikiti-s-hotel",
-  "hotel": "Old Nikiti's Hotel",
-  "grad": "Nikiti",
-  "mesto": "Nikiti",
-  "km": 110,
-  "vozOko": "111 min",
-  "zivost": 4,
-  "uMestu": true,
-  "odCentraKm": 0.4,
-  "kmOpis": "110 km",
-  "zvezdice": 2,
-  "ocena": 9.0,
-  "brOcena": 110,
-  "cene": {
-   "PP": 1666
-  },
-  "najniza": 1666,
-  "soba": {
-   "PP": "Quadruple Room with Balcony"
-  },
-  "udaljenostOdCentra": "400 m from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/old-nikitis.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Old+Nikiti%27s+Hotel+Nikiti+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Old+Nikiti%27s+Hotel+Nikiti+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "palm-boutique-suites",
-  "hotel": "Palm Boutique Suites",
-  "grad": "Pefkochori",
-  "mesto": "Pefkohori",
-  "km": 113,
-  "vozOko": "107 min",
-  "zivost": 5,
-  "uMestu": true,
-  "odCentraKm": 0.35,
-  "kmOpis": "113 km",
-  "zvezdice": 2,
-  "ocena": 9.5,
-  "brOcena": 205,
-  "cene": {
-   "PP": 1683
-  },
-  "najniza": 1683,
-  "soba": {
-   "PP": "One-Bedroom Apartment with Spa Bath"
-  },
-  "udaljenostOdCentra": "350 m from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/palm-boutique-suites.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Palm+Boutique+Suites+Pefkohori+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Palm+Boutique+Suites+Pefkohori+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "avatel-eco-lodge",
-  "hotel": "Avatel Eco Lodge",
-  "grad": "Kriopigi",
-  "mesto": "Kriopigi",
-  "km": 89,
-  "vozOko": "82 min",
-  "zivost": 3,
-  "uMestu": true,
-  "odCentraKm": 1.3,
-  "kmOpis": "89 km",
-  "zvezdice": 4,
-  "ocena": 9.0,
-  "brOcena": 356,
-  "cene": {
-   "PP": 1709
-  },
-  "najniza": 1709,
-  "soba": {
-   "PP": "Deluxe Family Room"
-  },
-  "udaljenostOdCentra": "1.3 km from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/avatel-eco-lodge.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Avatel+Eco+Lodge+Kriopigi+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Avatel+Eco+Lodge+Kriopigi+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "olympiada-girni-suites",
-  "hotel": "OLYMPIADA GIRNI Suites",
-  "grad": "Paralia Katerinis",
-  "mesto": "Paralia Katerinis",
-  "km": 73,
-  "vozOko": "56 min",
-  "zivost": 5,
-  "uMestu": false,
-  "odCentraKm": 4.4,
-  "kmOpis": "69–77 km",
-  "zvezdice": 3,
-  "ocena": 8.4,
-  "brOcena": 85,
-  "cene": {
-   "PP": 1710
-  },
-  "najniza": 1710,
-  "soba": {
-   "PP": "Superior Studio"
-  },
-  "udaljenostOdCentra": "4.4 km from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/olympiada-girni-suites.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=OLYMPIADA+GIRNI+Suites+Paralia+Katerinis+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=OLYMPIADA+GIRNI+Suites+Paralia+Katerinis+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "sea-level-hotel-by-diomedes-group",
-  "hotel": "Sea Level Hotel by Diomedes Group",
-  "grad": "Polychrono",
-  "mesto": "Polihrono",
-  "km": 105,
-  "vozOko": "99 min",
-  "zivost": 3,
-  "uMestu": true,
-  "odCentraKm": 0.45,
-  "kmOpis": "105 km",
-  "zvezdice": 4,
-  "ocena": 8.5,
-  "brOcena": 843,
-  "cene": {
-   "AI": 1735,
-   "PP": 1907
-  },
-  "najniza": 1735,
-  "soba": {
-   "AI": "Double Room",
-   "PP": "Double Room"
-  },
-  "udaljenostOdCentra": "450 m from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/sea-level-polukhrono.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Sea+Level+Hotel+by+Diomedes+Group+Polihrono+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Sea+Level+Hotel+by+Diomedes+Group+Polihrono+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "domus-hospitality",
-  "hotel": "domus hospitality",
-  "grad": "Nikiti",
-  "mesto": "Nikiti",
-  "km": 110,
-  "vozOko": "111 min",
-  "zivost": 4,
-  "uMestu": false,
-  "odCentraKm": 9.9,
-  "kmOpis": "100–120 km",
-  "zvezdice": 4,
-  "ocena": 9.3,
-  "brOcena": 442,
-  "cene": {
-   "PP": 1804
-  },
-  "najniza": 1804,
-  "soba": {
-   "PP": "One-Bedroom Apartment"
-  },
-  "udaljenostOdCentra": "9.9 km from Nikiti",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/domus-hospitality.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=domus+hospitality+Nikiti+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=domus+hospitality+Nikiti+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "ohana-hotel",
-  "hotel": "Ohana Hotel",
-  "grad": "Kriopigi",
-  "mesto": "Kriopigi",
-  "km": 89,
-  "vozOko": "82 min",
-  "zivost": 3,
-  "uMestu": true,
-  "odCentraKm": 1.1,
-  "kmOpis": "89 km",
-  "zvezdice": 4,
-  "ocena": 8.9,
-  "brOcena": 319,
-  "cene": {
-   "PP": 1806
-  },
-  "najniza": 1806,
-  "soba": {
-   "PP": "Two-Bedroom Family Apartment"
-  },
-  "udaljenostOdCentra": "1.1 km from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/ohana-kriopigi.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Ohana+Hotel+Kriopigi+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Ohana+Hotel+Kriopigi+Greece&dr-20260905-20260913=&rc-2="
+    "url": "https://www.trivago.com/en-US/srl?query=ZOI+Girni+-+Seaside+Hotel+Olimpik+Bi%C4%8D+Greece&dr-20260905-20260913=&rc-2="
    }
   ]
  },
@@ -3299,9 +1499,20 @@ const HOTELI = [
   "km": 105,
   "vozOko": "99 min",
   "zivost": 3,
-  "uMestu": true,
-  "odCentraKm": 0.05,
-  "kmOpis": "105 km",
+  "plazaM": 200,
+  "centarM": 50,
+  "naPlazi": true,
+  "centarMesto": "Polykhrono",
+  "aerodromKm": 83,
+  "bodovi": 31,
+  "razrada": {
+   "ocena": 94,
+   "cena": 0,
+   "plaza": 75,
+   "centar": 96,
+   "zivost": 50,
+   "pansion": 100
+  },
   "zvezdice": 4,
   "ocena": 9.4,
   "brOcena": 424,
@@ -3334,189 +1545,446 @@ const HOTELI = [
   ]
  },
  {
-  "id": "coco-ns-suites-villas-fourka",
-  "hotel": "Cocoοns Suites & Villas Fourka",
-  "grad": "Kallithea Halkidiki",
-  "mesto": "Kalitea",
-  "km": 96,
-  "vozOko": "103 min",
-  "zivost": 5,
-  "uMestu": false,
-  "odCentraKm": 9.7,
-  "kmOpis": "86–106 km",
-  "zvezdice": null,
+  "id": "secret-paradise-hotel-spa",
+  "hotel": "Secret Paradise Hotel & Spa",
+  "grad": "Nea Kallikratia",
+  "mesto": "Nea Kalikratija",
+  "km": 42,
+  "vozOko": "42 min",
+  "zivost": 4,
+  "plazaM": 100,
+  "centarM": 400,
+  "naPlazi": true,
+  "centarMesto": "Nea Kalikratia",
+  "aerodromKm": 27,
+  "bodovi": 30,
+  "razrada": {
+   "ocena": 87,
+   "cena": 0,
+   "plaza": 88,
+   "centar": 67,
+   "zivost": 75,
+   "pansion": 65
+  },
+  "zvezdice": 4,
   "ocena": 9.2,
-  "brOcena": 528,
+  "brOcena": 525,
   "cene": {
-   "PP": 1837
+   "PP": 2152
   },
-  "najniza": 1837,
+  "najniza": 2152,
   "soba": {
-   "PP": "Junior Suite with Balcony"
+   "PP": "Standard Family Room"
   },
-  "udaljenostOdCentra": "9.7 km from Kallithea Halkidikis",
+  "udaljenostOdCentra": "7.5 km from Sozopoli",
   "plazaBlizu": true,
   "takseUkljucene": true,
   "uBudzetu": false,
   "linkovi": [
    {
     "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/cocoons.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+    "url": "https://www.booking.com/hotel/gr/mykonos-paradise.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
    },
    {
     "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Coco%CE%BFns+Suites+%26+Villas+Fourka+Kalitea+Greece&qs=CAE&ap=MABoAA"
+    "url": "https://www.google.com/travel/search?q=Secret+Paradise+Hotel+%26+Spa+Nea+Kalikratija+Greece&qs=CAE&ap=MABoAA"
    },
    {
     "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Coco%CE%BFns+Suites+%26+Villas+Fourka+Kalitea+Greece&dr-20260905-20260913=&rc-2="
+    "url": "https://www.trivago.com/en-US/srl?query=Secret+Paradise+Hotel+%26+Spa+Nea+Kalikratija+Greece&dr-20260905-20260913=&rc-2="
    }
   ]
  },
  {
-  "id": "hotel-simeon",
-  "hotel": "Hotel Simeon",
-  "grad": "Metamorfosi",
-  "mesto": "Metamorfosi",
-  "km": 85,
-  "vozOko": "81 min",
-  "zivost": 2,
-  "uMestu": true,
-  "odCentraKm": 0.05,
-  "kmOpis": "85 km",
+  "id": "peloton-inn",
+  "hotel": "Peloton Inn",
+  "grad": "Paralia Katerinis",
+  "mesto": "Paralia Katerinis",
+  "km": 73,
+  "vozOko": "56 min",
+  "zivost": 5,
+  "plazaM": 450,
+  "centarM": 600,
+  "naPlazi": true,
+  "centarMesto": "Paralia Katerinis",
+  "aerodromKm": 91,
+  "bodovi": 29,
+  "razrada": {
+   "ocena": 100,
+   "cena": 0,
+   "plaza": 44,
+   "centar": 50,
+   "zivost": 100,
+   "pansion": 65
+  },
   "zvezdice": 3,
-  "ocena": 8.4,
-  "brOcena": 522,
+  "ocena": 9.7,
+  "brOcena": 201,
   "cene": {
-   "AI": 1868,
-   "PP": 1888
+   "PP": 1230
   },
-  "najniza": 1868,
+  "najniza": 1230,
   "soba": {
-   "AI": "Double or Twin Room",
-   "PP": "Standard Family Room"
+   "PP": "Superior Family Room"
   },
-  "udaljenostOdCentra": "50 m from centre",
+  "udaljenostOdCentra": "0.7 km from centre",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/peloton-inn.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Peloton+Inn+Paralia+Katerinis+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Peloton+Inn+Paralia+Katerinis+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "meravia-leonardo-limited-edition-adults-only",
+  "hotel": "MERAVIA Leonardo Limited Edition - Adults Only",
+  "grad": "Afitos",
+  "mesto": "Afitos",
+  "km": 86,
+  "vozOko": "78 min",
+  "zivost": 4,
+  "plazaM": 100,
+  "centarM": 2300,
+  "naPlazi": true,
+  "centarMesto": "Afitos",
+  "aerodromKm": 67,
+  "bodovi": 28,
+  "razrada": {
+   "ocena": 97,
+   "cena": 0,
+   "plaza": 88,
+   "centar": 0,
+   "zivost": 75,
+   "pansion": 65
+  },
+  "zvezdice": 5,
+  "ocena": 9.5,
+  "brOcena": 1611,
+  "cene": {
+   "PP": 5132
+  },
+  "najniza": 5132,
+  "soba": {
+   "PP": "One bedroom suite Sea View Private Pool"
+  },
+  "udaljenostOdCentra": "2.4 km from Nea Fokea",
   "plazaBlizu": false,
   "takseUkljucene": true,
   "uBudzetu": false,
   "linkovi": [
    {
     "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/simeon-halkidiki.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+    "url": "https://www.booking.com/hotel/gr/meravia-leonardo-limited-edition-adults-only-booking.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
    },
    {
     "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Hotel+Simeon+Metamorfosi+Greece&qs=CAE&ap=MABoAA"
+    "url": "https://www.google.com/travel/search?q=MERAVIA+Leonardo+Limited+Edition+-+Adults+Only+Afitos+Greece&qs=CAE&ap=MABoAA"
    },
    {
     "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Hotel+Simeon+Metamorfosi+Greece&dr-20260905-20260913=&rc-2="
+    "url": "https://www.trivago.com/en-US/srl?query=MERAVIA+Leonardo+Limited+Edition+-+Adults+Only+Afitos+Greece&dr-20260905-20260913=&rc-2="
    }
   ]
  },
  {
-  "id": "laguna-resort-by-diomedes-group",
-  "hotel": "Laguna Resort by Diomedes Group",
-  "grad": "Hanioti",
-  "mesto": "Hanioti",
-  "km": 109,
-  "vozOko": "103 min",
-  "zivost": 5,
-  "uMestu": true,
-  "odCentraKm": 1.9,
-  "kmOpis": "109 km",
-  "zvezdice": null,
-  "ocena": 8.7,
-  "brOcena": 180,
-  "cene": {
-   "AI": 1888,
-   "PP": 2082
-  },
-  "najniza": 1888,
-  "soba": {
-   "AI": "Superior Double Room",
-   "PP": "Superior Double Room"
-  },
-  "udaljenostOdCentra": "1.9 km from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/laguna-resort.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Laguna+Resort+by+Diomedes+Group+Hanioti+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Laguna+Resort+by+Diomedes+Group+Hanioti+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "sani-polyastron-hotel-spa",
-  "hotel": "Sani Polyastron Hotel & Spa",
-  "grad": "Sani",
-  "mesto": "Sani",
-  "km": 84,
-  "vozOko": "83 min",
-  "zivost": 1,
-  "uMestu": true,
-  "odCentraKm": 1.1,
-  "kmOpis": "84 km",
-  "zvezdice": 4,
-  "ocena": 9.2,
-  "brOcena": 214,
-  "cene": {
-   "PP": 1945
-  },
-  "najniza": 1945,
-  "soba": {
-   "PP": "Deluxe Suite"
-  },
-  "udaljenostOdCentra": "1.1 km from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/polyastron-place.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Sani+Polyastron+Hotel+%26+Spa+Sani+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Sani+Polyastron+Hotel+%26+Spa+Sani+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "akteon-girni",
-  "hotel": "AKTEON GIRNI",
+  "id": "asteras-studios",
+  "hotel": "ASTERAS STUDIOS",
   "grad": "Paralia Katerinis",
   "mesto": "Paralia Katerinis",
   "km": 73,
   "vozOko": "56 min",
   "zivost": 5,
-  "uMestu": true,
-  "odCentraKm": 0.35,
-  "kmOpis": "73 km",
-  "zvezdice": 3,
-  "ocena": 9.4,
-  "brOcena": 368,
-  "cene": {
-   "PP": 1951
+  "plazaM": 200,
+  "centarM": 600,
+  "naPlazi": true,
+  "centarMesto": "Paralia Katerinis",
+  "aerodromKm": 91,
+  "bodovi": 28,
+  "razrada": {
+   "ocena": 81,
+   "cena": 0,
+   "plaza": 75,
+   "centar": 50,
+   "zivost": 100,
+   "pansion": 65
   },
-  "najniza": 1951,
+  "zvezdice": 4,
+  "ocena": 9.0,
+  "brOcena": 201,
+  "cene": {
+   "PP": 1321
+  },
+  "najniza": 1321,
   "soba": {
-   "PP": "Family Room with Sea View"
+   "PP": "Triple Room"
+  },
+  "udaljenostOdCentra": "0.7 km from centre",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/asteras-studios.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=ASTERAS+STUDIOS+Paralia+Katerinis+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=ASTERAS+STUDIOS+Paralia+Katerinis+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "sun-hotel",
+  "hotel": "Sun Hotel",
+  "grad": "Polychrono",
+  "mesto": "Polihrono",
+  "km": 105,
+  "vozOko": "99 min",
+  "zivost": 3,
+  "plazaM": 100,
+  "centarM": 100,
+  "naPlazi": true,
+  "centarMesto": "Polykhrono",
+  "aerodromKm": 83,
+  "bodovi": 28,
+  "razrada": {
+   "ocena": 74,
+   "cena": 0,
+   "plaza": 88,
+   "centar": 92,
+   "zivost": 50,
+   "pansion": 65
+  },
+  "zvezdice": 3,
+  "ocena": 8.8,
+  "brOcena": 266,
+  "cene": {
+   "PP": 1108
+  },
+  "najniza": 1108,
+  "soba": {
+   "PP": "Family Room with Bunk Bed"
+  },
+  "udaljenostOdCentra": "150 m from centre",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/sunset-ouranoupolis.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Sun+Hotel+Polihrono+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Sun+Hotel+Polihrono+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "sea-level-hotel-by-diomedes-group",
+  "hotel": "Sea Level Hotel by Diomedes Group",
+  "grad": "Polychrono",
+  "mesto": "Polihrono",
+  "km": 105,
+  "vozOko": "99 min",
+  "zivost": 3,
+  "plazaM": 20,
+  "centarM": 400,
+  "naPlazi": true,
+  "centarMesto": "Polykhrono",
+  "aerodromKm": 82,
+  "bodovi": 28,
+  "razrada": {
+   "ocena": 65,
+   "cena": 0,
+   "plaza": 98,
+   "centar": 67,
+   "zivost": 50,
+   "pansion": 100
+  },
+  "zvezdice": 4,
+  "ocena": 8.5,
+  "brOcena": 843,
+  "cene": {
+   "AI": 1735,
+   "PP": 1907
+  },
+  "najniza": 1735,
+  "soba": {
+   "AI": "Double Room",
+   "PP": "Double Room"
+  },
+  "udaljenostOdCentra": "450 m from centre",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/sea-level-polukhrono.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Sea+Level+Hotel+by+Diomedes+Group+Polihrono+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Sea+Level+Hotel+by+Diomedes+Group+Polihrono+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "hotel-pilalidis",
+  "hotel": "Hotel Pilalidis",
+  "grad": "Pefkochori",
+  "mesto": "Pefkohori",
+  "km": 113,
+  "vozOko": "107 min",
+  "zivost": 5,
+  "plazaM": 400,
+  "centarM": 600,
+  "naPlazi": true,
+  "centarMesto": "Pefkohori",
+  "aerodromKm": 91,
+  "bodovi": 28,
+  "razrada": {
+   "ocena": 90,
+   "cena": 0,
+   "plaza": 50,
+   "centar": 50,
+   "zivost": 100,
+   "pansion": 65
+  },
+  "zvezdice": 3,
+  "ocena": 9.3,
+  "brOcena": 504,
+  "cene": {
+   "PP": 1360
+  },
+  "najniza": 1360,
+  "soba": {
+   "PP": "Superior Double Room with Garden View"
+  },
+  "udaljenostOdCentra": "0.7 km from centre",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/pilalidis.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Hotel+Pilalidis+Pefkohori+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Hotel+Pilalidis+Pefkohori+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "sun-residence-exclusive-seaside-suites",
+  "hotel": "SUN RESIDENCE Exclusive Seaside Suites",
+  "grad": "Polychrono",
+  "mesto": "Polihrono",
+  "km": 105,
+  "vozOko": "99 min",
+  "zivost": 3,
+  "plazaM": 50,
+  "centarM": 1400,
+  "naPlazi": true,
+  "centarMesto": "Polykhrono",
+  "aerodromKm": 81,
+  "bodovi": 28,
+  "razrada": {
+   "ocena": 100,
+   "cena": 0,
+   "plaza": 94,
+   "centar": 0,
+   "zivost": 50,
+   "pansion": 65
+  },
+  "zvezdice": 4,
+  "ocena": 9.6,
+  "brOcena": 67,
+  "cene": {
+   "PP": 2440
+  },
+  "najniza": 2440,
+  "soba": {
+   "PP": "Superior Executive Suite"
+  },
+  "udaljenostOdCentra": "1.4 km from centre",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/sun-residence.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=SUN+RESIDENCE+Exclusive+Seaside+Suites+Polihrono+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=SUN+RESIDENCE+Exclusive+Seaside+Suites+Polihrono+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "palm-boutique-suites",
+  "hotel": "Palm Boutique Suites",
+  "grad": "Pefkochori",
+  "mesto": "Pefkohori",
+  "km": 113,
+  "vozOko": "107 min",
+  "zivost": 5,
+  "plazaM": 550,
+  "centarM": 300,
+  "naPlazi": true,
+  "centarMesto": "Pefkohori",
+  "aerodromKm": 91,
+  "bodovi": 28,
+  "razrada": {
+   "ocena": 97,
+   "cena": 0,
+   "plaza": 31,
+   "centar": 75,
+   "zivost": 100,
+   "pansion": 65
+  },
+  "zvezdice": 2,
+  "ocena": 9.5,
+  "brOcena": 205,
+  "cene": {
+   "PP": 1683
+  },
+  "najniza": 1683,
+  "soba": {
+   "PP": "One-Bedroom Apartment with Spa Bath"
   },
   "udaljenostOdCentra": "350 m from centre",
   "plazaBlizu": true,
@@ -3525,177 +1993,170 @@ const HOTELI = [
   "linkovi": [
    {
     "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/akteon-girni.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+    "url": "https://www.booking.com/hotel/gr/palm-boutique-suites.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
    },
    {
     "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=AKTEON+GIRNI+Paralia+Katerinis+Greece&qs=CAE&ap=MABoAA"
+    "url": "https://www.google.com/travel/search?q=Palm+Boutique+Suites+Pefkohori+Greece&qs=CAE&ap=MABoAA"
    },
    {
     "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=AKTEON+GIRNI+Paralia+Katerinis+Greece&dr-20260905-20260913=&rc-2="
+    "url": "https://www.trivago.com/en-US/srl?query=Palm+Boutique+Suites+Pefkohori+Greece&dr-20260905-20260913=&rc-2="
    }
   ]
  },
  {
-  "id": "villa-askamnia-and-suites",
-  "hotel": "Villa Askamnia and Suites",
-  "grad": "Metamorfosi",
-  "mesto": "Metamorfosi",
-  "km": 85,
-  "vozOko": "81 min",
-  "zivost": 2,
-  "uMestu": true,
-  "odCentraKm": 0.6,
-  "kmOpis": "85 km",
-  "zvezdice": 4,
-  "ocena": 9.4,
-  "brOcena": 83,
+  "id": "evripidis-hotel-afitos",
+  "hotel": "Evripidis Hotel Afitos",
+  "grad": "Afitos",
+  "mesto": "Afitos",
+  "km": 86,
+  "vozOko": "78 min",
+  "zivost": 4,
+  "plazaM": 30,
+  "centarM": 2300,
+  "naPlazi": true,
+  "centarMesto": "Afitos",
+  "aerodromKm": 71,
+  "bodovi": 27,
+  "razrada": {
+   "ocena": 87,
+   "cena": 0,
+   "plaza": 96,
+   "centar": 0,
+   "zivost": 75,
+   "pansion": 65
+  },
+  "zvezdice": 1,
+  "ocena": 9.2,
+  "brOcena": 84,
   "cene": {
-   "PP": 1961
+   "PP": 1578
   },
-  "najniza": 1961,
+  "najniza": 1578,
   "soba": {
-   "PP": "Junior Suite with Pool View"
+   "PP": "One-Bedroom Apartment with Balcony and Sea View"
   },
-  "udaljenostOdCentra": "0.6 km from Metamorfosi",
+  "udaljenostOdCentra": "0.9 km from Kallithea Halkidikis",
   "plazaBlizu": true,
   "takseUkljucene": true,
   "uBudzetu": false,
   "linkovi": [
    {
     "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/villa-askamnia.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+    "url": "https://www.booking.com/hotel/gr/ksenodokheio-euripides.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
    },
    {
     "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Villa+Askamnia+and+Suites+Metamorfosi+Greece&qs=CAE&ap=MABoAA"
+    "url": "https://www.google.com/travel/search?q=Evripidis+Hotel+Afitos+Afitos+Greece&qs=CAE&ap=MABoAA"
    },
    {
     "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Villa+Askamnia+and+Suites+Metamorfosi+Greece&dr-20260905-20260913=&rc-2="
+    "url": "https://www.trivago.com/en-US/srl?query=Evripidis+Hotel+Afitos+Afitos+Greece&dr-20260905-20260913=&rc-2="
    }
   ]
  },
  {
-  "id": "royal-hotel-and-suites",
-  "hotel": "Royal Hotel and Suites",
-  "grad": "Polychrono",
-  "mesto": "Polihrono",
-  "km": 105,
-  "vozOko": "99 min",
-  "zivost": 3,
-  "uMestu": true,
-  "odCentraKm": 0.5,
-  "kmOpis": "105 km",
-  "zvezdice": 4,
-  "ocena": 8.6,
-  "brOcena": 155,
-  "cene": {
-   "AI": 1967,
-   "PP": 1967
+  "id": "meli-boutique-afitos",
+  "hotel": "Meli Boutique Afitos",
+  "grad": "Afitos",
+  "mesto": "Afitos",
+  "km": 86,
+  "vozOko": "78 min",
+  "zivost": 4,
+  "plazaM": 700,
+  "centarM": 50,
+  "naPlazi": true,
+  "centarMesto": "Afitos",
+  "aerodromKm": 68,
+  "bodovi": 26,
+  "razrada": {
+   "ocena": 97,
+   "cena": 0,
+   "plaza": 12,
+   "centar": 96,
+   "zivost": 75,
+   "pansion": 65
   },
-  "najniza": 1967,
-  "soba": {
-   "AI": "Family Room",
-   "PP": "Family Room"
-  },
-  "udaljenostOdCentra": "0.5 km from centre",
-  "plazaBlizu": false,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/apartments-royal.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Royal+Hotel+and+Suites+Polihrono+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Royal+Hotel+and+Suites+Polihrono+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "terra-olivia-luxury-villas-and-suites",
-  "hotel": "Terra Olivia Luxury Villas and Suites",
-  "grad": "Pefkochori",
-  "mesto": "Pefkohori",
-  "km": 113,
-  "vozOko": "107 min",
-  "zivost": 5,
-  "uMestu": false,
-  "odCentraKm": 6.4,
-  "kmOpis": "107–119 km",
-  "zvezdice": 4,
+  "zvezdice": 3,
   "ocena": 9.5,
-  "brOcena": 182,
+  "brOcena": 75,
   "cene": {
-   "PP": 2038
+   "PP": 1325
   },
-  "najniza": 2038,
+  "najniza": 1325,
   "soba": {
-   "PP": "One-Bedroom Villa"
+   "PP": "Deluxe Double Room"
   },
-  "udaljenostOdCentra": "6.4 km from Pefkohori",
+  "udaljenostOdCentra": "3.3 km from Kallithea Halkidikis",
   "plazaBlizu": true,
   "takseUkljucene": true,
   "uBudzetu": false,
   "linkovi": [
    {
     "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/paliouri-luxury-villas.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+    "url": "https://www.booking.com/hotel/gr/meli-boutique-afitos.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
    },
    {
     "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Terra+Olivia+Luxury+Villas+and+Suites+Pefkohori+Greece&qs=CAE&ap=MABoAA"
+    "url": "https://www.google.com/travel/search?q=Meli+Boutique+Afitos+Afitos+Greece&qs=CAE&ap=MABoAA"
    },
    {
     "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Terra+Olivia+Luxury+Villas+and+Suites+Pefkohori+Greece&dr-20260905-20260913=&rc-2="
+    "url": "https://www.trivago.com/en-US/srl?query=Meli+Boutique+Afitos+Afitos+Greece&dr-20260905-20260913=&rc-2="
    }
   ]
  },
  {
-  "id": "elinotel-sermilia-resort",
-  "hotel": "Elinotel Sermilia Resort",
+  "id": "amari-hotel",
+  "hotel": "Amari Hotel",
   "grad": "Metamorfosi",
   "mesto": "Metamorfosi",
   "km": 85,
   "vozOko": "81 min",
   "zivost": 2,
-  "uMestu": false,
-  "odCentraKm": 9.7,
-  "kmOpis": "75–95 km",
-  "zvezdice": 5,
-  "ocena": 8.2,
-  "brOcena": 313,
+  "plazaM": 400,
+  "centarM": 900,
+  "naPlazi": true,
+  "centarMesto": "Metamorfosi",
+  "aerodromKm": 78,
+  "bodovi": 26,
+  "razrada": {
+   "ocena": 100,
+   "cena": 0,
+   "plaza": 50,
+   "centar": 25,
+   "zivost": 25,
+   "pansion": 100
+  },
+  "zvezdice": 3,
+  "ocena": 9.6,
+  "brOcena": 134,
   "cene": {
-   "PP": 2063
+   "PP": 1417,
+   "AI": 1417
   },
-  "najniza": 2063,
+  "najniza": 1417,
   "soba": {
-   "PP": "Budget Double Room"
+   "PP": "One-Bedroom Apartment (2 - 4 Adults)",
+   "AI": "One-Bedroom Apartment (2 - 4 Adults)"
   },
-  "udaljenostOdCentra": "9.7 km from Metamorfosi",
+  "udaljenostOdCentra": "1 km from centre",
   "plazaBlizu": true,
   "takseUkljucene": true,
   "uBudzetu": false,
   "linkovi": [
    {
     "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/cronwell-resort-sermilia.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+    "url": "https://www.booking.com/hotel/gr/amari.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
    },
    {
     "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Elinotel+Sermilia+Resort+Metamorfosi+Greece&qs=CAE&ap=MABoAA"
+    "url": "https://www.google.com/travel/search?q=Amari+Hotel+Metamorfosi+Greece&qs=CAE&ap=MABoAA"
    },
    {
     "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Elinotel+Sermilia+Resort+Metamorfosi+Greece&dr-20260905-20260913=&rc-2="
+    "url": "https://www.trivago.com/en-US/srl?query=Amari+Hotel+Metamorfosi+Greece&dr-20260905-20260913=&rc-2="
    }
   ]
  },
@@ -3707,9 +2168,20 @@ const HOTELI = [
   "km": 109,
   "vozOko": "103 min",
   "zivost": 5,
-  "uMestu": true,
-  "odCentraKm": 0.5,
-  "kmOpis": "109 km",
+  "plazaM": 20,
+  "centarM": 500,
+  "naPlazi": true,
+  "centarMesto": "Hanioti",
+  "aerodromKm": 87,
+  "bodovi": 25,
+  "razrada": {
+   "ocena": 39,
+   "cena": 0,
+   "plaza": 98,
+   "centar": 58,
+   "zivost": 100,
+   "pansion": 100
+  },
   "zvezdice": 5,
   "ocena": 7.7,
   "brOcena": 347,
@@ -3742,136 +2214,543 @@ const HOTELI = [
   ]
  },
  {
-  "id": "secret-paradise-hotel-spa",
-  "hotel": "Secret Paradise Hotel & Spa",
-  "grad": "Sozopoli",
-  "mesto": "Sozopoli",
-  "km": 48,
-  "vozOko": "47 min",
-  "zivost": 2,
-  "uMestu": false,
-  "odCentraKm": 7.5,
-  "kmOpis": "40–56 km",
-  "zvezdice": 4,
-  "ocena": 9.2,
-  "brOcena": 525,
+  "id": "sarantis-hotel",
+  "hotel": "Sarantis Hotel",
+  "grad": "Hanioti",
+  "mesto": "Hanioti",
+  "km": 109,
+  "vozOko": "103 min",
+  "zivost": 5,
+  "plazaM": 500,
+  "centarM": 200,
+  "naPlazi": true,
+  "centarMesto": "Hanioti",
+  "aerodromKm": 87,
+  "bodovi": 25,
+  "razrada": {
+   "ocena": 71,
+   "cena": 0,
+   "plaza": 38,
+   "centar": 83,
+   "zivost": 100,
+   "pansion": 65
+  },
+  "zvezdice": 3,
+  "ocena": 8.7,
+  "brOcena": 340,
   "cene": {
-   "PP": 2152
+   "PP": 1273
   },
-  "najniza": 2152,
+  "najniza": 1273,
   "soba": {
-   "PP": "Standard Family Room"
+   "PP": "Twin Room"
   },
-  "udaljenostOdCentra": "7.5 km from Sozopoli",
+  "udaljenostOdCentra": "250 m from centre",
   "plazaBlizu": true,
   "takseUkljucene": true,
   "uBudzetu": false,
   "linkovi": [
    {
     "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/mykonos-paradise.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+    "url": "https://www.booking.com/hotel/gr/sarantis.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
    },
    {
     "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Secret+Paradise+Hotel+%26+Spa+Sozopoli+Greece&qs=CAE&ap=MABoAA"
+    "url": "https://www.google.com/travel/search?q=Sarantis+Hotel+Hanioti+Greece&qs=CAE&ap=MABoAA"
    },
    {
     "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Secret+Paradise+Hotel+%26+Spa+Sozopoli+Greece&dr-20260905-20260913=&rc-2="
+    "url": "https://www.trivago.com/en-US/srl?query=Sarantis+Hotel+Hanioti+Greece&dr-20260905-20260913=&rc-2="
    }
   ]
  },
  {
-  "id": "sani-verde",
-  "hotel": "Sani Verde",
-  "grad": "Sani",
-  "mesto": "Sani",
-  "km": 84,
-  "vozOko": "83 min",
-  "zivost": 1,
-  "uMestu": true,
-  "odCentraKm": 2.1,
-  "kmOpis": "84 km",
+  "id": "crystal-villas-suites",
+  "hotel": "Crystal villas & suites",
+  "grad": "Polychrono",
+  "mesto": "Polihrono",
+  "km": 105,
+  "vozOko": "99 min",
+  "zivost": 3,
+  "plazaM": 150,
+  "centarM": 1500,
+  "naPlazi": true,
+  "centarMesto": "Polykhrono",
+  "aerodromKm": 81,
+  "bodovi": 25,
+  "razrada": {
+   "ocena": 87,
+   "cena": 0,
+   "plaza": 81,
+   "centar": 0,
+   "zivost": 50,
+   "pansion": 65
+  },
   "zvezdice": 4,
-  "ocena": 9.6,
-  "brOcena": 345,
+  "ocena": 9.2,
+  "brOcena": 163,
   "cene": {
-   "PP": 2177
+   "PP": 5017
   },
-  "najniza": 2177,
+  "najniza": 5017,
   "soba": {
-   "PP": "Superior Apartment"
+   "PP": "Villa with Sea View"
   },
-  "udaljenostOdCentra": "2.1 km from centre",
+  "udaljenostOdCentra": "1.5 km from centre",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/crystal-villas-amp-suites.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Crystal+villas+%26+suites+Polihrono+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Crystal+villas+%26+suites+Polihrono+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "akritas-hotel-pefkochori",
+  "hotel": "Akritas Hotel Pefkochori",
+  "grad": "Pefkochori",
+  "mesto": "Pefkohori",
+  "km": 113,
+  "vozOko": "107 min",
+  "zivost": 5,
+  "plazaM": 550,
+  "centarM": 300,
+  "naPlazi": true,
+  "centarMesto": "Pefkohori",
+  "aerodromKm": 91,
+  "bodovi": 25,
+  "razrada": {
+   "ocena": 77,
+   "cena": 0,
+   "plaza": 31,
+   "centar": 75,
+   "zivost": 100,
+   "pansion": 65
+  },
+  "zvezdice": 3,
+  "ocena": 8.9,
+  "brOcena": 644,
+  "cene": {
+   "PP": 1506
+  },
+  "najniza": 1506,
+  "soba": {
+   "PP": "Family Room with Bathroom"
+  },
+  "udaljenostOdCentra": "350 m from centre",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/akritas-pefkohori.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Akritas+Hotel+Pefkochori+Pefkohori+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Akritas+Hotel+Pefkochori+Pefkohori+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "kassandra-village-resort",
+  "hotel": "Kassandra Village Resort",
+  "grad": "Pefkochori",
+  "mesto": "Pefkohori",
+  "km": 113,
+  "vozOko": "107 min",
+  "zivost": 5,
+  "plazaM": 700,
+  "centarM": 400,
+  "naPlazi": true,
+  "centarMesto": "Pefkohori",
+  "aerodromKm": 91,
+  "bodovi": 25,
+  "razrada": {
+   "ocena": 87,
+   "cena": 0,
+   "plaza": 12,
+   "centar": 67,
+   "zivost": 100,
+   "pansion": 65
+  },
+  "zvezdice": 4,
+  "ocena": 9.2,
+  "brOcena": 211,
+  "cene": {
+   "PP": 2944
+  },
+  "najniza": 2944,
+  "soba": {
+   "PP": "Superior Two-Bedroom Apartment"
+  },
+  "udaljenostOdCentra": "400 m from centre",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/kassandra-village-resort.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Kassandra+Village+Resort+Pefkohori+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Kassandra+Village+Resort+Pefkohori+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "pomegranate-wellness-spa-hotel",
+  "hotel": "Pomegranate Wellness Spa Hotel",
+  "grad": "Nea Potidea",
+  "mesto": "Nea Potidea",
+  "km": 68,
+  "vozOko": "63 min",
+  "zivost": 2,
+  "plazaM": 350,
+  "centarM": 1400,
+  "naPlazi": true,
+  "centarMesto": "Nea Potidaea",
+  "aerodromKm": 52,
+  "bodovi": 24,
+  "razrada": {
+   "ocena": 94,
+   "cena": 0,
+   "plaza": 56,
+   "centar": 0,
+   "zivost": 25,
+   "pansion": 100
+  },
+  "zvezdice": 5,
+  "ocena": 9.4,
+  "brOcena": 511,
+  "cene": {
+   "PP": 4734,
+   "AI": 4734
+  },
+  "najniza": 4734,
+  "soba": {
+   "PP": "Suite Standard",
+   "AI": "Suite Standard"
+  },
+  "udaljenostOdCentra": "4.9 km from Nea Moudania",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/pomegranate-spa.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Pomegranate+Wellness+Spa+Hotel+Nea+Potidea+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Pomegranate+Wellness+Spa+Hotel+Nea+Potidea+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "elinotel-sermilia-resort",
+  "hotel": "Elinotel Sermilia Resort",
+  "grad": "Psakoudia",
+  "mesto": "Psakoudia",
+  "km": 88,
+  "vozOko": "89 min",
+  "zivost": 2,
+  "plazaM": 10,
+  "centarM": 200,
+  "naPlazi": true,
+  "centarMesto": "Psakoudia",
+  "aerodromKm": 67,
+  "bodovi": 24,
+  "razrada": {
+   "ocena": 55,
+   "cena": 0,
+   "plaza": 99,
+   "centar": 83,
+   "zivost": 25,
+   "pansion": 65
+  },
+  "zvezdice": 5,
+  "ocena": 8.2,
+  "brOcena": 313,
+  "cene": {
+   "PP": 2063
+  },
+  "najniza": 2063,
+  "soba": {
+   "PP": "Budget Double Room"
+  },
+  "udaljenostOdCentra": "9.7 km from Metamorfosi",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/cronwell-resort-sermilia.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Elinotel+Sermilia+Resort+Psakoudia+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Elinotel+Sermilia+Resort+Psakoudia+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "hotel-simeon",
+  "hotel": "Hotel Simeon",
+  "grad": "Metamorfosi",
+  "mesto": "Metamorfosi",
+  "km": 85,
+  "vozOko": "81 min",
+  "zivost": 2,
+  "plazaM": 350,
+  "centarM": 50,
+  "naPlazi": true,
+  "centarMesto": "Metamorfosi",
+  "aerodromKm": 77,
+  "bodovi": 24,
+  "razrada": {
+   "ocena": 61,
+   "cena": 0,
+   "plaza": 56,
+   "centar": 96,
+   "zivost": 25,
+   "pansion": 100
+  },
+  "zvezdice": 3,
+  "ocena": 8.4,
+  "brOcena": 522,
+  "cene": {
+   "AI": 1868,
+   "PP": 1888
+  },
+  "najniza": 1868,
+  "soba": {
+   "AI": "Double or Twin Room",
+   "PP": "Standard Family Room"
+  },
+  "udaljenostOdCentra": "50 m from centre",
   "plazaBlizu": false,
   "takseUkljucene": true,
   "uBudzetu": false,
   "linkovi": [
    {
     "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/sani-verde.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+    "url": "https://www.booking.com/hotel/gr/simeon-halkidiki.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
    },
    {
     "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Sani+Verde+Sani+Greece&qs=CAE&ap=MABoAA"
+    "url": "https://www.google.com/travel/search?q=Hotel+Simeon+Metamorfosi+Greece&qs=CAE&ap=MABoAA"
    },
    {
     "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Sani+Verde+Sani+Greece&dr-20260905-20260913=&rc-2="
+    "url": "https://www.trivago.com/en-US/srl?query=Hotel+Simeon+Metamorfosi+Greece&dr-20260905-20260913=&rc-2="
    }
   ]
  },
  {
-  "id": "kyma-boutique",
-  "hotel": "ĪKYMA Boutique",
-  "grad": "Polychrono",
-  "mesto": "Polihrono",
-  "km": 105,
-  "vozOko": "99 min",
-  "zivost": 3,
-  "uMestu": true,
-  "odCentraKm": 3.0,
-  "kmOpis": "105 km",
-  "zvezdice": null,
+  "id": "angelina-hotel",
+  "hotel": "Angelina Hotel",
+  "grad": "Ormos Panagias",
+  "mesto": "Ormos Panagias",
+  "km": 112,
+  "vozOko": "110 min",
+  "zivost": 2,
+  "plazaM": 1,
+  "centarM": 100,
+  "naPlazi": true,
+  "centarMesto": "Ormos Panagias",
+  "aerodromKm": 90,
+  "bodovi": 24,
+  "razrada": {
+   "ocena": 52,
+   "cena": 0,
+   "plaza": 100,
+   "centar": 92,
+   "zivost": 25,
+   "pansion": 65
+  },
+  "zvezdice": 2,
   "ocena": 8.1,
-  "brOcena": 514,
+  "brOcena": 131,
   "cene": {
-   "PP": 2182
+   "PP": 1350
   },
-  "najniza": 2182,
+  "najniza": 1350,
   "soba": {
-   "PP": "Double Room with Pool View"
+   "PP": "Triple Room with Garden View"
   },
-  "udaljenostOdCentra": "3 km from centre",
+  "udaljenostOdCentra": "5.5 km from Nikiti",
   "plazaBlizu": true,
   "takseUkljucene": true,
   "uBudzetu": false,
   "linkovi": [
    {
     "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/ikyma-boutique.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+    "url": "https://www.booking.com/hotel/gr/aggelos-ormos-panagias.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
    },
    {
     "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=%C4%AAKYMA+Boutique+Polihrono+Greece&qs=CAE&ap=MABoAA"
+    "url": "https://www.google.com/travel/search?q=Angelina+Hotel+Ormos+Panagias+Greece&qs=CAE&ap=MABoAA"
    },
    {
     "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=%C4%AAKYMA+Boutique+Polihrono+Greece&dr-20260905-20260913=&rc-2="
+    "url": "https://www.trivago.com/en-US/srl?query=Angelina+Hotel+Ormos+Panagias+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "stratos-hotel",
+  "hotel": "Stratos Hotel",
+  "grad": "Afitos",
+  "mesto": "Afitos",
+  "km": 86,
+  "vozOko": "78 min",
+  "zivost": 4,
+  "plazaM": 850,
+  "centarM": 100,
+  "naPlazi": true,
+  "centarMesto": "Afitos",
+  "aerodromKm": 69,
+  "bodovi": 23,
+  "razrada": {
+   "ocena": 84,
+   "cena": 0,
+   "plaza": 0,
+   "centar": 92,
+   "zivost": 75,
+   "pansion": 65
+  },
+  "zvezdice": 3,
+  "ocena": 9.1,
+  "brOcena": 383,
+  "cene": {
+   "PP": 1312
+  },
+  "najniza": 1312,
+  "soba": {
+   "PP": "Family Suite"
+  },
+  "udaljenostOdCentra": "3.1 km from Kallithea Halkidikis",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/stratos.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Stratos+Hotel+Afitos+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Stratos+Hotel+Afitos+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "cosmopolitan-hotel-by-ghh",
+  "hotel": "Cosmopolitan Hotel by GHH",
+  "grad": "Paralia Katerinis",
+  "mesto": "Paralia Katerinis",
+  "km": 73,
+  "vozOko": "56 min",
+  "zivost": 5,
+  "plazaM": 550,
+  "centarM": 800,
+  "naPlazi": true,
+  "centarMesto": "Paralia Katerinis",
+  "aerodromKm": 90,
+  "bodovi": 23,
+  "razrada": {
+   "ocena": 68,
+   "cena": 0,
+   "plaza": 31,
+   "centar": 33,
+   "zivost": 100,
+   "pansion": 100
+  },
+  "zvezdice": 4,
+  "ocena": 8.6,
+  "brOcena": 426,
+  "cene": {
+   "PP": 1444,
+   "AI": 1743
+  },
+  "najniza": 1444,
+  "soba": {
+   "PP": "Family Room",
+   "AI": "Family Room"
+  },
+  "udaljenostOdCentra": "0.9 km from centre",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/cosmopolitan-paralia-katerinis.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Cosmopolitan+Hotel+by+GHH+Paralia+Katerinis+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Cosmopolitan+Hotel+by+GHH+Paralia+Katerinis+Greece&dr-20260905-20260913=&rc-2="
    }
   ]
  },
  {
   "id": "lagaria-apartments",
   "hotel": "Lagaria Apartments",
-  "grad": "Kallithea Halkidiki",
-  "mesto": "Kalitea",
-  "km": 96,
-  "vozOko": "103 min",
-  "zivost": 5,
-  "uMestu": true,
-  "odCentraKm": 2.6,
-  "kmOpis": "96 km",
+  "grad": "Afitos",
+  "mesto": "Afitos",
+  "km": 86,
+  "vozOko": "78 min",
+  "zivost": 4,
+  "plazaM": 600,
+  "centarM": 600,
+  "naPlazi": true,
+  "centarMesto": "Afitos",
+  "aerodromKm": 69,
+  "bodovi": 23,
+  "razrada": {
+   "ocena": 81,
+   "cena": 0,
+   "plaza": 25,
+   "centar": 50,
+   "zivost": 75,
+   "pansion": 65
+  },
   "zvezdice": 4,
   "ocena": 9.0,
   "brOcena": 85,
@@ -3893,93 +2772,374 @@ const HOTELI = [
    },
    {
     "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Lagaria+Apartments+Kalitea+Greece&qs=CAE&ap=MABoAA"
+    "url": "https://www.google.com/travel/search?q=Lagaria+Apartments+Afitos+Greece&qs=CAE&ap=MABoAA"
    },
    {
     "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Lagaria+Apartments+Kalitea+Greece&dr-20260905-20260913=&rc-2="
+    "url": "https://www.trivago.com/en-US/srl?query=Lagaria+Apartments+Afitos+Greece&dr-20260905-20260913=&rc-2="
    }
   ]
  },
  {
-  "id": "sun-residence-exclusive-seaside-suites",
-  "hotel": "SUN RESIDENCE Exclusive Seaside Suites",
+  "id": "laguna-resort-by-diomedes-group",
+  "hotel": "Laguna Resort by Diomedes Group",
+  "grad": "Hanioti",
+  "mesto": "Hanioti",
+  "km": 109,
+  "vozOko": "103 min",
+  "zivost": 5,
+  "plazaM": 450,
+  "centarM": 1900,
+  "naPlazi": true,
+  "centarMesto": "Hanioti",
+  "aerodromKm": 85,
+  "bodovi": 23,
+  "razrada": {
+   "ocena": 71,
+   "cena": 0,
+   "plaza": 44,
+   "centar": 0,
+   "zivost": 100,
+   "pansion": 100
+  },
+  "zvezdice": null,
+  "ocena": 8.7,
+  "brOcena": 180,
+  "cene": {
+   "AI": 1888,
+   "PP": 2082
+  },
+  "najniza": 1888,
+  "soba": {
+   "AI": "Superior Double Room",
+   "PP": "Superior Double Room"
+  },
+  "udaljenostOdCentra": "1.9 km from centre",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/laguna-resort.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Laguna+Resort+by+Diomedes+Group+Hanioti+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Laguna+Resort+by+Diomedes+Group+Hanioti+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "royal-hotel-and-suites",
+  "hotel": "Royal Hotel and Suites",
   "grad": "Polychrono",
   "mesto": "Polihrono",
   "km": 105,
   "vozOko": "99 min",
   "zivost": 3,
-  "uMestu": true,
-  "odCentraKm": 1.4,
-  "kmOpis": "105 km",
+  "plazaM": 450,
+  "centarM": 500,
+  "naPlazi": true,
+  "centarMesto": "Polykhrono",
+  "aerodromKm": 82,
+  "bodovi": 23,
+  "razrada": {
+   "ocena": 68,
+   "cena": 0,
+   "plaza": 44,
+   "centar": 58,
+   "zivost": 50,
+   "pansion": 100
+  },
   "zvezdice": 4,
-  "ocena": 9.6,
-  "brOcena": 67,
+  "ocena": 8.6,
+  "brOcena": 155,
   "cene": {
-   "PP": 2440
+   "AI": 1967,
+   "PP": 1967
   },
-  "najniza": 2440,
+  "najniza": 1967,
   "soba": {
-   "PP": "Superior Executive Suite"
+   "AI": "Family Room",
+   "PP": "Family Room"
   },
-  "udaljenostOdCentra": "1.4 km from centre",
-  "plazaBlizu": true,
+  "udaljenostOdCentra": "0.5 km from centre",
+  "plazaBlizu": false,
   "takseUkljucene": true,
   "uBudzetu": false,
   "linkovi": [
    {
     "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/sun-residence.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+    "url": "https://www.booking.com/hotel/gr/apartments-royal.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
    },
    {
     "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=SUN+RESIDENCE+Exclusive+Seaside+Suites+Polihrono+Greece&qs=CAE&ap=MABoAA"
+    "url": "https://www.google.com/travel/search?q=Royal+Hotel+and+Suites+Polihrono+Greece&qs=CAE&ap=MABoAA"
    },
    {
     "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=SUN+RESIDENCE+Exclusive+Seaside+Suites+Polihrono+Greece&dr-20260905-20260913=&rc-2="
+    "url": "https://www.trivago.com/en-US/srl?query=Royal+Hotel+and+Suites+Polihrono+Greece&dr-20260905-20260913=&rc-2="
    }
   ]
  },
  {
-  "id": "porfi-beach-hotel",
-  "hotel": "Porfi Beach Hotel",
-  "grad": "Metamorfosi",
-  "mesto": "Metamorfosi",
-  "km": 85,
-  "vozOko": "81 min",
+  "id": "domus-hospitality",
+  "hotel": "domus hospitality",
+  "grad": "Vourvourou",
+  "mesto": "Vourvourou",
+  "km": 116,
+  "vozOko": "114 min",
   "zivost": 2,
-  "uMestu": true,
-  "odCentraKm": 2.4,
-  "kmOpis": "85 km",
-  "zvezdice": 3,
-  "ocena": 8.4,
-  "brOcena": 648,
+  "plazaM": 250,
+  "centarM": 2100,
+  "naPlazi": true,
+  "centarMesto": "Vourvourou",
+  "aerodromKm": 96,
+  "bodovi": 23,
+  "razrada": {
+   "ocena": 90,
+   "cena": 0,
+   "plaza": 69,
+   "centar": 0,
+   "zivost": 25,
+   "pansion": 65
+  },
+  "zvezdice": 4,
+  "ocena": 9.3,
+  "brOcena": 442,
   "cene": {
-   "AI": 2769,
-   "PP": 2479
+   "PP": 1804
   },
-  "najniza": 2479,
+  "najniza": 1804,
   "soba": {
-   "AI": "Family Suite",
-   "PP": "Family Suite"
+   "PP": "One-Bedroom Apartment"
   },
-  "udaljenostOdCentra": "2.4 km from Metamorfosi",
+  "udaljenostOdCentra": "9.9 km from Nikiti",
   "plazaBlizu": true,
   "takseUkljucene": true,
   "uBudzetu": false,
   "linkovi": [
    {
     "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/porfi-beach.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+    "url": "https://www.booking.com/hotel/gr/domus-hospitality.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
    },
    {
     "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Porfi+Beach+Hotel+Metamorfosi+Greece&qs=CAE&ap=MABoAA"
+    "url": "https://www.google.com/travel/search?q=domus+hospitality+Vourvourou+Greece&qs=CAE&ap=MABoAA"
    },
    {
     "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Porfi+Beach+Hotel+Metamorfosi+Greece&dr-20260905-20260913=&rc-2="
+    "url": "https://www.trivago.com/en-US/srl?query=domus+hospitality+Vourvourou+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "lagaria-hotel",
+  "hotel": "Lagaria Hotel",
+  "grad": "Afitos",
+  "mesto": "Afitos",
+  "km": 86,
+  "vozOko": "78 min",
+  "zivost": 4,
+  "plazaM": 600,
+  "centarM": 600,
+  "naPlazi": true,
+  "centarMesto": "Afitos",
+  "aerodromKm": 69,
+  "bodovi": 22,
+  "razrada": {
+   "ocena": 77,
+   "cena": 0,
+   "plaza": 25,
+   "centar": 50,
+   "zivost": 75,
+   "pansion": 65
+  },
+  "zvezdice": 4,
+  "ocena": 8.9,
+  "brOcena": 652,
+  "cene": {
+   "PP": 1319
+  },
+  "najniza": 1319,
+  "soba": {
+   "PP": "Flexible Room"
+  },
+  "udaljenostOdCentra": "2.6 km from Kallithea Halkidikis",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/lagaria-palace.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Lagaria+Hotel+Afitos+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Lagaria+Hotel+Afitos+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "arya-hotel",
+  "hotel": "Arya Hotel",
+  "grad": "Hanioti",
+  "mesto": "Hanioti",
+  "km": 109,
+  "vozOko": "103 min",
+  "zivost": 5,
+  "plazaM": 750,
+  "centarM": 700,
+  "naPlazi": true,
+  "centarMesto": "Hanioti",
+  "aerodromKm": 88,
+  "bodovi": 22,
+  "razrada": {
+   "ocena": 68,
+   "cena": 0,
+   "plaza": 6,
+   "centar": 42,
+   "zivost": 100,
+   "pansion": 100
+  },
+  "zvezdice": 3,
+  "ocena": 8.6,
+  "brOcena": 448,
+  "cene": {
+   "AI": 1278,
+   "PP": 1406
+  },
+  "najniza": 1278,
+  "soba": {
+   "AI": "Deluxe Double Room",
+   "PP": "Deluxe Double Room"
+  },
+  "udaljenostOdCentra": "0.8 km from centre",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/arya.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Arya+Hotel+Hanioti+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Arya+Hotel+Hanioti+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "old-nikiti-s-hotel",
+  "hotel": "Old Nikiti's Hotel",
+  "grad": "Nikiti",
+  "mesto": "Nikiti",
+  "km": 110,
+  "vozOko": "111 min",
+  "zivost": 4,
+  "plazaM": 1200,
+  "centarM": 400,
+  "naPlazi": true,
+  "centarMesto": "Nikiti",
+  "aerodromKm": 83,
+  "bodovi": 22,
+  "razrada": {
+   "ocena": 81,
+   "cena": 0,
+   "plaza": 0,
+   "centar": 67,
+   "zivost": 75,
+   "pansion": 65
+  },
+  "zvezdice": 2,
+  "ocena": 9.0,
+  "brOcena": 110,
+  "cene": {
+   "PP": 1666
+  },
+  "najniza": 1666,
+  "soba": {
+   "PP": "Quadruple Room with Balcony"
+  },
+  "udaljenostOdCentra": "400 m from centre",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/old-nikitis.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Old+Nikiti%27s+Hotel+Nikiti+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Old+Nikiti%27s+Hotel+Nikiti+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "core-hotel",
+  "hotel": "Core Hotel",
+  "grad": "Polychrono",
+  "mesto": "Polihrono",
+  "km": 105,
+  "vozOko": "99 min",
+  "zivost": 3,
+  "plazaM": 250,
+  "centarM": 100,
+  "naPlazi": true,
+  "centarMesto": "Polykhrono",
+  "aerodromKm": 83,
+  "bodovi": 22,
+  "razrada": {
+   "ocena": 45,
+   "cena": 0,
+   "plaza": 69,
+   "centar": 92,
+   "zivost": 50,
+   "pansion": 65
+  },
+  "zvezdice": 4,
+  "ocena": 7.9,
+  "brOcena": 193,
+  "cene": {
+   "PP": 1370
+  },
+  "najniza": 1370,
+  "soba": {
+   "PP": "Classic One-Bedroom Suite"
+  },
+  "udaljenostOdCentra": "150 m from centre",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/core-resorts.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Core+Hotel+Polihrono+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Core+Hotel+Polihrono+Greece&dr-20260905-20260913=&rc-2="
    }
   ]
  },
@@ -3991,9 +3151,20 @@ const HOTELI = [
   "km": 109,
   "vozOko": "103 min",
   "zivost": 5,
-  "uMestu": true,
-  "odCentraKm": 1.0,
-  "kmOpis": "109 km",
+  "plazaM": 500,
+  "centarM": 1000,
+  "naPlazi": true,
+  "centarMesto": "Hanioti",
+  "aerodromKm": 88,
+  "bodovi": 22,
+  "razrada": {
+   "ocena": 87,
+   "cena": 0,
+   "plaza": 38,
+   "centar": 17,
+   "zivost": 100,
+   "pansion": 100
+  },
   "zvezdice": 5,
   "ocena": 9.2,
   "brOcena": 23,
@@ -4026,206 +3197,926 @@ const HOTELI = [
   ]
  },
  {
-  "id": "ostria-sea-side-hotel",
-  "hotel": "Ostria Sea Side Hotel",
-  "grad": "Hanioti",
-  "mesto": "Hanioti",
-  "km": 109,
-  "vozOko": "103 min",
-  "zivost": 5,
-  "uMestu": true,
-  "odCentraKm": 0.3,
-  "kmOpis": "109 km",
-  "zvezdice": 4,
-  "ocena": 9.3,
-  "brOcena": 427,
-  "cene": {
-   "PP": 2702
-  },
-  "najniza": 2702,
-  "soba": {
-   "PP": "FAMILY SUITE GARDEN VIEW"
-  },
-  "udaljenostOdCentra": "300 m from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/ostria-sea-side.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Ostria+Sea+Side+Hotel+Hanioti+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Ostria+Sea+Side+Hotel+Hanioti+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "philoxenia-hotel",
-  "hotel": "Philoxenia Hotel",
-  "grad": "Metamorfosi",
-  "mesto": "Metamorfosi",
-  "km": 85,
-  "vozOko": "81 min",
-  "zivost": 2,
-  "uMestu": false,
-  "odCentraKm": 10.1,
-  "kmOpis": "75–95 km",
-  "zvezdice": 4,
-  "ocena": 8.8,
-  "brOcena": 203,
-  "cene": {
-   "PP": 2834,
-   "AI": 2979
-  },
-  "najniza": 2834,
-  "soba": {
-   "PP": "Junior Suite with Garden View",
-   "AI": "Suite with Private Pool"
-  },
-  "udaljenostOdCentra": "10.1 km from Metamorfosi",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/philoxenia-bungalows.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Philoxenia+Hotel+Metamorfosi+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Philoxenia+Hotel+Metamorfosi+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "kassandra-village-resort",
-  "hotel": "Kassandra Village Resort",
+  "id": "aloni-hotel-pefkochori",
+  "hotel": "Aloni Hotel Pefkochori",
   "grad": "Pefkochori",
   "mesto": "Pefkohori",
   "km": 113,
   "vozOko": "107 min",
   "zivost": 5,
-  "uMestu": true,
-  "odCentraKm": 0.4,
-  "kmOpis": "113 km",
+  "plazaM": 600,
+  "centarM": 500,
+  "naPlazi": true,
+  "centarMesto": "Pefkohori",
+  "aerodromKm": 91,
+  "bodovi": 22,
+  "razrada": {
+   "ocena": 65,
+   "cena": 0,
+   "plaza": 25,
+   "centar": 58,
+   "zivost": 100,
+   "pansion": 65
+  },
   "zvezdice": 4,
-  "ocena": 9.2,
-  "brOcena": 211,
+  "ocena": 8.5,
+  "brOcena": 335,
   "cene": {
-   "PP": 2944
+   "PP": 1283
   },
-  "najniza": 2944,
+  "najniza": 1283,
   "soba": {
-   "PP": "Superior Two-Bedroom Apartment"
+   "PP": "Superior Triple Room"
   },
-  "udaljenostOdCentra": "400 m from centre",
+  "udaljenostOdCentra": "0.6 km from centre",
   "plazaBlizu": true,
   "takseUkljucene": true,
   "uBudzetu": false,
   "linkovi": [
    {
     "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/kassandra-village-resort.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+    "url": "https://www.booking.com/hotel/gr/aloni-pefkohori-halkidiki.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
    },
    {
     "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Kassandra+Village+Resort+Pefkohori+Greece&qs=CAE&ap=MABoAA"
+    "url": "https://www.google.com/travel/search?q=Aloni+Hotel+Pefkochori+Pefkohori+Greece&qs=CAE&ap=MABoAA"
    },
    {
     "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Kassandra+Village+Resort+Pefkohori+Greece&dr-20260905-20260913=&rc-2="
+    "url": "https://www.trivago.com/en-US/srl?query=Aloni+Hotel+Pefkochori+Pefkohori+Greece&dr-20260905-20260913=&rc-2="
    }
   ]
  },
  {
-  "id": "home-for-8-in-sane-greece",
-  "hotel": "Home for 8 in Sane, Greece",
+  "id": "golden-beach-hotel",
+  "hotel": "Golden Beach Hotel",
+  "grad": "Metamorfosi",
+  "mesto": "Metamorfosi",
+  "km": 85,
+  "vozOko": "81 min",
+  "zivost": 2,
+  "plazaM": 350,
+  "centarM": 100,
+  "naPlazi": true,
+  "centarMesto": "Metamorfosi",
+  "aerodromKm": 77,
+  "bodovi": 21,
+  "razrada": {
+   "ocena": 45,
+   "cena": 0,
+   "plaza": 56,
+   "centar": 92,
+   "zivost": 25,
+   "pansion": 100
+  },
+  "zvezdice": 3,
+  "ocena": 7.9,
+  "brOcena": 44,
+  "cene": {
+   "PP": 1496,
+   "AI": 1496
+  },
+  "najniza": 1496,
+  "soba": {
+   "PP": "One-Bedroom Family Apartment",
+   "AI": "One-Bedroom Family Apartment"
+  },
+  "udaljenostOdCentra": "200 m from centre",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/golden-beach-metamorfosi.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Golden+Beach+Hotel+Metamorfosi+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Golden+Beach+Hotel+Metamorfosi+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "alkion-hotel",
+  "hotel": "Alkion Hotel",
+  "grad": "Kriopigi",
+  "mesto": "Kriopigi",
+  "km": 89,
+  "vozOko": "82 min",
+  "zivost": 3,
+  "plazaM": 1600,
+  "centarM": 100,
+  "naPlazi": true,
+  "centarMesto": "Kriopigi",
+  "aerodromKm": 77,
+  "bodovi": 21,
+  "razrada": {
+   "ocena": 74,
+   "cena": 0,
+   "plaza": 0,
+   "centar": 92,
+   "zivost": 50,
+   "pansion": 65
+  },
+  "zvezdice": 4,
+  "ocena": 8.8,
+  "brOcena": 164,
+  "cene": {
+   "PP": 1605
+  },
+  "najniza": 1605,
+  "soba": {
+   "PP": "Superior Double Room"
+  },
+  "udaljenostOdCentra": "100 m from centre",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/alkion-kriopigi.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Alkion+Hotel+Kriopigi+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Alkion+Hotel+Kriopigi+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "aegean-melathron-thalasso-spa-hotel",
+  "hotel": "Aegean Melathron Thalasso Spa Hotel",
+  "grad": "Kallithea Halkidiki",
+  "mesto": "Kalitea",
+  "km": 96,
+  "vozOko": "103 min",
+  "zivost": 5,
+  "plazaM": 1200,
+  "centarM": 2000,
+  "naPlazi": true,
+  "centarMesto": "Kallithea Halkidikis",
+  "aerodromKm": 74,
+  "bodovi": 21,
+  "razrada": {
+   "ocena": 77,
+   "cena": 0,
+   "plaza": 0,
+   "centar": 0,
+   "zivost": 100,
+   "pansion": 100
+  },
+  "zvezdice": 5,
+  "ocena": 8.9,
+  "brOcena": 1767,
+  "cene": {
+   "PP": 10198,
+   "AI": 10198
+  },
+  "najniza": 10198,
+  "soba": {
+   "PP": "Suite with Private Pool",
+   "AI": "Suite with Private Pool"
+  },
+  "udaljenostOdCentra": "2 km from centre",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/aegean-melathron.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Aegean+Melathron+Thalasso+Spa+Hotel+Kalitea+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Aegean+Melathron+Thalasso+Spa+Hotel+Kalitea+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "kyma-boutique",
+  "hotel": "ĪKYMA Boutique",
+  "grad": "Polychrono",
+  "mesto": "Polihrono",
+  "km": 105,
+  "vozOko": "99 min",
+  "zivost": 3,
+  "plazaM": 10,
+  "centarM": 2900,
+  "naPlazi": true,
+  "centarMesto": "Polykhrono",
+  "aerodromKm": 80,
+  "bodovi": 21,
+  "razrada": {
+   "ocena": 52,
+   "cena": 0,
+   "plaza": 99,
+   "centar": 0,
+   "zivost": 50,
+   "pansion": 65
+  },
+  "zvezdice": null,
+  "ocena": 8.1,
+  "brOcena": 514,
+  "cene": {
+   "PP": 2182
+  },
+  "najniza": 2182,
+  "soba": {
+   "PP": "Double Room with Pool View"
+  },
+  "udaljenostOdCentra": "3 km from centre",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/ikyma-boutique.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=%C4%AAKYMA+Boutique+Polihrono+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=%C4%AAKYMA+Boutique+Polihrono+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "terra-olivia-luxury-villas-and-suites",
+  "hotel": "Terra Olivia Luxury Villas and Suites",
+  "grad": "Paliouri",
+  "mesto": "Paliouri",
+  "km": 116,
+  "vozOko": "117 min",
+  "zivost": 2,
+  "plazaM": 2200,
+  "centarM": 500,
+  "naPlazi": true,
+  "centarMesto": "Paliouri",
+  "aerodromKm": 99,
+  "bodovi": 21,
+  "razrada": {
+   "ocena": 97,
+   "cena": 0,
+   "plaza": 0,
+   "centar": 58,
+   "zivost": 25,
+   "pansion": 65
+  },
+  "zvezdice": 4,
+  "ocena": 9.5,
+  "brOcena": 182,
+  "cene": {
+   "PP": 2038
+  },
+  "najniza": 2038,
+  "soba": {
+   "PP": "One-Bedroom Villa"
+  },
+  "udaljenostOdCentra": "6.4 km from Pefkohori",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/paliouri-luxury-villas.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Terra+Olivia+Luxury+Villas+and+Suites+Paliouri+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Terra+Olivia+Luxury+Villas+and+Suites+Paliouri+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "sunway-hotel",
+  "hotel": "Sunway Hotel",
+  "grad": "Kallithea Halkidiki",
+  "mesto": "Kalitea",
+  "km": 96,
+  "vozOko": "103 min",
+  "zivost": 5,
+  "plazaM": 950,
+  "centarM": 500,
+  "naPlazi": true,
+  "centarMesto": "Kallithea Halkidikis",
+  "aerodromKm": 73,
+  "bodovi": 20,
+  "razrada": {
+   "ocena": 65,
+   "cena": 0,
+   "plaza": 0,
+   "centar": 58,
+   "zivost": 100,
+   "pansion": 65
+  },
+  "zvezdice": null,
+  "ocena": 8.5,
+  "brOcena": 131,
+  "cene": {
+   "PP": 1237
+  },
+  "najniza": 1237,
+  "soba": {
+   "PP": "Economy Twin Room"
+  },
+  "udaljenostOdCentra": "0.6 km from centre",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/sunway-kallithea-khalkidikes12.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Sunway+Hotel+Kalitea+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Sunway+Hotel+Kalitea+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "hotel-paradise",
+  "hotel": "Hotel Paradise",
+  "grad": "Kriopigi",
+  "mesto": "Kriopigi",
+  "km": 89,
+  "vozOko": "82 min",
+  "zivost": 3,
+  "plazaM": 300,
+  "centarM": 1300,
+  "naPlazi": true,
+  "centarMesto": "Kriopigi",
+  "aerodromKm": 77,
+  "bodovi": 20,
+  "razrada": {
+   "ocena": 55,
+   "cena": 0,
+   "plaza": 62,
+   "centar": 0,
+   "zivost": 50,
+   "pansion": 100
+  },
+  "zvezdice": 3,
+  "ocena": 8.2,
+  "brOcena": 229,
+  "cene": {
+   "PP": 1440,
+   "AI": 1440
+  },
+  "najniza": 1440,
+  "soba": {
+   "PP": "Quadruple Room with Sea View",
+   "AI": "Quadruple Room with Sea View"
+  },
+  "udaljenostOdCentra": "1.3 km from centre",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/paradise-kriopigi-halkidiki.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Hotel+Paradise+Kriopigi+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Hotel+Paradise+Kriopigi+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "coco-ns-suites-villas-fourka",
+  "hotel": "Cocoοns Suites & Villas Fourka",
+  "grad": "Fourka",
+  "mesto": "Fourka",
+  "km": 95,
+  "vozOko": "101 min",
+  "zivost": 2,
+  "plazaM": 500,
+  "centarM": 2500,
+  "naPlazi": true,
+  "centarMesto": "Fourka",
+  "aerodromKm": 81,
+  "bodovi": 20,
+  "razrada": {
+   "ocena": 87,
+   "cena": 0,
+   "plaza": 38,
+   "centar": 0,
+   "zivost": 25,
+   "pansion": 65
+  },
+  "zvezdice": null,
+  "ocena": 9.2,
+  "brOcena": 528,
+  "cene": {
+   "PP": 1837
+  },
+  "najniza": 1837,
+  "soba": {
+   "PP": "Junior Suite with Balcony"
+  },
+  "udaljenostOdCentra": "9.7 km from Kallithea Halkidikis",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/cocoons.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Coco%CE%BFns+Suites+%26+Villas+Fourka+Fourka+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Coco%CE%BFns+Suites+%26+Villas+Fourka+Fourka+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "ampelia-hotel-kassandra",
+  "hotel": "Ampelia Hotel Kassandra",
+  "grad": "Hanioti",
+  "mesto": "Hanioti",
+  "km": 109,
+  "vozOko": "103 min",
+  "zivost": 5,
+  "plazaM": 1100,
+  "centarM": 1000,
+  "naPlazi": true,
+  "centarMesto": "Hanioti",
+  "aerodromKm": 88,
+  "bodovi": 20,
+  "razrada": {
+   "ocena": 74,
+   "cena": 0,
+   "plaza": 0,
+   "centar": 17,
+   "zivost": 100,
+   "pansion": 65
+  },
+  "zvezdice": 3,
+  "ocena": 8.8,
+  "brOcena": 201,
+  "cene": {
+   "PP": 1154
+  },
+  "najniza": 1154,
+  "soba": {
+   "PP": "Comfort Room with Balcony"
+  },
+  "udaljenostOdCentra": "1 km from centre",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/ampelia-studios.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Ampelia+Hotel+Kassandra+Hanioti+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Ampelia+Hotel+Kassandra+Hanioti+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "kappa-resort",
+  "hotel": "Kappa Resort",
+  "grad": "Paliouri",
+  "mesto": "Paliouri",
+  "km": 116,
+  "vozOko": "117 min",
+  "zivost": 2,
+  "plazaM": 450,
+  "centarM": 2600,
+  "naPlazi": true,
+  "centarMesto": "Paliouri",
+  "aerodromKm": null,
+  "bodovi": 20,
+  "razrada": {
+   "ocena": 68,
+   "cena": 0,
+   "plaza": 44,
+   "centar": 0,
+   "zivost": 25,
+   "pansion": 100
+  },
+  "zvezdice": 4,
+  "ocena": 8.6,
+  "brOcena": 227,
+  "cene": {
+   "AI": 4193
+  },
+  "najniza": 4193,
+  "soba": {
+   "AI": "Exclusive Suite - 2 Bedroom with private pool"
+  },
+  "udaljenostOdCentra": "9.1 km from Pefkohori",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/k-villas.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Kappa+Resort+Paliouri+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Kappa+Resort+Paliouri+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "blue-lagoon-queen",
+  "hotel": "Blue Lagoon Queen",
+  "grad": "Kalyves Poligirou",
+  "mesto": "Kalives",
+  "km": 87,
+  "vozOko": "88 min",
+  "zivost": 2,
+  "plazaM": 550,
+  "centarM": 1300,
+  "naPlazi": true,
+  "centarMesto": "Kalyves Poligirou",
+  "aerodromKm": 56,
+  "bodovi": 19,
+  "razrada": {
+   "ocena": 81,
+   "cena": 0,
+   "plaza": 31,
+   "centar": 0,
+   "zivost": 25,
+   "pansion": 65
+  },
+  "zvezdice": null,
+  "ocena": 9.0,
+  "brOcena": 236,
+  "cene": {
+   "PP": 3875
+  },
+  "najniza": 3875,
+  "soba": {
+   "PP": "Family Room with Private Bathroom"
+  },
+  "udaljenostOdCentra": "9.8 km from Nea Moudania",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/blue-lagoon-queen.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Blue+Lagoon+Queen+Kalives+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Blue+Lagoon+Queen+Kalives+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "blue-sea-boutique-apartments",
+  "hotel": "Blue Sea Boutique Apartments",
+  "grad": "Olympiaki Akti",
+  "mesto": "Olimpik Bič",
+  "km": 76,
+  "vozOko": "61 min",
+  "zivost": 4,
+  "plazaM": 450,
+  "centarM": 50,
+  "naPlazi": true,
+  "centarMesto": "Olympiaki Akti",
+  "aerodromKm": 98,
+  "bodovi": 19,
+  "razrada": {
+   "ocena": 55,
+   "cena": 0,
+   "plaza": 44,
+   "centar": 96,
+   "zivost": 75,
+   "pansion": 65
+  },
+  "zvezdice": 3,
+  "ocena": 8.2,
+  "brOcena": 26,
+  "cene": {
+   "PP": 1237
+  },
+  "najniza": 1237,
+  "soba": {
+   "PP": "Deluxe Triple Room"
+  },
+  "udaljenostOdCentra": "3.2 km from Paralia Katerinis",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/marianna-rooms.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Blue+Sea+Boutique+Apartments+Olimpik+Bi%C4%8D+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Blue+Sea+Boutique+Apartments+Olimpik+Bi%C4%8D+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "sani-verde",
+  "hotel": "Sani Verde",
   "grad": "Sani",
   "mesto": "Sani",
   "km": 84,
   "vozOko": "83 min",
   "zivost": 1,
-  "uMestu": true,
-  "odCentraKm": 1.2,
-  "kmOpis": "84 km",
-  "zvezdice": null,
-  "ocena": 1.0,
-  "brOcena": 1,
+  "plazaM": 2600,
+  "centarM": 2100,
+  "naPlazi": true,
+  "centarMesto": "Sani Beach",
+  "aerodromKm": 67,
+  "bodovi": 18,
+  "razrada": {
+   "ocena": 100,
+   "cena": 0,
+   "plaza": 0,
+   "centar": 0,
+   "zivost": 0,
+   "pansion": 65
+  },
+  "zvezdice": 4,
+  "ocena": 9.6,
+  "brOcena": 345,
   "cene": {
-   "PP": 3061
+   "PP": 2177
   },
-  "najniza": 3061,
+  "najniza": 2177,
   "soba": {
-   "PP": "Villa"
+   "PP": "Superior Apartment"
   },
-  "udaljenostOdCentra": "1.2 km from centre",
-  "plazaBlizu": true,
+  "udaljenostOdCentra": "2.1 km from centre",
+  "plazaBlizu": false,
   "takseUkljucene": true,
   "uBudzetu": false,
   "linkovi": [
    {
     "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/home-for-8-in-sane-greece.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+    "url": "https://www.booking.com/hotel/gr/sani-verde.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
    },
    {
     "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Home+for+8+in+Sane%2C+Greece+Sani+Greece&qs=CAE&ap=MABoAA"
+    "url": "https://www.google.com/travel/search?q=Sani+Verde+Sani+Greece&qs=CAE&ap=MABoAA"
    },
    {
     "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Home+for+8+in+Sane%2C+Greece+Sani+Greece&dr-20260905-20260913=&rc-2="
+    "url": "https://www.trivago.com/en-US/srl?query=Sani+Verde+Sani+Greece&dr-20260905-20260913=&rc-2="
    }
   ]
  },
  {
-  "id": "acrotel-athena-pallas-residence",
-  "hotel": "Acrotel Athena Pallas & Residence",
-  "grad": "Nikiti",
-  "mesto": "Nikiti",
-  "km": 110,
-  "vozOko": "111 min",
-  "zivost": 4,
-  "uMestu": false,
-  "odCentraKm": 8.4,
-  "kmOpis": "102–118 km",
-  "zvezdice": 5,
-  "ocena": 9.2,
-  "brOcena": 520,
+  "id": "avatel-eco-lodge",
+  "hotel": "Avatel Eco Lodge",
+  "grad": "Kriopigi",
+  "mesto": "Kriopigi",
+  "km": 89,
+  "vozOko": "82 min",
+  "zivost": 3,
+  "plazaM": 1100,
+  "centarM": 1200,
+  "naPlazi": true,
+  "centarMesto": "Kriopigi",
+  "aerodromKm": 79,
+  "bodovi": 18,
+  "razrada": {
+   "ocena": 81,
+   "cena": 0,
+   "plaza": 0,
+   "centar": 0,
+   "zivost": 50,
+   "pansion": 65
+  },
+  "zvezdice": 4,
+  "ocena": 9.0,
+  "brOcena": 356,
   "cene": {
-   "PP": 3170,
-   "AI": 3686
+   "PP": 1709
   },
-  "najniza": 3170,
+  "najniza": 1709,
   "soba": {
-   "PP": "Maisonette Front Pool",
-   "AI": "Maisonette Front Pool"
+   "PP": "Deluxe Family Room"
   },
-  "udaljenostOdCentra": "8.4 km from Nikiti",
+  "udaljenostOdCentra": "1.3 km from centre",
   "plazaBlizu": true,
   "takseUkljucene": true,
   "uBudzetu": false,
   "linkovi": [
    {
     "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/athena-pallas-village.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+    "url": "https://www.booking.com/hotel/gr/avatel-eco-lodge.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
    },
    {
     "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Acrotel+Athena+Pallas+%26+Residence+Nikiti+Greece&qs=CAE&ap=MABoAA"
+    "url": "https://www.google.com/travel/search?q=Avatel+Eco+Lodge+Kriopigi+Greece&qs=CAE&ap=MABoAA"
    },
    {
     "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Acrotel+Athena+Pallas+%26+Residence+Nikiti+Greece&dr-20260905-20260913=&rc-2="
+    "url": "https://www.trivago.com/en-US/srl?query=Avatel+Eco+Lodge+Kriopigi+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "sani-polyastron-hotel-spa",
+  "hotel": "Sani Polyastron Hotel & Spa",
+  "grad": "Sani",
+  "mesto": "Sani",
+  "km": 84,
+  "vozOko": "83 min",
+  "zivost": 1,
+  "plazaM": 1800,
+  "centarM": 1000,
+  "naPlazi": true,
+  "centarMesto": "Sani Beach",
+  "aerodromKm": 69,
+  "bodovi": 17,
+  "razrada": {
+   "ocena": 87,
+   "cena": 0,
+   "plaza": 0,
+   "centar": 17,
+   "zivost": 0,
+   "pansion": 65
+  },
+  "zvezdice": 4,
+  "ocena": 9.2,
+  "brOcena": 214,
+  "cene": {
+   "PP": 1945
+  },
+  "najniza": 1945,
+  "soba": {
+   "PP": "Deluxe Suite"
+  },
+  "udaljenostOdCentra": "1.1 km from centre",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/polyastron-place.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Sani+Polyastron+Hotel+%26+Spa+Sani+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Sani+Polyastron+Hotel+%26+Spa+Sani+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "ohana-hotel",
+  "hotel": "Ohana Hotel",
+  "grad": "Kriopigi",
+  "mesto": "Kriopigi",
+  "km": 89,
+  "vozOko": "82 min",
+  "zivost": 3,
+  "plazaM": 800,
+  "centarM": 1100,
+  "naPlazi": true,
+  "centarMesto": "Kriopigi",
+  "aerodromKm": 76,
+  "bodovi": 17,
+  "razrada": {
+   "ocena": 77,
+   "cena": 0,
+   "plaza": 0,
+   "centar": 8,
+   "zivost": 50,
+   "pansion": 65
+  },
+  "zvezdice": 4,
+  "ocena": 8.9,
+  "brOcena": 319,
+  "cene": {
+   "PP": 1806
+  },
+  "najniza": 1806,
+  "soba": {
+   "PP": "Two-Bedroom Family Apartment"
+  },
+  "udaljenostOdCentra": "1.1 km from centre",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/ohana-kriopigi.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Ohana+Hotel+Kriopigi+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Ohana+Hotel+Kriopigi+Greece&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "maria-s-house-hotel",
+  "hotel": "Maria's House Hotel",
+  "grad": "Metamorfosi",
+  "mesto": "Metamorfosi",
+  "km": 85,
+  "vozOko": "81 min",
+  "zivost": 2,
+  "plazaM": 900,
+  "centarM": 800,
+  "naPlazi": true,
+  "centarMesto": "Metamorfosi",
+  "aerodromKm": 78,
+  "bodovi": 16,
+  "razrada": {
+   "ocena": 68,
+   "cena": 0,
+   "plaza": 0,
+   "centar": 33,
+   "zivost": 25,
+   "pansion": 65
+  },
+  "zvezdice": 3,
+  "ocena": 8.6,
+  "brOcena": 132,
+  "cene": {
+   "PP": 1199
+  },
+  "najniza": 1199,
+  "soba": {
+   "PP": "Standard Twin Room (2-3 Adults)"
+  },
+  "udaljenostOdCentra": "0.9 km from centre",
+  "plazaBlizu": false,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/gr/maria-s-hous.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Maria%27s+House+Hotel+Metamorfosi+Greece&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Maria%27s+House+Hotel+Metamorfosi+Greece&dr-20260905-20260913=&rc-2="
    }
   ]
  },
@@ -4237,9 +4128,20 @@ const HOTELI = [
   "km": 85,
   "vozOko": "81 min",
   "zivost": 2,
-  "uMestu": true,
-  "odCentraKm": 1.7,
-  "kmOpis": "85 km",
+  "plazaM": 1100,
+  "centarM": 1700,
+  "naPlazi": true,
+  "centarMesto": "Metamorfosi",
+  "aerodromKm": 77,
+  "bodovi": 9,
+  "razrada": {
+   "ocena": 35,
+   "cena": 0,
+   "plaza": 0,
+   "centar": 0,
+   "zivost": 25,
+   "pansion": 65
+  },
   "zvezdice": 4,
   "ocena": 7.6,
   "brOcena": 58,
@@ -4270,492 +4172,53 @@ const HOTELI = [
   ]
  },
  {
-  "id": "medite-kassandra-resort",
-  "hotel": "Medite Kassandra Resort",
-  "grad": "Nea Moudania",
-  "mesto": "Nea Moudania",
-  "km": 61,
-  "vozOko": "56 min",
-  "zivost": 5,
-  "uMestu": false,
-  "odCentraKm": 3.6,
-  "kmOpis": "57–65 km",
-  "zvezdice": 5,
-  "ocena": 6.0,
+  "id": "home-for-8-in-sane-greece",
+  "hotel": "Home for 8 in Sane, Greece",
+  "grad": "Sani",
+  "mesto": "Sani",
+  "km": 84,
+  "vozOko": "83 min",
+  "zivost": 1,
+  "plazaM": 850,
+  "centarM": 1100,
+  "naPlazi": true,
+  "centarMesto": "Sani Beach",
+  "aerodromKm": 68,
+  "bodovi": 3,
+  "razrada": {
+   "ocena": 0,
+   "cena": 0,
+   "plaza": 0,
+   "centar": 8,
+   "zivost": 0,
+   "pansion": 65
+  },
+  "zvezdice": null,
+  "ocena": 1.0,
   "brOcena": 1,
   "cene": {
-   "PP": 3824,
-   "AI": 3824
+   "PP": 3061
   },
-  "najniza": 3824,
+  "najniza": 3061,
   "soba": {
-   "PP": "Double Room with Pool View",
-   "AI": "Double Room with Pool View"
+   "PP": "Villa"
   },
-  "udaljenostOdCentra": "3.6 km from centre",
+  "udaljenostOdCentra": "1.2 km from centre",
   "plazaBlizu": true,
   "takseUkljucene": true,
   "uBudzetu": false,
   "linkovi": [
    {
     "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/medite-kassandra-resort.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+    "url": "https://www.booking.com/hotel/gr/home-for-8-in-sane-greece.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
    },
    {
     "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Medite+Kassandra+Resort+Nea+Moudania+Greece&qs=CAE&ap=MABoAA"
+    "url": "https://www.google.com/travel/search?q=Home+for+8+in+Sane%2C+Greece+Sani+Greece&qs=CAE&ap=MABoAA"
    },
    {
     "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Medite+Kassandra+Resort+Nea+Moudania+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "blue-lagoon-queen",
-  "hotel": "Blue Lagoon Queen",
-  "grad": "Nea Moudania",
-  "mesto": "Nea Moudania",
-  "km": 61,
-  "vozOko": "56 min",
-  "zivost": 5,
-  "uMestu": false,
-  "odCentraKm": 9.8,
-  "kmOpis": "51–71 km",
-  "zvezdice": null,
-  "ocena": 9.0,
-  "brOcena": 236,
-  "cene": {
-   "PP": 3875
-  },
-  "najniza": 3875,
-  "soba": {
-   "PP": "Family Room with Private Bathroom"
-  },
-  "udaljenostOdCentra": "9.8 km from Nea Moudania",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/blue-lagoon-queen.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Blue+Lagoon+Queen+Nea+Moudania+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Blue+Lagoon+Queen+Nea+Moudania+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "sea-coast-resort-halkidiki",
-  "hotel": "Sea Coast Resort Halkidiki",
-  "grad": "Nea Moudania",
-  "mesto": "Nea Moudania",
-  "km": 61,
-  "vozOko": "56 min",
-  "zivost": 5,
-  "uMestu": false,
-  "odCentraKm": 13.6,
-  "kmOpis": "47–75 km",
-  "zvezdice": 5,
-  "ocena": 9.1,
-  "brOcena": 288,
-  "cene": {
-   "PP": 3881
-  },
-  "najniza": 3881,
-  "soba": {
-   "PP": "Superior Triple Room with Sea View"
-  },
-  "udaljenostOdCentra": "13.6 km from Nea Moudania",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/sea-coast.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Sea+Coast+Resort+Halkidiki+Nea+Moudania+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Sea+Coast+Resort+Halkidiki+Nea+Moudania+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "kappa-resort",
-  "hotel": "Kappa Resort",
-  "grad": "Pefkochori",
-  "mesto": "Pefkohori",
-  "km": 113,
-  "vozOko": "107 min",
-  "zivost": 5,
-  "uMestu": false,
-  "odCentraKm": 9.1,
-  "kmOpis": "104–122 km",
-  "zvezdice": 4,
-  "ocena": 8.6,
-  "brOcena": 227,
-  "cene": {
-   "AI": 4193
-  },
-  "najniza": 4193,
-  "soba": {
-   "AI": "Exclusive Suite - 2 Bedroom with private pool"
-  },
-  "udaljenostOdCentra": "9.1 km from Pefkohori",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/k-villas.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Kappa+Resort+Pefkohori+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Kappa+Resort+Pefkohori+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "miraggio-thermal-spa-resort",
-  "hotel": "Miraggio Thermal Spa Resort",
-  "grad": "Pefkochori",
-  "mesto": "Pefkohori",
-  "km": 113,
-  "vozOko": "107 min",
-  "zivost": 5,
-  "uMestu": false,
-  "odCentraKm": 10.5,
-  "kmOpis": "102–124 km",
-  "zvezdice": 5,
-  "ocena": 8.9,
-  "brOcena": 1182,
-  "cene": {
-   "AI": 4288
-  },
-  "najniza": 4288,
-  "soba": {
-   "AI": "Family Garden View Room"
-  },
-  "udaljenostOdCentra": "10.5 km from Pefkohori",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/miraggio-thermal-spa-resort.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Miraggio+Thermal+Spa+Resort+Pefkohori+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Miraggio+Thermal+Spa+Resort+Pefkohori+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "anthemus-sea-beach-hotel-and-spa",
-  "hotel": "Anthemus Sea Beach Hotel and Spa",
-  "grad": "Nikiti",
-  "mesto": "Nikiti",
-  "km": 110,
-  "vozOko": "111 min",
-  "zivost": 4,
-  "uMestu": false,
-  "odCentraKm": 10.5,
-  "kmOpis": "100–120 km",
-  "zvezdice": 5,
-  "ocena": 9.3,
-  "brOcena": 251,
-  "cene": {
-   "AI": 4329,
-   "PP": 4335
-  },
-  "najniza": 4329,
-  "soba": {
-   "AI": "Deluxe Suite with Sea View or Pool View",
-   "PP": "Deluxe Suite with Sea View or Pool View"
-  },
-  "udaljenostOdCentra": "10.5 km from Nikiti",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/anthemus-sea.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Anthemus+Sea+Beach+Hotel+and+Spa+Nikiti+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Anthemus+Sea+Beach+Hotel+and+Spa+Nikiti+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "lagomandra-luxury-suites-with-private-pools",
-  "hotel": "Lagomandra Luxury Suites with Private Pools",
-  "grad": "Nikiti",
-  "mesto": "Nikiti",
-  "km": 110,
-  "vozOko": "111 min",
-  "zivost": 4,
-  "uMestu": false,
-  "odCentraKm": 11.7,
-  "kmOpis": "98–122 km",
-  "zvezdice": null,
-  "ocena": 9.4,
-  "brOcena": 16,
-  "cene": {
-   "AI": 4617,
-   "PP": 4617
-  },
-  "najniza": 4617,
-  "soba": {
-   "AI": "Deluxe Apartment",
-   "PP": "Deluxe Apartment"
-  },
-  "udaljenostOdCentra": "11.7 km from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/lagomandra-luxury-suites-amp-private-pool.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Lagomandra+Luxury+Suites+with+Private+Pools+Nikiti+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Lagomandra+Luxury+Suites+with+Private+Pools+Nikiti+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "pomegranate-wellness-spa-hotel",
-  "hotel": "Pomegranate Wellness Spa Hotel",
-  "grad": "Nea Moudania",
-  "mesto": "Nea Moudania",
-  "km": 61,
-  "vozOko": "56 min",
-  "zivost": 5,
-  "uMestu": false,
-  "odCentraKm": 4.9,
-  "kmOpis": "56–66 km",
-  "zvezdice": 5,
-  "ocena": 9.4,
-  "brOcena": 511,
-  "cene": {
-   "PP": 4734,
-   "AI": 4734
-  },
-  "najniza": 4734,
-  "soba": {
-   "PP": "Suite Standard",
-   "AI": "Suite Standard"
-  },
-  "udaljenostOdCentra": "4.9 km from Nea Moudania",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/pomegranate-spa.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Pomegranate+Wellness+Spa+Hotel+Nea+Moudania+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Pomegranate+Wellness+Spa+Hotel+Nea+Moudania+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "crystal-villas-suites",
-  "hotel": "Crystal villas & suites",
-  "grad": "Polychrono",
-  "mesto": "Polihrono",
-  "km": 105,
-  "vozOko": "99 min",
-  "zivost": 3,
-  "uMestu": true,
-  "odCentraKm": 1.5,
-  "kmOpis": "105 km",
-  "zvezdice": 4,
-  "ocena": 9.2,
-  "brOcena": 163,
-  "cene": {
-   "PP": 5017
-  },
-  "najniza": 5017,
-  "soba": {
-   "PP": "Villa with Sea View"
-  },
-  "udaljenostOdCentra": "1.5 km from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/crystal-villas-amp-suites.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Crystal+villas+%26+suites+Polihrono+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Crystal+villas+%26+suites+Polihrono+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "meravia-leonardo-limited-edition-adults-only",
-  "hotel": "MERAVIA Leonardo Limited Edition - Adults Only",
-  "grad": "Nea Fokea",
-  "mesto": "Nea Fokea",
-  "km": 81,
-  "vozOko": "76 min",
-  "zivost": 2,
-  "uMestu": true,
-  "odCentraKm": 2.4,
-  "kmOpis": "81 km",
-  "zvezdice": 5,
-  "ocena": 9.5,
-  "brOcena": 1611,
-  "cene": {
-   "PP": 5132
-  },
-  "najniza": 5132,
-  "soba": {
-   "PP": "One bedroom suite Sea View Private Pool"
-  },
-  "udaljenostOdCentra": "2.4 km from Nea Fokea",
-  "plazaBlizu": false,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/meravia-leonardo-limited-edition-adults-only-booking.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=MERAVIA+Leonardo+Limited+Edition+-+Adults+Only+Nea+Fokea+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=MERAVIA+Leonardo+Limited+Edition+-+Adults+Only+Nea+Fokea+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "the-danai",
-  "hotel": "The Danai",
-  "grad": "Metamorfosi",
-  "mesto": "Metamorfosi",
-  "km": 85,
-  "vozOko": "81 min",
-  "zivost": 2,
-  "uMestu": true,
-  "odCentraKm": 2.0,
-  "kmOpis": "85 km",
-  "zvezdice": 5,
-  "ocena": 9.7,
-  "brOcena": 59,
-  "cene": {
-   "PP": 8253
-  },
-  "najniza": 8253,
-  "soba": {
-   "PP": "Suite"
-  },
-  "udaljenostOdCentra": "2 km from Metamorfosi",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/danai-beach-resort-villas.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=The+Danai+Metamorfosi+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=The+Danai+Metamorfosi+Greece&dr-20260905-20260913=&rc-2="
-   }
-  ]
- },
- {
-  "id": "aegean-melathron-thalasso-spa-hotel",
-  "hotel": "Aegean Melathron Thalasso Spa Hotel",
-  "grad": "Kallithea Halkidiki",
-  "mesto": "Kalitea",
-  "km": 96,
-  "vozOko": "103 min",
-  "zivost": 5,
-  "uMestu": true,
-  "odCentraKm": 2.0,
-  "kmOpis": "96 km",
-  "zvezdice": 5,
-  "ocena": 8.9,
-  "brOcena": 1767,
-  "cene": {
-   "PP": 10198,
-   "AI": 10198
-  },
-  "najniza": 10198,
-  "soba": {
-   "PP": "Suite with Private Pool",
-   "AI": "Suite with Private Pool"
-  },
-  "udaljenostOdCentra": "2 km from centre",
-  "plazaBlizu": true,
-  "takseUkljucene": true,
-  "uBudzetu": false,
-  "linkovi": [
-   {
-    "naziv": "Booking — datumi upisani",
-    "url": "https://www.booking.com/hotel/gr/aegean-melathron.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
-   },
-   {
-    "naziv": "Google Hotels — uporedi sve",
-    "url": "https://www.google.com/travel/search?q=Aegean+Melathron+Thalasso+Spa+Hotel+Kalitea+Greece&qs=CAE&ap=MABoAA"
-   },
-   {
-    "naziv": "Trivago",
-    "url": "https://www.trivago.com/en-US/srl?query=Aegean+Melathron+Thalasso+Spa+Hotel+Kalitea+Greece&dr-20260905-20260913=&rc-2="
+    "url": "https://www.trivago.com/en-US/srl?query=Home+for+8+in+Sane%2C+Greece+Sani+Greece&dr-20260905-20260913=&rc-2="
    }
   ]
  }

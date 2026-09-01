@@ -37,13 +37,23 @@
     Ako je „ne tako daleko od Soluna“ bio ozbiljan uslov, Kasandra je oko 2,5× dalja od Nea
     Kalikratije, gde su već bili — zato je klizač za udaljenost prvi filter na listi.</p>
 
-  <h3>„U mestu“ protiv „okoline“</h3>
-  <p>Booking na pretragu jednog mesta vraća i hotele iz šire okoline — neki su i 20 km od mesta po
-    kome su nađeni. Za takve <strong>udaljenost od Soluna nije poznata tačno</strong>, jer se ne zna
-    u kom su smeru, pa je prikazana kao <em>raspon</em> i kartica nosi oznaku
-    <em>„okolina, ne samo mesto“</em>. Od 115 hotela, <strong>62 su u samom mestu</strong>
-    (do 3 km od centra) — uključi filter <em>„Samo u samom mestu“</em> ako je važno da se na večeru
-    izlazi peške, jer za hotel u okolini treba auto.</p>
+  <h3>Svi hoteli su u samom mestu</h3>
+  <p>Booking na pretragu jednog mesta vraća i hotele iz šire okoline — jedan je bio 20 km od mesta
+    po kome je nađen. <strong>Svi takvi su izbačeni</strong>, jer im udaljenost od Soluna nije
+    poznata: ne zna se u kom su smeru.</p>
+  <p>Odluka se ne donosi po pretrazi nego po <strong>Booking-ovom sopstvenom podatku sa strane
+    hotela</strong> — <em>„X m from the centre of &lt;mesto&gt;“</em> — koji kaže i koje je mesto
+    pravo i koliko je hotel od njegovog centra. To je ispravljalo i pogrešna mesta: hotel Iris je
+    300 m od centra Nea Kalikratije, a našla ga je pretraga Sozopolija na 7,8 km. Ostaje samo ono
+    što je <strong>do 3 km od centra svog mesta</strong>, pa udaljenost od Soluna važi tačno i na
+    večeru se može izaći bez auta.</p>
+
+  <h3>Udaljenost od plaže i od centra</h3>
+  <p>Ni jedno ni drugo se ne vidi u rezultatima Booking pretrage — mora sa stranice svakog hotela
+    posebno. Zato je za svaki hotel pročitana i njegova strana, pa je uzet blok
+    <em>„Beaches in the neighbourhood“</em> (najbliža plaža) i Booking-ov odgovor koliko je hotel
+    od centra mesta. Oba stoje na kartici i oba imaju svoj filter. Gde Booking piše
+    <strong>0 m ili 1 m</strong> to nije greška nego hotel na samoj plaži, i tako je i napisano.</p>
 
   <h3>„Živost“ mesta</h3>
   <p>Ocena ● ● ● ○ ○ na svakoj kartici je moja procena broja restorana i večernje vreve,
@@ -97,10 +107,16 @@
 
   <div class="red">
     <label class="klizac">Udaljenost od Soluna: <output id="km-vrednost"></output>
-      <input id="km" type="range" min="40" max="115" step="5" value="115">
+      <input id="km" type="range" min="40" max="125" step="5" value="125">
     </label>
     <label class="klizac">Ocena gostiju: <output id="ocena-vrednost"></output>
       <input id="ocena" type="range" min="0" max="9.5" step="0.5" value="0">
+    </label>
+    <label class="klizac">Do plaže: <output id="plaza-vrednost"></output>
+      <input id="plaza" type="range" min="100" max="1500" step="100" value="1500">
+    </label>
+    <label class="klizac">Do centra mesta: <output id="centar-vrednost"></output>
+      <input id="centar" type="range" min="100" max="2500" step="100" value="2500">
     </label>
   </div>
 
@@ -112,8 +128,11 @@
   <div class="red">
     <input id="q" type="search" placeholder="Pretraga (hotel, mesto)…">
     <select id="sort">
+      <option value="preporuka">Sortiraj: preporuka (podrazumevano)</option>
       <option value="cena">Sortiraj: cena, od najjeftinije</option>
       <option value="ocena">Sortiraj: najbolja ocena</option>
+      <option value="plaza">Sortiraj: bliže plaži</option>
+      <option value="centar">Sortiraj: bliže centru mesta</option>
       <option value="km">Sortiraj: bliže Solunu</option>
       <option value="zivost">Sortiraj: živost mesta</option>
     </select>
@@ -125,11 +144,26 @@
 <div id="lista"></div>
 
 <footer>
+  <h2>Šta je „preporuka“ i zašto najjeftinije nije prvo</h2>
+  <p>
+    Broj u kvadratiću levo od naziva su <strong>bodovi 0–100</strong>. Nije to ocena hotela —
+    to je koliko hotel odgovara <em>ovom</em> zadatku. Namerno <strong>nije sortirano po ceni</strong>,
+    jer najjeftinije obično znači lošu ocenu ili hotel daleko od plaže. Formula je vidljiva na svakoj
+    kartici, pod <em>„Zašto N bodova“</em>, i sastoji se od:
+  </p>
+  <ul id="tezine-lista"></ul>
+  <p>
+    Dva kažnjavanja: hotel <strong>preko budžeta</strong> ima prepolovljene bodove (vidi se, ali pada
+    nisko), a hotel sa <strong>manje od 40 ocena</strong> gubi 15%, jer ocena od 20 ljudi ne znači
+    isto što i ocena od 400. Gde podatak ne postoji, ta stavka dobija sredinu — niti nagrađuje niti
+    kažnjava.
+  </p>
   <h2>Kako ovo održavati</h2>
   <p>
-    Cene stare. Da se osveže: <code>./skrejper.py --svez</code> pročita Booking ponovo, pa
+    Cene stare. Osvežavanje: <code>./skrejper.py --svez</code> pročita Booking pretrage,
+    <code>./detalji.py --svez</code> pročita stranice hotela (plaža, centar), pa
     <code>./napravi.py</code> iznova napravi <code>podaci.js</code>. Opisi mesta i ocene živosti su
-    ručni i stoje u <code>mesta.json</code> — njih skrejper ne dira.
+    ručni i stoje u <code>mesta.json</code> — skrejper ih ne dira.
   </p>
 </footer>
 
@@ -151,6 +185,15 @@
     [blizu.length, "u budžetu i unutar 75 km od Soluna", ""],
     [naj.toLocaleString("sr-RS") + " €", "najniža cena na listi, za dvoje", ""],
   ].map(([b, s, k]) => `<div class="sansa ${k}"><b>${b}</b><span>${s}</span></div>`).join("");
+
+  const IME = { ocena: "ocena gostiju na Booking-u", cena: "koliko je cena ispod budžeta",
+    plaza: "blizina plaže (0 m = pun broj, 800 m i dalje = nula)",
+    centar: "blizina centra mesta (0 m = pun broj, 1,2 km i dalje = nula)",
+    zivost: "živost mesta — da im ne bude dosadno",
+    pansion: "pansion (all inclusive vredi više od polupansiona)" };
+  document.getElementById("tezine-lista").innerHTML = Object.entries(TEZINE)
+    .sort((a, b) => b[1] - a[1])
+    .map(([k, v]) => `<li><strong>${Math.round(v * 100)}%</strong> — ${IME[k]}</li>`).join("");
 })();
 </script>
 <script src="app.js"></script>

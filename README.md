@@ -19,18 +19,65 @@ Razlika je što `podaci.js` nije pisan rukom — **generiše se iz stvarnih cena
 
 ## Cevovod
 
-    ./skrejper.py            # Booking -> ponude.json   (HTML se kešira u kes/)
-    ./napravi.py             # mesta.json + ponude.json -> podaci.js
+    ./skrejper.py            # Booking pretrage  -> ponude.json    (HTML se kešira u kes/)
+    ./detalji.py             # stranice hotela   -> detalji.json   (plaža, centar, mesto)
+    ./napravi.py             # + mesta.json      -> podaci.js
     ./pokreni.sh             # http://127.0.0.1:8766
+
+Sva tri su nezavisna i idu u ovom redu — `detalji.py` čita `ponude.json`, ne `podaci.js`,
+pa nema kružne zavisnosti i `napravi.py` se pokreće samo jednom.
 
 - `skrejper.py` — čita Booking preko **headless Chrome-a**, 17 mesta × 2 pansiona.
   Booking običnom `curl`-u vraća 202 i praznu stranicu; pravi browser prolazi bez captcha.
   Throttle 6 s, opisan User-Agent, sve se kešira u `kes/` pa ponovni run ne ide na sajt.
   `--svez` ignoriše keš, `--grad Hanioti` radi samo jedno mesto.
 - `mesta.json` — **ručno**: km od Soluna, opis mesta, ocena „živosti“. Skrejper ovo ne dira.
+- `detalji.py` — čita **stranicu svakog hotela**, jer udaljenosti od plaže i od centra nema u
+  rezultatima pretrage. Vadi blok *„Beaches in the neighbourhood“* (najbliža plaža), Booking-ov
+  FAQ *„X m from the centre of &lt;mesto&gt;“* (i udaljenost **i ime pravog mesta**), i
+  `Beachfront` oznaku. Vuče sve do `PRAG_KM = 10` od nekog pretraživanog centra — šire od
+  finalnog filtera od 3 km, jer pretraga jednog mesta često nađe hotel koji je 8 km od *njega*
+  a 300 m od svog sopstvenog mesta.
 - `napravi.py` — spaja PP i AI ponudu istog hotela u jednu karticu, dedupira hotele koji se
-  pojave u pretrazi više mesta (Booking širi radijus), dodaje linkove za upoređivanje.
+  pojave u pretrazi više mesta (Booking širi radijus), **izbacuje hotele van mesta**, uvezuje
+  detalje i računa bodove preporuke.
 - `podaci.js` — **generisano, ne menjati rukom.**
+
+## Bodovi preporuke
+
+Lista **nije sortirana po ceni** — najjeftinije obično znači lošu ocenu ili hotel daleko od plaže.
+Svaki hotel dobija 0–100 bodova, i razrada je vidljiva na kartici pod *„Zašto N bodova“*:
+
+| Težina | Stavka |
+|---|---|
+| 34% | ocena gostiju (6,5 = nula, 9,6 = pun broj) |
+| 18% | koliko je cena ispod budžeta (1.100 € = nula, 600 € = pun broj) |
+| 18% | blizina plaže (0 m = pun broj, 800 m i dalje = nula) |
+| 10% | blizina centra mesta (0 m = pun broj, 1,2 km i dalje = nula) |
+| 10% | živost mesta (ručna ocena iz `mesta.json`) |
+| 10% | pansion (all inclusive 1,0 · polupansion 0,65) |
+
+Kažnjavanja: **preko budžeta → bodovi prepolovljeni** (hotel se vidi ali pada nisko);
+**manje od 40 ocena → −15%**, jer ocena od 20 ljudi ne vredi kao ocena od 400.
+Gde podatak ne postoji, stavka dobija sredinu — niti nagrađuje niti kažnjava.
+
+Težine su u `TEZINE` u `napravi.py` i emituju se u `podaci.js`, pa ih strana sama ispisuje
+u futeru — ne mogu da se raziđu sa stvarnom formulom.
+
+## Hoteli van mesta se ne prikazuju
+
+Booking na pretragu jednog mesta vraća i hotele iz šire okoline — jedan je bio 20 km od mesta po
+kome je nađen. Za takve udaljenost od Soluna nije poznata (ne zna se u kom su smeru), pa su
+**izbačeni**. Probano je i geokodiranje imena hotela preko Nominatim-a da bi im se izračunala
+prava udaljenost — pogađa samo oko trećine imena, ne vredi.
+
+**Ali odluka se NE donosi po pretrazi.** Prvo je donošena tako i to je bila greška: hotel Iris je
+300 m od centra Nea Kalikratije, ali ga je našla pretraga Sozopolija (7,8 km) i zato je ispao —
+a Nea Kalikratija je mesto u kome su roditelji već bili. Zato se sada uzima Booking-ov sopstveni
+podatak sa strane hotela — *„X m from the centre of &lt;mesto&gt;“* — koji daje i **pravo mesto**
+i **pravu udaljenost od njegovog centra**. Ime mesta se svodi na ključ iz `mesta.json` preko mape
+`ALIJASI` u `napravi.py` (Polykhrono → Polychrono, Kallithea Halkidikis → Kallithea Halkidiki…);
+ako se naziv ne poznaje, `napravi.py` to **ispiše na kraju** da se doda.
 
 ## Šta je provereno
 
@@ -44,6 +91,8 @@ Razlika je što `podaci.js` nije pisan rukom — **generiše se iz stvarnih cena
   provera raspoloživosti u celom ovom poslu.
 - **Kilometraža.** Izračunata OSRM-om (vožnja od centra Soluna), **nije prepisana sa sajtova
   hotela** — oni redovno pišu „85 km“ za mesta koja su realno 110.
+- **Udaljenost od plaže i od centra, i ime mesta** — pročitani sa stranice svakog hotela
+  pojedinačno (u rezultatima pretrage ih nema).
 
 ## Šta NIJE provereno
 
@@ -78,9 +127,27 @@ placeholder; status posle renoviranja se ne može potvrditi. Ne rezervisati prek
 
 Cene stare za dan-dva. Osvežavanje:
 
-    ./skrejper.py --svez && ./napravi.py && git add -A && git commit -m "osvežene cene" && git push
+    ./skrejper.py --svez && ./detalji.py --svez && ./napravi.py \
+      && git add -A && git commit -m "osvežene cene" && git push
 
 Novo mesto: dodaj u `GRADOVI` u `skrejper.py` (km izračunaj OSRM-om, ne prepisuj sa sajta hotela)
 i u `mesta.json` (`ime`, `km`, `vozOko`, `zivost`, `tekst`).
 
-`kes/` i `ponude.json` su međurezultati — ako ne treba da idu na GitHub, dodaj ih u `.gitignore`.
+`kes/`, `ponude.json` i `detalji.json` su međurezultati — ako ne treba da idu na GitHub, dodaj ih u `.gitignore`.
+
+## Zamke na koje se naletelo
+
+Sve su bile prave greške u podacima, ne u kodu — i sve su ostavile trag u skriptama:
+
+- **`data-testid="property-card"` se ne sme deliti po prefiksu** — `property-card-container`
+  počinje isto, pa se svaka kartica cepala na pola. Traži se tačno poklapanje.
+- **Booking u rezultate ubacuje i PRODATE objekte** („sold out… you might like“). Bez provere po
+  kartici prikazala bi se ponuda koje nema.
+- **Zapeta je razdvajač hiljada, ne decimalna** — Booking na en-gb piše `1,000 m`. Prvo je
+  parsirano kao 1 m, pa je hotel na kilometar od plaže izgledao kao hotel na plaži.
+- **„85 km from the centre of Thessaloniki“** stoji na svakoj strani hotela. Naivni regex je to
+  uzimao kao udaljenost od centra mesta. Pravi podatak je u FAQ-u, gde broj stoji *posle* pitanja.
+- **`0 m` i `1 m` do plaže nisu greška** — Booking tako piše za hotele na samoj plaži. Strana to
+  prikazuje rečima („na samoj plaži“).
+- **Dva skrejpera nikad paralelno** — dele `kes/` i oba udaraju na Booking. Ako se prekidaju,
+  proveriti veličinu keširanih strana (zdrava je 1,5–1,8 MB) i obrisati krnje.

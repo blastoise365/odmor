@@ -1,54 +1,213 @@
 {
   "_": "Rucno pisano. km = vožnja od centra Soluna, izracunato OSRM-om (NE prepisano sa sajtova hotela). zivost 1-5 = procena broja restorana i vecernje vreve, merena prema Nea Kalikratiji kao referenci, jer je uslov bio da mesto NIJE manje od nje.",
-
-  "Nea Kallikratia": { "ime": "Nea Kalikratija", "km": 42, "vozOko": "42 min", "zivost": 4,
-    "tekst": "Mesto u kome su već bili i mera za sve ostalo. Pravo naselje koje živi i van sezone: duga šetnica uz more, puno taverni, pekara i kafića, ambulanta, pijaca. Najbliže Solunu od svega na listi — može se otići u grad na pola dana i vratiti na spavanje. Plaže su korektne ali ne kao na Kasandri: voda je u Termajskom zalivu, plića i manje prozirna." },
-
-  "Sozopoli": { "ime": "Sozopoli", "km": 48, "vozOko": "47 min", "zivost": 2,
-    "tekst": "Malo primorsko naselje pored Nea Plagije, uglavnom apartmani i vile, po nekoliko taverni. Mirno i blizu Solunu, ali MANJE od Nea Kalikratije — pada na kriterijumu „da im ne bude dosadno“." },
-
-  "Nea Plagia": { "ime": "Nea Plagia", "km": 50, "vozOko": "49 min", "zivost": 2,
-    "tekst": "Tiho mesto sa malim centrom, pretežno apartmanski smeštaj. Blizu Solunu, ali manje i mirnije od Nea Kalikratije." },
-
-  "Nea Flogita": { "ime": "Nea Flogita", "km": 55, "vozOko": "52 min", "zivost": 3,
-    "tekst": "Malo veće od Nea Plagije, ima pravi seoski centar sa tavernama i radnjama, tradicionalno popularno kod naših ljudi. Po živosti otprilike na nivou Nea Kalikratije ili malo ispod." },
-
-  "Nea Moudania": { "ime": "Nea Moudania", "km": 61, "vozOko": "56 min", "zivost": 5,
-    "tekst": "Pravi gradić (oko 10.000 ljudi), najveće naselje na ulazu u Halkidiki. Najbolji izbor restorana, kafića i radnji od svih mesta na listi, radi cele godine. Ali to je grad a ne letovalište — plaža je osrednja i nije glavna stvar mesta. Dobra baza za auto, slabije za „sedi na plaži 8 dana“." },
-
-  "Nea Potidea": { "ime": "Nea Potidea", "km": 68, "vozOko": "63 min", "zivost": 2,
-    "tekst": "Na samom grlu Kasandre, kod prokopanog kanala iz antike — kanal i ostaci Potidejinog zida su lepa kratka šetnja. Selo je malo, ali TU SU VELIKI ALL INCLUSIVE HOTELI, i to je jedini all inclusive kraj koji je realno blizu Solunu (68 km umesto 110). Van hotela nema mnogo restorana — život je u hotelu, što uz all inclusive i nije mana." },
-
-  "Paralia Katerinis": { "ime": "Paralia Katerinis", "km": 73, "vozOko": "56 min", "zivost": 5,
-    "tekst": "Druga strana zaliva, Pierija, ispod Olimpa. Ogromna pešačka zona sa stotinama restorana, kafića i radnji — najveća vreva na celoj listi i tradicionalno puna naših ljudi, pa se svuda progovori srpski. Dve mane: more je plitko i manje prozirno nego na Kasandri, i hoteli su tu skoro svi noćenje s doručkom, malo ih je sa polupansionom ili all inclusive." },
-
-  "Nea Fokea": { "ime": "Nea Fokea", "km": 81, "vozOko": "76 min", "zivost": 2,
-    "tekst": "Malo selo sa vizantijskom kulom na rtu i simpatičnom lučicom — lepo za oko, ali mirno i manje od Nea Kalikratije." },
-
-  "Sani": { "ime": "Sani", "km": 84, "vozOko": "83 min", "zivost": 1,
-    "tekst": "Nije selo nego resort kraj (Sani Resort i marina). Nema mesta u koje se izlazi na večeru, sve je unutar hotela, i cene su najviše na Kasandri. Za njihov budžet i kriterijume ne dolazi u obzir." },
-
-  "Metamorfosi": { "ime": "Metamorfosi", "km": 85, "vozOko": "81 min", "zivost": 2,
-    "tekst": "Početak Sitonije, borovi do same plaže, mirno i familijarno. Nekoliko taverni i osnovne radnje — tiše i manje od Nea Kalikratije." },
-
-  "Kriopigi": { "ime": "Kriopigi", "km": 89, "vozOko": "82 min", "zivost": 3,
-    "tekst": "Selo na brdu iznad obale, sa lepim pogledom i tavernama u gornjem delu. Šarmantno, ali između hotela na plaži i sela je ozbiljan uspon — nije za svakodnevnu šetnju gore-dole peške." },
-
-  "Kallithea Halkidiki": { "ime": "Kalitea", "km": 96, "vozOko": "103 min", "zivost": 5,
-    "tekst": "Jedno od najživljih mesta na Kasandri — gust centar sa restoranima, barovima i noćnim životom, u sezoni veće i bučnije od Nea Kalikratije. Dobro ako se traži vreva, loše ako se traži tišina." },
-
-  "Posidi": { "ime": "Posidi", "km": 104, "vozOko": "101 min", "zivost": 1,
-    "tekst": "Malo letovalište poznato po peščanom rtu koji ulazi duboko u more (Posidi cape) — lepo za jedan dan, ali mesto je MANJE od Nea Kalikratije i sa malo restorana." },
-
-  "Polychrono": { "ime": "Polihrono", "km": 105, "vozOko": "99 min", "zivost": 3,
-    "tekst": "Srednje veliko letovalište sa dugom plažom i solidnim izborom taverni, mirnije od Haniotija i Kalitee ali nikako dosadno. Dobar kompromis između vreve i mira." },
-
-  "Hanioti": { "ime": "Hanioti", "km": 109, "vozOko": "103 min", "zivost": 5,
-    "tekst": "Verovatno najbolje mesto po kriterijumu „da ima restorana i da nije dosadno“: glavna pešačka ulica je puna restorana, poslastičarnica, pekara i radnji, uveče se šeta do ponoći, a plaža je velika i peščana. Sigurno ŽIVLJE od Nea Kalikratije. Mana je jedino udaljenost — 109 km i skoro dva sata do Soluna." },
-
-  "Nikiti": { "ime": "Nikiti", "km": 110, "vozOko": "111 min", "zivost": 4,
-    "tekst": "Pravo mesto sa starim gornjim selom od kamenih kuća, dugom plažom i dobrim izborom taverni — po veličini i živosti otprilike kao Nea Kalikratija ili malo iznad. Odatle su najlepši izleti po Sitoniji." },
-
-  "Pefkochori": { "ime": "Pefkohori", "km": 113, "vozOko": "107 min", "zivost": 5,
-    "tekst": "Po karakteru gotovo isto što i Hanioti — duga plaža, živa šetnica, puno restorana i kafića. Najdalje mesto na listi. Iz njega su lepi izleti do juga poluostrva (Hruso, Loutra)." }
+  "Nea Kallikratia": {
+    "ime": "Nea Kalikratija",
+    "km": 42,
+    "vozOko": "42 min",
+    "zivost": 4,
+    "tekst": "Mesto u kome su već bili i mera za sve ostalo. Pravo naselje koje živi i van sezone: duga šetnica uz more, puno taverni, pekara i kafića, ambulanta, pijaca. Najbliže Solunu od svega na listi — može se otići u grad na pola dana i vratiti na spavanje. Plaže su korektne ali ne kao na Kasandri: voda je u Termajskom zalivu, plića i manje prozirna."
+  },
+  "Sozopoli": {
+    "ime": "Sozopoli",
+    "km": 48,
+    "vozOko": "47 min",
+    "zivost": 2,
+    "tekst": "Malo primorsko naselje pored Nea Plagije, uglavnom apartmani i vile, po nekoliko taverni. Mirno i blizu Solunu, ali MANJE od Nea Kalikratije — pada na kriterijumu „da im ne bude dosadno“."
+  },
+  "Nea Plagia": {
+    "ime": "Nea Plagia",
+    "km": 50,
+    "vozOko": "49 min",
+    "zivost": 2,
+    "tekst": "Tiho mesto sa malim centrom, pretežno apartmanski smeštaj. Blizu Solunu, ali manje i mirnije od Nea Kalikratije."
+  },
+  "Nea Flogita": {
+    "ime": "Nea Flogita",
+    "km": 55,
+    "vozOko": "52 min",
+    "zivost": 3,
+    "tekst": "Malo veće od Nea Plagije, ima pravi seoski centar sa tavernama i radnjama, tradicionalno popularno kod naših ljudi. Po živosti otprilike na nivou Nea Kalikratije ili malo ispod."
+  },
+  "Nea Moudania": {
+    "ime": "Nea Moudania",
+    "km": 61,
+    "vozOko": "56 min",
+    "zivost": 5,
+    "tekst": "Pravi gradić (oko 10.000 ljudi), najveće naselje na ulazu u Halkidiki. Najbolji izbor restorana, kafića i radnji od svih mesta na listi, radi cele godine. Ali to je grad a ne letovalište — plaža je osrednja i nije glavna stvar mesta. Dobra baza za auto, slabije za „sedi na plaži 8 dana“."
+  },
+  "Nea Potidea": {
+    "ime": "Nea Potidea",
+    "km": 68,
+    "vozOko": "63 min",
+    "zivost": 2,
+    "tekst": "Na samom grlu Kasandre, kod prokopanog kanala iz antike — kanal i ostaci Potidejinog zida su lepa kratka šetnja. Selo je malo, ali TU SU VELIKI ALL INCLUSIVE HOTELI, i to je jedini all inclusive kraj koji je realno blizu Solunu (68 km umesto 110). Van hotela nema mnogo restorana — život je u hotelu, što uz all inclusive i nije mana."
+  },
+  "Paralia Katerinis": {
+    "ime": "Paralia Katerinis",
+    "km": 73,
+    "vozOko": "56 min",
+    "zivost": 5,
+    "tekst": "Druga strana zaliva, Pierija, ispod Olimpa. Ogromna pešačka zona sa stotinama restorana, kafića i radnji — najveća vreva na celoj listi i tradicionalno puna naših ljudi, pa se svuda progovori srpski. Dve mane: more je plitko i manje prozirno nego na Kasandri, i hoteli su tu skoro svi noćenje s doručkom, malo ih je sa polupansionom ili all inclusive."
+  },
+  "Olympiaki Akti": {
+    "ime": "Olimpik Bič",
+    "km": 76,
+    "vozOko": "61 min",
+    "zivost": 4,
+    "tekst": "Olimpik Bič, produžetak Paralije Katerinis ka jugu i praktično isti kraj — šetnica sa restoranima i radnjama, mirnije i malo pristupačnije od same Paralije. Blizu Solunu (76 km) i puno naših ljudi. Isto ograničenje kao Paralija: more je plitko i manje prozirno nego na Kasandri."
+  },
+  "Nea Fokea": {
+    "ime": "Nea Fokea",
+    "km": 81,
+    "vozOko": "76 min",
+    "zivost": 2,
+    "tekst": "Malo selo sa vizantijskom kulom na rtu i simpatičnom lučicom — lepo za oko, ali mirno i manje od Nea Kalikratije."
+  },
+  "Sani": {
+    "ime": "Sani",
+    "km": 84,
+    "vozOko": "83 min",
+    "zivost": 1,
+    "tekst": "Nije selo nego resort kraj (Sani Resort i marina). Nema mesta u koje se izlazi na večeru, sve je unutar hotela, i cene su najviše na Kasandri. Za njihov budžet i kriterijume ne dolazi u obzir."
+  },
+  "Metamorfosi": {
+    "ime": "Metamorfosi",
+    "km": 85,
+    "vozOko": "81 min",
+    "zivost": 2,
+    "tekst": "Početak Sitonije, borovi do same plaže, mirno i familijarno. Nekoliko taverni i osnovne radnje — tiše i manje od Nea Kalikratije."
+  },
+  "Afitos": {
+    "ime": "Afitos",
+    "km": 86,
+    "vozOko": "78 min",
+    "zivost": 4,
+    "tekst": "Jedno od najlepših mesta na Kasandri i jedino koje je sačuvalo staru arhitekturu — kamene kuće, uske kaldrmisane ulice, i taverne na samoj ivici litice sa pogledom na more i Olimp u daljini. Selo je na visini, pa se do plaže silazi (i penje). Uveče je živo, puno restorana i kafića, ali bez bučnog noćnog života kao Kalitea. Po živosti otprilike kao Nea Kalikratija, a po lepoti mesta iznad svega ostalog na listi."
+  },
+  "Mola Kalyva": {
+    "ime": "Mola Kaliva",
+    "km": 86,
+    "vozOko": "78 min",
+    "zivost": 2,
+    "tekst": "Obalni deo ispod Afitosa — plaže i hoteli, bez pravog centra. Prednost je što je Afitos, jedno od najlepših sela na Kasandri, na par minuta autom."
+  },
+  "Kalyves Poligirou": {
+    "ime": "Kalives",
+    "km": 87,
+    "vozOko": "88 min",
+    "zivost": 2,
+    "tekst": "Mali primorski kraj pored Psakudije, pretežno hoteli i apartmani. Lepe plaže, ali mesta kao takvog skoro da nema — za restorane se ide u Psakudiju ili Gerakini."
+  },
+  "Psakoudia": {
+    "ime": "Psakoudia",
+    "km": 88,
+    "vozOko": "89 min",
+    "zivost": 2,
+    "tekst": "Mirno letovalište na ulazu u Sitoniju, borovi i duga plaža, familijarno. Malo taverni, tiše i manje od Nea Kalikratije."
+  },
+  "Kriopigi": {
+    "ime": "Kriopigi",
+    "km": 89,
+    "vozOko": "82 min",
+    "zivost": 3,
+    "tekst": "Selo na brdu iznad obale, sa lepim pogledom i tavernama u gornjem delu. Šarmantno, ali između hotela na plaži i sela je ozbiljan uspon — nije za svakodnevnu šetnju gore-dole peške."
+  },
+  "Fourka": {
+    "ime": "Fourka",
+    "km": 95,
+    "vozOko": "101 min",
+    "zivost": 2,
+    "tekst": "Malo mesto na zapadnoj obali Kasandre, uglavnom apartmani i nekoliko taverni. Duga peščana plaža i mirnije veče — manje od Nea Kalikratije."
+  },
+  "Kallithea Halkidiki": {
+    "ime": "Kalitea",
+    "km": 96,
+    "vozOko": "103 min",
+    "zivost": 5,
+    "tekst": "Jedno od najživljih mesta na Kasandri — gust centar sa restoranima, barovima i noćnim životom, u sezoni veće i bučnije od Nea Kalikratije. Dobro ako se traži vreva, loše ako se traži tišina."
+  },
+  "Posidi": {
+    "ime": "Posidi",
+    "km": 104,
+    "vozOko": "101 min",
+    "zivost": 1,
+    "tekst": "Malo letovalište poznato po peščanom rtu koji ulazi duboko u more (Posidi cape) — lepo za jedan dan, ali mesto je MANJE od Nea Kalikratije i sa malo restorana."
+  },
+  "Polychrono": {
+    "ime": "Polihrono",
+    "km": 105,
+    "vozOko": "99 min",
+    "zivost": 3,
+    "tekst": "Srednje veliko letovalište sa dugom plažom i solidnim izborom taverni, mirnije od Haniotija i Kalitee ali nikako dosadno. Dobar kompromis između vreve i mira."
+  },
+  "Nea Skioni": {
+    "ime": "Nea Skioni",
+    "km": 108,
+    "vozOko": "104 min",
+    "zivost": 3,
+    "tekst": "Ribarsko selo na jugozapadu Kasandre sa lučicom i nekoliko taverni uz more. Mirnije i manje od Nea Kalikratije, ali ima svoj centar i život — nije samo hotelski kraj. Voda je ovde bistra, plaže mnogo lepše nego u Termajskom zalivu."
+  },
+  "Hanioti": {
+    "ime": "Hanioti",
+    "km": 109,
+    "vozOko": "103 min",
+    "zivost": 5,
+    "tekst": "Verovatno najbolje mesto po kriterijumu „da ima restorana i da nije dosadno“: glavna pešačka ulica je puna restorana, poslastičarnica, pekara i radnji, uveče se šeta do ponoći, a plaža je velika i peščana. Sigurno ŽIVLJE od Nea Kalikratije. Mana je jedino udaljenost — 109 km i skoro dva sata do Soluna."
+  },
+  "Ayios Nikolaos Sithonia": {
+    "ime": "Agios Nikolaos",
+    "km": 109,
+    "vozOko": "108 min",
+    "zivost": 3,
+    "tekst": "Selo u unutrašnjosti Sitonije, na brdu, sa velikim seoskim trgom i tavernama — autentično i mirno, ali nije na plaži: do mora se ide autom."
+  },
+  "Nikiti": {
+    "ime": "Nikiti",
+    "km": 110,
+    "vozOko": "111 min",
+    "zivost": 4,
+    "tekst": "Pravo mesto sa starim gornjim selom od kamenih kuća, dugom plažom i dobrim izborom taverni — po veličini i živosti otprilike kao Nea Kalikratija ili malo iznad. Odatle su najlepši izleti po Sitoniji."
+  },
+  "Ormos Panagias": {
+    "ime": "Ormos Panagias",
+    "km": 112,
+    "vozOko": "110 min",
+    "zivost": 2,
+    "tekst": "Mala luka u Sitoniji odakle idu brodići na krstarenje oko Svete Gore — to je glavni razlog da se dođe. Nekoliko riblјih taverni na vodi, inače mirno."
+  },
+  "Pefkochori": {
+    "ime": "Pefkohori",
+    "km": 113,
+    "vozOko": "107 min",
+    "zivost": 5,
+    "tekst": "Po karakteru gotovo isto što i Hanioti — duga plaža, živa šetnica, puno restorana i kafića. Najdalje mesto na listi. Iz njega su lepi izleti do juga poluostrva (Hruso, Loutra)."
+  },
+  "Paliouri": {
+    "ime": "Paliouri",
+    "km": 116,
+    "vozOko": "117 min",
+    "zivost": 2,
+    "tekst": "Malo tradicionalno selo na jugu Kasandre, iznad obale. Mirno, sa par taverni; za veći izbor se ide u Pefkohori. Jedno od najdaljih mesta na listi."
+  },
+  "Vourvourou": {
+    "ime": "Vourvourou",
+    "km": 116,
+    "vozOko": "114 min",
+    "zivost": 2,
+    "tekst": "Jedan od najlepših delova Sitonije — plitka bistra laguna i ostrvca Dijaporos. Mesto je malo i raštrkano, sa par taverni; dolazi se zbog vode i prirode, ne zbog vreve."
+  },
+  "Elia Sithonia": {
+    "ime": "Elia (Nikiti)",
+    "km": 118,
+    "vozOko": "119 min",
+    "zivost": 1,
+    "tekst": "Nije selo nego plaža i resort kraj kod Nikitija. Nema mesta u koje se izlazi, sve je unutar hotela. Najdalje na listi."
+  },
+  "Agia Paraskevi Kassandra": {
+    "ime": "Agia Paraskevi",
+    "km": 122,
+    "vozOko": "153 min",
+    "zivost": 1,
+    "tekst": "Kraj na jugu Kasandre poznat po termalnim izvorima (Loutra). Vrlo mirno i najdalje od Soluna — vožnja preko dva i po sata. Za odmor od 8 dana previše je izolovano."
+  }
 }
