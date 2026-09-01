@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="sr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grčka 05.–13.09.2026 — pregled za mamu i tatu</title>
+<link rel="stylesheet" href="stil.css">
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Grčka, 05.09 – 13.09.2026</h1>
+  <p>8 noći · 2 osobe · sopstveni auto · budžet oko 1.100 € za smeštaj.
+     Sve cene su <strong>ukupno za dvoje za ceo boravak</strong>, ne po osobi.
+     Čekiraj kućicu kad hotel obradiš.</p>
+</header>
+
+<section class="napomene">
+  <h2>Pročitaj ovo pre nego što rezervišeš</h2>
+
+  <div class="sanse" id="statistika"></div>
+
+  <div class="kljucno">
+    <p><strong>Cene su stvarne, pročitane sa Booking-a za tačno ove datume</strong> — nisu procena
+    i nisu „od“ cene. Pretraga sa upisanim datumima vraća samo ono što je slobodno, a objekti
+    označeni <em>sold out</em> su prepoznati po kartici i izbačeni. Znači: hotel na ovoj listi je
+    <strong>bio slobodan za 05.–13.09. u trenutku čitanja</strong>. Ali cene i slobodne sobe se
+    menjaju iz sata u sat — pre uplate proveri klikom na link.</p>
+  </div>
+
+  <h3>Kako je merena udaljenost</h3>
+  <p>Kilometraža <strong>nije prepisana sa sajtova hotela</strong> — oni redovno pišu „85 km“ za mesta
+    koja su realno 110. Izračunata je rutiranjem preko OpenStreetMap-a, vožnja od centra Soluna:
+    Nea Kalikratija <strong>42 km</strong>, Nea Potidea 68, Paralia Katerinis 73, Kalitea 96,
+    Polihrono 105, Hanioti <strong>109 km</strong>, Pefkohori <strong>113 km</strong>.
+    Ako je „ne tako daleko od Soluna“ bio ozbiljan uslov, Kasandra je oko 2,5× dalja od Nea
+    Kalikratije, gde su već bili — zato je klizač za udaljenost prvi filter na listi.</p>
+
+  <h3>„U mestu“ protiv „okoline“</h3>
+  <p>Booking na pretragu jednog mesta vraća i hotele iz šire okoline — neki su i 20 km od mesta po
+    kome su nađeni. Za takve <strong>udaljenost od Soluna nije poznata tačno</strong>, jer se ne zna
+    u kom su smeru, pa je prikazana kao <em>raspon</em> i kartica nosi oznaku
+    <em>„okolina, ne samo mesto“</em>. Od 115 hotela, <strong>62 su u samom mestu</strong>
+    (do 3 km od centra) — uključi filter <em>„Samo u samom mestu“</em> ako je važno da se na večeru
+    izlazi peške, jer za hotel u okolini treba auto.</p>
+
+  <h3>„Živost“ mesta</h3>
+  <p>Ocena ● ● ● ○ ○ na svakoj kartici je moja procena broja restorana i večernje vreve,
+    <strong>merena prema Nea Kalikratiji</strong>, jer je uslov bio da mesto <em>nije manje</em> od
+    nje. Življi su Hanioti, Pefkohori, Kalitea, Paralia Katerinis i Nea Moudania; manji i tiši su
+    Posidi, Sani, Nea Fokea, Sozopoli, Nea Plagia, Metamorfosi i Nea Potidea.</p>
+
+  <h3>Šta je provereno, a šta nije</h3>
+  <ul>
+    <li><strong>Booking — provereno mašinski.</strong> Cene, ocene, broj ocena, zvezdice, tip sobe i
+      udaljenost od centra su pročitani pravim browserom (Booking običnom <code>curl</code>-u vraća
+      202 i praznu stranicu). Filteri za pansion su Booking-ovi sopstveni:
+      <em>Breakfast &amp; dinner included</em> za polupansion i <em>All-inclusive</em> za AI —
+      kodovi su pročitani iz njihovog menija, nisu pogođeni.</li>
+    <li><strong>Google Hotels i Trivago — NIJE provereno.</strong> Linkovi imaju upisane datume i rade
+      u pregledaču, ali se te strane učitavaju JavaScript-om i u automatskom čitanju vrate praznu
+      školjku bez cena (Hotels.com odmah traži captcha). Zato se <em>nijedna cena na ovoj strani ne
+      poziva na njih</em> — služe da ti ručno uporediš cenu za isti hotel. Google Hotels je za to
+      najkorisniji jer na jednom mestu prikaže cene svih posrednika za taj hotel.</li>
+    <li><strong>Genius se ne vidi ovde.</strong> Skrejper čita Booking neprijavljen, pa su ove cene
+      <em>bez</em> tvog Genius popusta — kad se prijaviš, deo hotela bi trebalo da bude jeftiniji
+      nego što tu piše.</li>
+    <li><strong>Takse.</strong> Gde piše „takse uključene“, to je Booking-ova oznaka
+      <em>Includes taxes and charges</em>. Grčki „Climate Resilience Fee“ (01.03–31.10) se ipak
+      često plaća na recepciji posebno: 5 €/noć za 3★, 10 €/noć za 4★, 2 €/noć za apartman —
+      za 8 noći 40 / 80 / 16 €. Računaj na to kao rezervu.</li>
+  </ul>
+
+  <h3>Zašto agencije nisu na listi</h3>
+  <p>Prvo su bile provereni srpski agencijski ceonovnici (argus.rs, dreamland.travel, travelland.rs,
+    grckainfo.com). Ispalo je da <strong>za polazak 05.09 agencijski kontingenti više nisu otvoreni</strong> —
+    kod većine hotela najraniji period u cenovniku počinje 09.09, 11.09 ili 14.09. Uz to
+    <strong>Grčka Info radi samo na upit</strong> („Send a booking request“, 50% depozita), bez
+    instant potvrde, i skoro sve su privatni apartmani bez polupansiona. Zato je ceo pregled
+    prebačen na direktne kanale, kako si i rekao.</p>
+
+  <p class="mini">Podaci pročitani <strong id="prikupljeno"></strong>. Ništa se ne čuva na serveru —
+    kvačice ostaju samo u ovom pretraživaču, na ovom uređaju.</p>
+</section>
+
+<div class="tabs" role="tablist">
+  <button role="tab" id="tab-aktivno" aria-selected="true">Aktivno <span class="count" id="c-aktivno"></span></button>
+  <button role="tab" id="tab-obradjeno" aria-selected="false">Obrađeno <span class="count" id="c-obradjeno"></span></button>
+</div>
+
+<div class="filteri">
+  <div class="pansion-filter" role="group" aria-label="Filter po pansionu">
+    <label><input type="checkbox" value="AI"> All inclusive</label>
+    <label><input type="checkbox" value="PP"> Polupansion</label>
+  </div>
+
+  <div class="red">
+    <label class="klizac">Udaljenost od Soluna: <output id="km-vrednost"></output>
+      <input id="km" type="range" min="40" max="115" step="5" value="115">
+    </label>
+    <label class="klizac">Ocena gostiju: <output id="ocena-vrednost"></output>
+      <input id="ocena" type="range" min="0" max="9.5" step="0.5" value="0">
+    </label>
+  </div>
+
+  <div class="red">
+    <label><input type="checkbox" id="samo-budzet"> Samo u budžetu (do 1.100 €)</label>
+    <label><input type="checkbox" id="samo-u-mestu"> Samo u samom mestu (ne okolina)</label>
+  </div>
+
+  <div class="red">
+    <input id="q" type="search" placeholder="Pretraga (hotel, mesto)…">
+    <select id="sort">
+      <option value="cena">Sortiraj: cena, od najjeftinije</option>
+      <option value="ocena">Sortiraj: najbolja ocena</option>
+      <option value="km">Sortiraj: bliže Solunu</option>
+      <option value="zivost">Sortiraj: živost mesta</option>
+    </select>
+    <span class="broj" id="broj"></span>
+    <button id="reset" hidden>Vrati sve u „Aktivno“</button>
+  </div>
+</div>
+
+<div id="lista"></div>
+
+<footer>
+  <h2>Kako ovo održavati</h2>
+  <p>
+    Cene stare. Da se osveže: <code>./skrejper.py --svez</code> pročita Booking ponovo, pa
+    <code>./napravi.py</code> iznova napravi <code>podaci.js</code>. Opisi mesta i ocene živosti su
+    ručni i stoje u <code>mesta.json</code> — njih skrejper ne dira.
+  </p>
+</footer>
+
+</div>
+
+<script src="podaci.js"></script>
+<script>
+// Statistika na vrhu se računa iz podataka, da ne može da se raziđe sa listom.
+(function () {
+  const uB = HOTELI.filter(h => h.uBudzetu);
+  const ai = HOTELI.filter(h => h.cene.AI);
+  const aiB = ai.filter(h => h.cene.AI <= BUDZET);
+  const blizu = uB.filter(h => h.km <= 75);
+  const naj = Math.min(...HOTELI.map(h => h.najniza));
+  document.getElementById("prikupljeno").textContent = PRIKUPLJENO;
+  document.getElementById("statistika").innerHTML = [
+    [uB.length, "slobodnih hotela u budžetu za 8 noći", "dobro"],
+    [aiB.length, "all inclusive u budžetu", aiB.length ? "dobro" : "lose"],
+    [blizu.length, "u budžetu i unutar 75 km od Soluna", ""],
+    [naj.toLocaleString("sr-RS") + " €", "najniža cena na listi, za dvoje", ""],
+  ].map(([b, s, k]) => `<div class="sansa ${k}"><b>${b}</b><span>${s}</span></div>`).join("");
+})();
+</script>
+<script src="app.js"></script>
+</body>
+</html>
