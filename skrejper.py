@@ -20,8 +20,19 @@ KES = pathlib.Path(__file__).parent / "kes"
 UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
       "Chrome/128.0.0.0 Safari/537.36")
 
-# Booking-ovi kodovi za pansion, procitani iz njihovog filter menija (ne pogodjeni):
-PANSION = {"PP": ("1", "polupansion"), "AI": ("9", "all inclusive")}
+# Booking-ovi kodovi za pansion. PAZI: lako se zamene. Tacno mapiranje, procitano
+# tako sto se uzme oznaka koja stoji POSLE <input value="mealplan=N"> u istom <label>:
+#   1  = Breakfast included          (samo dorucak — NE koristimo)
+#   3  = All meals included          (pun pansion)
+#   4  = All-inclusive
+#   9  = Breakfast & dinner included (polupansion)
+#   999= Self catering
+# Prva verzija je koristila 1 za "polupansion" i 9 za "all inclusive" — oboje pogresno,
+# pa su hoteli sa samo dorucakom bili oznaceni kao polupansion. Zato dole stoji
+# samoprovera koja svaki put potvrdi znacenje koda iz same stranice.
+PANSION = {"PP": ("9", "polupansion", "Breakfast & dinner included"),
+           "FB": ("3", "pun pansion", "All meals included"),
+           "AI": ("4", "all inclusive", "All-inclusive")}
 
 # Mesta: naziv za Booking pretragu -> km od Soluna (izracunato OSRM-om, ne prepisano)
 GRADOVI = {
@@ -56,6 +67,26 @@ def povuci(url, svez=False):
         capture_output=True, text=True, timeout=180)
     put.write_text(r.stdout, "utf-8")
     return r.stdout, False
+
+
+def proveri_kod(dom, kod, ocekivano):
+    """Iz Booking-ovog filter menija procitaj sta kod ZAISTA znaci i uporedi.
+    Oznaka stoji POSLE <input value="mealplan=N">, unutar istog <label>."""
+    m = re.search(r'value="mealplan=%s"' % kod, dom)
+    if not m:
+        return None                      # filter meni nije u DOM-u, nema sta da se proveri
+    lab = re.search(r'data-testid="filters-group-label-content"[^>]*>(.{0,200}?)</div>',
+                    dom[m.end():m.end() + 4000], re.S)
+    if not lab:
+        return None
+    stvarno = tekst(lab.group(1))
+    if ocekivano.lower() not in stvarno.lower():
+        raise SystemExit(
+            f"\nPREKID: Booking je promenio kodove filtera.\n"
+            f"  mealplan={kod} sada znaci: {stvarno!r}\n"
+            f"  a ocekivano je: {ocekivano!r}\n"
+            f"  Ispravi PANSION u skrejper.py pre nego sto se podaci objave.")
+    return stvarno
 
 
 def tekst(s):
@@ -116,8 +147,23 @@ def raspari(dom, grad, pansion):
         if m:
             link = htmllib.unescape(m.group(1))
 
+        # Pansion procitan sa SAME KARTICE, ne iz filtera — to je provera da filter
+        # radi ono sto mislimo. Ako se ne poklapa, vidi se u podacima.
+        ptekst = ""
+        ru = re.search(r'data-testid="recommended-units"(.{0,3000}?)'
+                       r'data-testid="(?:availability|price)', blok, re.S)
+        if ru:
+            t = tekst(ru.group(1))
+            for oznaka in ("All-inclusive", "All inclusive", "Breakfast & dinner included",
+                           "All meals included", "Half board", "Full board",
+                           "Breakfast included", "Self catering"):
+                if oznaka.lower() in t.lower():
+                    ptekst = oznaka
+                    break
+
         out.append({
             "hotel": ime, "grad": grad, "km": GRADOVI[grad], "pansion": pansion,
+            "pansionTekst": ptekst,
             "cena": cena, "ocena": ocena, "brOcena": brOcena, "zvezdice": zvez,
             "udaljenost": udalj, "soba": soba,
             # Booking u rezultate ubacuje i PRODATE objekte ("sold out ... you might like")
@@ -137,12 +183,16 @@ def main():
     ap.add_argument("--grad")
     a = ap.parse_args()
 
-    gradovi = [a.grad] if a.grad else list(GRADOVI)
+    gradovi = [x.strip() for x in a.grad.split(",")] if a.grad else list(GRADOVI)
+    for g in gradovi:
+        if g not in GRADOVI:
+            raise SystemExit(f"Nepoznat grad: {g}. Poznati: {', '.join(GRADOVI)}")
     svi, iz_kesa = [], 0
     for grad in gradovi:
-        for kljuc, (kod, ime) in PANSION.items():
+        for kljuc, (kod, ime, oznaka) in PANSION.items():
             dom, kes = povuci(uri(grad, kod), a.svez)
             iz_kesa += kes
+            proveri_kod(dom, kod, oznaka)
             r = raspari(dom, grad, kljuc)
             prodato = [x for x in r if x["prodato"]]
             r = [x for x in r if not x["prodato"] and x["cena"]]

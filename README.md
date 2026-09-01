@@ -43,6 +43,43 @@ pa nema kružne zavisnosti i `napravi.py` se pokreće samo jednom.
   detalje i računa bodove preporuke.
 - `podaci.js` — **generisano, ne menjati rukom.**
 
+## Pansion — ovde je bila najveća greška
+
+Booking-ovi `mealplan` kodovi su **lako zamenljivi i prva verzija ih je imala pogrešno**:
+koristila je `mealplan=1` kao „polupansion“ i `mealplan=9` kao „all inclusive“. Tačno je:
+
+| kod | značenje |
+|---|---|
+| `mealplan=1` | Breakfast included — **samo doručak** |
+| `mealplan=3` | All meals included (pun pansion) |
+| `mealplan=4` | **All-inclusive** |
+| `mealplan=9` | **Breakfast & dinner included** (polupansion) |
+| `mealplan=999` | Self catering |
+
+Posledica greške: hoteli sa samo doručkom bili su prikazani kao polupansion, i lista je izgledala
+skoro četiri puta bogatija nego što jeste (79 hotela, „21 u budžetu“ — stvarno 22 i 3).
+
+Dve zaštite da se ne ponovi:
+
+1. `proveri_kod()` u `skrejper.py` na **svakoj** strani pročita šta kod zaista znači — oznaka koja
+   stoji *posle* `<input value="mealplan=N">` u istom `<label>` — i **prekine rad** (`SystemExit`)
+   ako se ne poklapa sa očekivanim. Bolje pad nego tihi pogrešan podatak.
+2. Pansion se čita i **sa same kartice hotela** (`pansionTekst`), kao nezavisna potvrda. Trenutno
+   se svih 293 ponude poklapaju sa filterom, bez izuzetka.
+
+Pun pansion je pretražen u svih 17 mesta i **nema ni jedan slobodan hotel** za ove datume, zato se
+taj čip i ne pojavljuje — čipovi za pansion se prave iz podataka, da se nikad ne nudi filter koji
+daje nulu.
+
+## All inclusive ne staje u budžet
+
+Na Booking-u za 05.–13.09.2026: **najjeftiniji AI je 1.978 €** za dvoje (Elinotel Sermilia 5*,
+Psakudija), pa do preko 5.000 €. Ni jedan ne ulazi u 1.100 €.
+
+Pošteno je zapisati i da je **agencijski kanal za AI bio jedini u budžetu**: Hotel Atrium 4*,
+Pefkohori, preko argus.rs 74 €/osobi/dan AI = oko **1.027 €** za 8 noći sa objavljenim popustom od
+20%. Direktno preko Booking-a isti nivo je dvostruko skuplji.
+
 ## Bodovi preporuke
 
 Lista **nije sortirana po ceni** — najjeftinije obično znači lošu ocenu ili hotel daleko od plaže.
@@ -139,6 +176,9 @@ i u `mesta.json` (`ime`, `km`, `vozOko`, `zivost`, `tekst`).
 
 Sve su bile prave greške u podacima, ne u kodu — i sve su ostavile trag u skriptama:
 
+- **Booking-ovi `mealplan` kodovi nisu ono što izgledaju** — vidi sekciju o pansionu gore. Ovo je
+  bila najskuplja greška: oznaka je vađena iz prozora *ispred* poklapanja, pa su vrednosti zamenjene.
+  Uvek uzimaj oznaku koja stoji POSLE inputa, u istom `<label>`.
 - **`data-testid="property-card"` se ne sme deliti po prefiksu** — `property-card-container`
   počinje isto, pa se svaka kartica cepala na pola. Traži se tačno poklapanje.
 - **Booking u rezultate ubacuje i PRODATE objekte** („sold out… you might like“). Bez provere po

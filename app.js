@@ -11,7 +11,7 @@ let tab = "aktivno";
 const el  = (id) => document.getElementById(id);
 const esc = (s) => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const eur = (n) => n.toLocaleString("sr-RS") + " €";
-const PANSION_IME = { PP: "polupansion", AI: "ALL INCLUSIVE" };
+const PANSION_IME = { PP: "polupansion", FB: "PUN PANSION", AI: "ALL INCLUSIVE" };
 const RAZRADA_IME = {
   ocena: "ocena gostiju", cena: "cena ispod budžeta", plaza: "blizina plaže",
   centar: "blizina centra", zivost: "živost mesta", pansion: "pansion",
@@ -97,6 +97,14 @@ function kartica(h) {
     </div>
   </div>`;
 }
+
+// Čipovi za pansion se prave iz podataka — da se nikad ne nudi filter koji daje nulu.
+// (Pun pansion npr. za ove datume nema ni jedan slobodan hotel, pa se čip i ne pojavi.)
+(function cipovi() {
+  const ima = ["AI", "FB", "PP"].filter(p => HOTELI.some(h => h.cene[p]));
+  el("pansion-filter").innerHTML = ima.map(p =>
+    `<label><input type="checkbox" value="${p}"> ${PANSION_IME[p]}</label>`).join("");
+})();
 
 const aktivniPansioni = () =>
   [...document.querySelectorAll(".pansion-filter input:checked")].map(i => i.value);

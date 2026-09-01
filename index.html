@@ -22,12 +22,33 @@
   <div class="sanse" id="statistika"></div>
 
   <div class="kljucno">
+    <p><strong>Ispravka (19:45):</strong> ranija verzija ove strane je označavala kao „polupansion“
+    hotele koji imaju <em>samo doručak</em>. Booking-ovi kodovi filtera su bili pročitani pogrešno:
+    <code>mealplan=1</code> nije „Breakfast &amp; dinner“ nego <strong>„Breakfast included“</strong>,
+    a polupansion je <code>mealplan=9</code>, a all inclusive <code>mealplan=4</code>. Sada je
+    ispravljeno i skrejper <strong>sam proverava</strong> značenje koda na svakoj strani i prekida
+    rad ako se ne poklapa. Uz to, pansion se čita i sa same kartice hotela: svih 293 ponude se
+    poklapaju sa filterom, bez izuzetka.</p>
+    <p><strong>Zbog toga je lista mnogo kraća nego pre.</strong> Pravi polupansion i all inclusive
+    su znatno rjeđi od doručka: ostalo je 22 hotela umesto 79, a u budžetu 3 umesto „21“.
+    Onaj prvi broj je bio pogrešan, ovaj je tačan.</p>
     <p><strong>Cene su stvarne, pročitane sa Booking-a za tačno ove datume</strong> — nisu procena
     i nisu „od“ cene. Pretraga sa upisanim datumima vraća samo ono što je slobodno, a objekti
     označeni <em>sold out</em> su prepoznati po kartici i izbačeni. Znači: hotel na ovoj listi je
     <strong>bio slobodan za 05.–13.09. u trenutku čitanja</strong>. Ali cene i slobodne sobe se
     menjaju iz sata u sat — pre uplate proveri klikom na link.</p>
   </div>
+
+  <h3>All inclusive ne staje u budžet — i to je važno</h3>
+  <p>Na Booking-u za ove datume <strong>najjeftiniji all inclusive je 1.978 €</strong> za dvoje
+    (Elinotel Sermilia 5*, Psakudija), a dalje ide do preko 5.000 €. Znači <strong>ni jedan AI ne
+    ulazi u 1.100 €</strong> — nije da ih je malo, nego ih nema.</p>
+  <p>Pošteno je reći i ovo: <strong>agencijski kanal je za all inclusive bio jedini koji je stajao
+    u budžet.</strong> Hotel Atrium 4* u Pefkohoriju je preko argus.rs bio 74 €/osobi/dan AI, što je
+    sa objavljenim popustom od 20% oko <strong>1.027 €</strong> za njihovih 8 noći. Direktno preko
+    Booking-a isti nivo usluge je dvostruko skuplji. Ako im je all inclusive uslov a ne želja,
+    vredi jedan telefonski poziv agenciji, uz sve mane koje to ima (kontingenti za 05.09 su bili
+    zatvoreni, plaća se avans, nema instant potvrde).</p>
 
   <h3>Kako je merena udaljenost</h3>
   <p>Kilometraža <strong>nije prepisana sa sajtova hotela</strong> — oni redovno pišu „85 km“ za mesta
@@ -66,8 +87,14 @@
     <li><strong>Booking — provereno mašinski.</strong> Cene, ocene, broj ocena, zvezdice, tip sobe i
       udaljenost od centra su pročitani pravim browserom (Booking običnom <code>curl</code>-u vraća
       202 i praznu stranicu). Filteri za pansion su Booking-ovi sopstveni:
-      <em>Breakfast &amp; dinner included</em> za polupansion i <em>All-inclusive</em> za AI —
-      kodovi su pročitani iz njihovog menija, nisu pogođeni.</li>
+      <em>Breakfast &amp; dinner included</em> (<code>mealplan=9</code>) za polupansion i
+      <em>All-inclusive</em> (<code>mealplan=4</code>) za AI. Kodovi se čitaju iz Booking-ovog
+      filter menija na <strong>svakoj</strong> strani i porede sa očekivanim — ako Booking promeni
+      numeraciju, skrejper prekine rad umesto da tiho vrati pogrešan pansion. Uz to se pansion čita
+      i sa same kartice, kao druga potvrda.</li>
+    <li><strong>Pun pansion</strong> (<em>All meals included</em>, <code>mealplan=3</code>) je
+      takođe pretražen u svih 17 mesta — <strong>nema ni jedan slobodan hotel</strong> za ove
+      datume, zato se taj filter i ne pojavljuje.</li>
     <li><strong>Google Hotels i Trivago — NIJE provereno.</strong> Linkovi imaju upisane datume i rade
       u pregledaču, ali se te strane učitavaju JavaScript-om i u automatskom čitanju vrate praznu
       školjku bez cena (Hotels.com odmah traži captcha). Zato se <em>nijedna cena na ovoj strani ne
@@ -100,10 +127,7 @@
 </div>
 
 <div class="filteri">
-  <div class="pansion-filter" role="group" aria-label="Filter po pansionu">
-    <label><input type="checkbox" value="AI"> All inclusive</label>
-    <label><input type="checkbox" value="PP"> Polupansion</label>
-  </div>
+  <div class="pansion-filter" id="pansion-filter" role="group" aria-label="Filter po pansionu"></div>
 
   <div class="red">
     <label class="klizac">Udaljenost od Soluna: <output id="km-vrednost"></output>
@@ -180,9 +204,10 @@
   const naj = Math.min(...HOTELI.map(h => h.najniza));
   document.getElementById("prikupljeno").textContent = PRIKUPLJENO;
   document.getElementById("statistika").innerHTML = [
-    [uB.length, "slobodnih hotela u budžetu za 8 noći", "dobro"],
-    [aiB.length, "all inclusive u budžetu", aiB.length ? "dobro" : "lose"],
-    [blizu.length, "u budžetu i unutar 75 km od Soluna", ""],
+    [HOTELI.length, "hotela sa pravim polupansionom ili all inclusive", ""],
+    [uB.length, "od njih u budžetu do 1.100 € za 8 noći", uB.length ? "dobro" : "lose"],
+    [aiB.length, "all inclusive u budžetu (najjeftiniji AI je " +
+      Math.min(...ai.map(h => h.cene.AI)).toLocaleString("sr-RS") + " €)", aiB.length ? "dobro" : "lose"],
     [naj.toLocaleString("sr-RS") + " €", "najniža cena na listi, za dvoje", ""],
   ].map(([b, s, k]) => `<div class="sansa ${k}"><b>${b}</b><span>${s}</span></div>`).join("");
 
