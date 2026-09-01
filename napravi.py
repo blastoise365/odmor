@@ -219,7 +219,9 @@ for rec in h.values():
         "id": re.sub(r"[^a-z0-9]+", "-", rec["hotel"].lower()).strip("-")[:48],
         "hotel": rec["hotel"], "grad": grad, "mesto": m["ime"], "km": m["km"],
         "vozOko": m["vozOko"], "zivost": m["zivost"],
-        "plazaM": plazaM, "centarM": centarM, "naPlazi": dd.get("naPlazi", False),
+        "plazaM": plazaM, "centarM": centarM,
+        # "Na plazi" = Booking-ova izmerena udaljenost do najblize plaze do 50 m.
+        "naPlazi": plazaM is not None and plazaM <= 50,
         "centarMesto": dd.get("centarMesto"),
         "aerodromKm": dd.get("aerodromKm"),
         "bodovi": bodovi, "razrada": razrada,

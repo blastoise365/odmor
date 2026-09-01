@@ -97,9 +97,12 @@ def izvadi(dom):
 
     if plaza is not None and plaza > 15000:
         plaza = None
+    # NE trazi "Beachfront" u tekstu: Booking na SVAKOJ strani nosi recnik prevoda
+    # ("beach_property_page_banner_beachfront":"Beachfront", spisak sadrzaja hotela...),
+    # pa je ta rec uvek prisutna i oznaka je bila tacna za sve — dakle bezvredna.
+    # "Na plazi" se izvodi iz stvarne udaljenosti, u napravi.py.
     return {"plazaM": plaza, "centarM": centar, "centarMesto": centarMesto,
-            "aerodromKm": round(aerodrom / 1000) if aerodrom else None,
-            "naPlazi": bool(re.search(r"\bBeachfront\b", t))}
+            "aerodromKm": round(aerodrom / 1000) if aerodrom else None}
 
 
 def main():
@@ -138,7 +141,7 @@ def main():
             bez.append(h["hotel"])
         print(f"  {i:>3}/{len(ciljevi)}  {h['hotel'][:34]:<34} "
               f"plaža {str(r['plazaM'] or '?'):>5} m  centar {str(r['centarM'] or '?'):>5} m"
-              f"{'  na plaži' if r['naPlazi'] else ''}{'  (keš)' if kes else ''}",
+              f"{'  (keš)' if kes else ''}",
               file=sys.stderr)
 
     (D / "detalji.json").write_text(json.dumps(out, ensure_ascii=False, indent=1), "utf-8")
