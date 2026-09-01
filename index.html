@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Grčka 05.–13.09.2026 — pregled za mamu i tatu</title>
-<link rel="stylesheet" href="stil.css">
+<link rel="stylesheet" href="stil.css?v=202609011950">
 </head>
 <body>
 <div class="wrap">
@@ -14,6 +14,8 @@
   <p>8 noći · 2 osobe · sopstveni auto · budžet oko 1.100 € za smeštaj.
      Sve cene su <strong>ukupno za dvoje za ceo boravak</strong>, ne po osobi.
      Čekiraj kućicu kad hotel obradiš.</p>
+  <p class="verzija">Podaci pročitani <strong id="hdr-prikupljeno"></strong>.
+     Ako ovde piše stariji datum od onoga što očekuješ, osveži stranu sa Ctrl+Shift+R.</p>
 </header>
 
 <section class="napomene">
@@ -193,7 +195,7 @@
 
 </div>
 
-<script src="podaci.js"></script>
+<script src="podaci.js?v=202609011950"></script>
 <script>
 // Statistika na vrhu se računa iz podataka, da ne može da se raziđe sa listom.
 (function () {
@@ -203,6 +205,7 @@
   const blizu = uB.filter(h => h.km <= 75);
   const naj = Math.min(...HOTELI.map(h => h.najniza));
   document.getElementById("prikupljeno").textContent = PRIKUPLJENO;
+  document.getElementById("hdr-prikupljeno").textContent = PRIKUPLJENO;
   document.getElementById("statistika").innerHTML = [
     [HOTELI.length, "hotela sa pravim polupansionom ili all inclusive", ""],
     [uB.length, "od njih u budžetu do 1.100 € za 8 noći", uB.length ? "dobro" : "lose"],
@@ -221,6 +224,6 @@
     .map(([k, v]) => `<li><strong>${Math.round(v * 100)}%</strong> — ${IME[k]}</li>`).join("");
 })();
 </script>
-<script src="app.js"></script>
+<script src="app.js?v=202609011950"></script>
 </body>
 </html>

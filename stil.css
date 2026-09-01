@@ -112,3 +112,5 @@
     dt{margin-top:6px}
     .broj{margin-left:0}
   }
+  .verzija{margin:6px 0 0;font-size:.82rem;color:var(--muted)}
+  .verzija strong{color:var(--ink)}

@@ -241,11 +241,23 @@ const HOTELI = {json.dumps(out, ensure_ascii=False, indent=1)};
 """
 (D / "podaci.js").write_text(js, "utf-8")
 
+# Zalepi verziju na podaci.js/app.js/stil.css u index.html. Bez ovoga pretrazivac
+# servira stari podaci.js iz keša (GitHub Pages salje max-age=600) i strana pokazuje
+# juceranje hotele — sto se i desilo: prikazivao je "Aris" i posle ispravke.
+verzija = re.sub(r"\D", "", pon["prikupljeno"])
+ih = D / "index.html"
+html = ih.read_text("utf-8")
+for fajl, atr in (("podaci.js", "src"), ("app.js", "src"), ("stil.css", "href")):
+    html = re.sub(r'%s="%s(?:\?v=\d+)?"' % (atr, re.escape(fajl)),
+                  '%s="%s?v=%s"' % (atr, fajl, verzija), html)
+ih.write_text(html, "utf-8")
+
 ai = [r for r in out if "AI" in r["cene"]]
 bezPlaze = [r for r in out if r["plazaM"] is None]
 print(f"podaci.js: {len(out)} hotela iz {len({r['grad'] for r in out})} mesta")
 print(f"  u budžetu (≤{BUDZET} €): {sum(r['uBudzetu'] for r in out)}")
 print(f"  ima all inclusive: {len(ai)}, od toga u budžetu: {sum(r['uBudzetu'] for r in ai)}")
+print(f"  verzija zalepljena na index.html: ?v={verzija}")
 print(f"  bez podatka o plaži: {len(bezPlaze)}"
       + ("   <-- SVI! detalji.json nije uvezan" if len(bezPlaze) == len(out) else ""))
 if NEPOZNATA:
