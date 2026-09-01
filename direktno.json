@@ -1,0 +1,39 @@
+{
+  "_": "Rucno. Kontakti hotela provereni 01.09.2026 pretragom i sa zvanicnih sajtova. Grcki familijarni hoteli cesto prodaju polupansion SAMO direktno i bez provizije, pa vredi pitati mejlom. Direktna CENA se ne prikazuje: WebHotelier (reserve-online.net) prima upit preko GET-a samo na nekim instalacijama, a gde je odgovorio sve je bilo NA za 8 noci. Zato ovde stoje samo kontakti, ne cene.",
+
+  "rahoni-cronwell-hotel-by-diomedes-group": {
+    "sajt": "https://rahoni.cronwell.gr/en/",
+    "email": "salesgreece@cronwell.com",
+    "telefon": "+30 23740 71977",
+    "napomena": "Adults Only — za njih dvoje prednost, nema dečje vreve."
+  },
+  "theo-bungalows-boutique-hotel": {
+    "sajt": "https://www.theo-bungalows.com/",
+    "email": "info@theo-bungalows.com",
+    "telefon": "+30 698 150 0050",
+    "napomena": "Sajt izričito navodi polupansion — pitati cenu direktno."
+  },
+  "haris-hotel-by-diomedes-group": {
+    "sajt": "https://harishotel.gr/",
+    "email": "info@harishotel.gr",
+    "telefon": "+30 2374 020520",
+    "napomena": "300 m do plaže, prilaz mostićem pod glavnim putem."
+  },
+  "hotel-vizantio": {
+    "sajt": "https://hotel-vizantio.gr/en/",
+    "email": "villa@hotel-vizantio.gr",
+    "telefon": "+30 2351 063173",
+    "napomena": "Familijarni hotel, par koraka od peščane plaže."
+  },
+  "hanioti-hotel": {
+    "sajt": "https://www.haniotihotel.gr/en/",
+    "email": "info@haniotihotel.gr",
+    "telefon": "+30 23740 51323",
+    "napomena": "Mali familijarni hotel u samom Haniotiju."
+  },
+  "parthenon-art-executive-wing-seaside-collection": {
+    "sajt": "https://parthenonarthotel.reserve-online.net/about",
+    "telefon": "+30 23510 63322",
+    "napomena": "Ima svoj booking sistem, ali ne prima upit preko linka — zvati ili pisati."
+  }
+}

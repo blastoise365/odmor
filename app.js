@@ -61,7 +61,16 @@ function kartica(h) {
       `<span class="mini">težina ${Math.round(TEZINE[k] * 100)}%</span>` +
       `<b>${v == null ? "?" : v}</b></div>`).join("");
 
+  if (h.direktno) {
+    const dd = h.direktno;
+    red.push(["Direktno kod hotela",
+      (dd.email ? `<a href="mailto:${esc(dd.email)}">${esc(dd.email)}</a><br>` : "") +
+      (dd.telefon ? `<a href="tel:${esc(dd.telefon.replace(/[^+\d]/g, ""))}">${esc(dd.telefon)}</a><br>` : "") +
+      `<span class="mini">${esc(dd.napomena || "")}</span>`]);
+  }
+
   const maps = `https://www.google.com/maps/dir/Thessaloniki/${encodeURIComponent(h.hotel + ", " + h.mesto + ", Greece")}`;
+  const trazi = `https://www.google.com/search?q=${encodeURIComponent('"' + h.hotel + '" ' + h.mesto + " Greece official site")}`;
 
   return `
   <div class="card${done ? " done" : ""}">
@@ -77,6 +86,7 @@ function kartica(h) {
         ${Object.keys(h.cene).map(p => `<span class="badge p-${p}">${esc(PANSION_IME[p])}</span>`).join("")}
         <span class="badge ${h.uBudzetu ? "ok" : "bad"}">${h.uBudzetu ? "u budžetu" : "preko budžeta"}</span>
         ${h.naPlazi ? '<span class="badge ok">na plaži</span>' : ""}
+        ${h.direktno ? '<span class="badge">ima direktan kontakt</span>' : ""}
         ${h.takseUkljucene ? '<span class="badge">takse uključene</span>' : '<span class="badge warn">takse se doplaćuju</span>'}
       </div>
 
@@ -96,6 +106,9 @@ function kartica(h) {
 
       <div class="links">
         ${h.linkovi.map(l => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.naziv)} ↗</a>`).join("")}
+        ${h.direktno && h.direktno.sajt
+          ? `<a href="${esc(h.direktno.sajt)}" target="_blank" rel="noopener">Sajt hotela ↗</a>`
+          : `<a href="${trazi}" target="_blank" rel="noopener">Traži hotel direktno ↗</a>`}
         <a href="${maps}" target="_blank" rel="noopener">Ruta od Soluna ↗</a>
       </div>
     </div>

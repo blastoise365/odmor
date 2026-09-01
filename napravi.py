@@ -14,6 +14,11 @@ BUDZET = 1100
 mesta = {k: v for k, v in json.loads((D / "mesta.json").read_text("utf-8")).items()
          if not k.startswith("_")}
 pon = json.loads((D / "ponude.json").read_text("utf-8"))
+# Rucno pisani kontakti hotela (direktan kanal). Nema cena — vidi objasnjenje u direktno.json.
+dir_put = D / "direktno.json"
+dirk = {k: v for k, v in json.loads(dir_put.read_text("utf-8")).items()
+        if not k.startswith("_")} if dir_put.exists() else {}
+
 det_put = D / "detalji.json"
 if not det_put.exists():
     print("UPOZORENJE: detalji.json ne postoji — strana bi ostala BEZ udaljenosti od plaže\n"
@@ -218,6 +223,7 @@ for rec in h.values():
         "centarMesto": dd.get("centarMesto"),
         "aerodromKm": dd.get("aerodromKm"),
         "bodovi": bodovi, "razrada": razrada,
+        "direktno": dirk.get(re.sub(r"[^a-z0-9]+", "-", rec["hotel"].lower()).strip("-")[:48]),
         "zvezdice": rec["zvezdice"], "ocena": rec["ocena"], "brOcena": rec["brOcena"],
         "cene": rec["cene"], "najniza": naj, "soba": rec["soba"],
         "najboljiPansion": najboljiPansion,
@@ -286,6 +292,7 @@ print(f"podaci.js: {len(out)} hotela iz {len({r['grad'] for r in out})} mesta")
 print(f"  u budžetu (≤{BUDZET} €): {sum(r['uBudzetu'] for r in out)}")
 print(f"  ima all inclusive: {len(ai)}, od toga u budžetu: {sum(r['uBudzetu'] for r in ai)}")
 print(f"  verzija zalepljena na index.html: ?v={verzija}")
+print(f"  sa direktnim kontaktom: {sum(1 for r in out if r['direktno'])}")
 print(f"  po pansionu: " + ", ".join(f"{k}={v}" for k, v in sorted(raspodela.items())))
 print(f"  bez podatka o plaži: {len(bezPlaze)}"
       + ("   <-- SVI! detalji.json nije uvezan" if len(bezPlaze) == len(out) else ""))

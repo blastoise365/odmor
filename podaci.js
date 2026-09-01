@@ -179,6 +179,7 @@ const HOTELI = [
    "zivost": 100,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 2,
   "ocena": 9.6,
   "brOcena": 90,
@@ -230,6 +231,12 @@ const HOTELI = [
    "centar": 96,
    "zivost": 100,
    "pansion": 40
+  },
+  "direktno": {
+   "sajt": "https://www.haniotihotel.gr/en/",
+   "email": "info@haniotihotel.gr",
+   "telefon": "+30 23740 51323",
+   "napomena": "Mali familijarni hotel u samom Haniotiju."
   },
   "zvezdice": 2,
   "ocena": 9.3,
@@ -283,6 +290,11 @@ const HOTELI = [
    "zivost": 75,
    "pansion": 40
   },
+  "direktno": {
+   "sajt": "https://parthenonarthotel.reserve-online.net/about",
+   "telefon": "+30 23510 63322",
+   "napomena": "Ima svoj booking sistem, ali ne prima upit preko linka — zvati ili pisati."
+  },
   "zvezdice": 1,
   "ocena": 9.4,
   "brOcena": 63,
@@ -334,6 +346,12 @@ const HOTELI = [
    "centar": 92,
    "zivost": 100,
    "pansion": 40
+  },
+  "direktno": {
+   "sajt": "https://hotel-vizantio.gr/en/",
+   "email": "villa@hotel-vizantio.gr",
+   "telefon": "+30 2351 063173",
+   "napomena": "Familijarni hotel, par koraka od peščane plaže."
   },
   "zvezdice": 3,
   "ocena": 9.2,
@@ -387,6 +405,7 @@ const HOTELI = [
    "zivost": 100,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 3,
   "ocena": 9.6,
   "brOcena": 44,
@@ -439,6 +458,7 @@ const HOTELI = [
    "zivost": 100,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 2,
   "ocena": 8.3,
   "brOcena": 214,
@@ -491,6 +511,7 @@ const HOTELI = [
    "zivost": 100,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 2,
   "ocena": 8.7,
   "brOcena": 281,
@@ -543,6 +564,7 @@ const HOTELI = [
    "zivost": 75,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 2,
   "ocena": 8.2,
   "brOcena": 152,
@@ -595,6 +617,7 @@ const HOTELI = [
    "zivost": 100,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 3,
   "ocena": 7.8,
   "brOcena": 116,
@@ -647,6 +670,7 @@ const HOTELI = [
    "zivost": 75,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 2,
   "ocena": 8.3,
   "brOcena": 330,
@@ -699,6 +723,7 @@ const HOTELI = [
    "zivost": 25,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 4,
   "ocena": 9.7,
   "brOcena": 161,
@@ -751,6 +776,7 @@ const HOTELI = [
    "zivost": 100,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 2,
   "ocena": 7.8,
   "brOcena": 357,
@@ -802,6 +828,12 @@ const HOTELI = [
    "centar": 67,
    "zivost": 50,
    "pansion": 70
+  },
+  "direktno": {
+   "sajt": "https://rahoni.cronwell.gr/en/",
+   "email": "salesgreece@cronwell.com",
+   "telefon": "+30 23740 71977",
+   "napomena": "Adults Only — za njih dvoje prednost, nema dečje vreve."
   },
   "zvezdice": 5,
   "ocena": 8.2,
@@ -855,6 +887,7 @@ const HOTELI = [
    "zivost": 100,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 3,
   "ocena": 9.2,
   "brOcena": 377,
@@ -907,6 +940,7 @@ const HOTELI = [
    "zivost": 100,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 3,
   "ocena": 7.8,
   "brOcena": 53,
@@ -959,6 +993,7 @@ const HOTELI = [
    "zivost": 25,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 4,
   "ocena": 9.3,
   "brOcena": 363,
@@ -1010,6 +1045,12 @@ const HOTELI = [
    "centar": 33,
    "zivost": 100,
    "pansion": 70
+  },
+  "direktno": {
+   "sajt": "https://harishotel.gr/",
+   "email": "info@harishotel.gr",
+   "telefon": "+30 2374 020520",
+   "napomena": "300 m do plaže, prilaz mostićem pod glavnim putem."
   },
   "zvezdice": 3,
   "ocena": 6.9,
@@ -1063,6 +1104,7 @@ const HOTELI = [
    "zivost": 75,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": null,
   "ocena": 8.4,
   "brOcena": 388,
@@ -1115,6 +1157,7 @@ const HOTELI = [
    "zivost": 75,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 1,
   "ocena": 7.5,
   "brOcena": 240,
@@ -1166,6 +1209,12 @@ const HOTELI = [
    "centar": 50,
    "zivost": 50,
    "pansion": 70
+  },
+  "direktno": {
+   "sajt": "https://www.theo-bungalows.com/",
+   "email": "info@theo-bungalows.com",
+   "telefon": "+30 698 150 0050",
+   "napomena": "Sajt izričito navodi polupansion — pitati cenu direktno."
   },
   "zvezdice": 3,
   "ocena": 8.2,
@@ -1219,6 +1268,7 @@ const HOTELI = [
    "zivost": 25,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 1,
   "ocena": 7.9,
   "brOcena": 178,
@@ -1271,6 +1321,7 @@ const HOTELI = [
    "zivost": 100,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 4,
   "ocena": 9.6,
   "brOcena": 278,
@@ -1323,6 +1374,7 @@ const HOTELI = [
    "zivost": 100,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 3,
   "ocena": 9.4,
   "brOcena": 368,
@@ -1375,6 +1427,7 @@ const HOTELI = [
    "zivost": 100,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 4,
   "ocena": 9.3,
   "brOcena": 427,
@@ -1427,6 +1480,7 @@ const HOTELI = [
    "zivost": 75,
    "pansion": 100
   },
+  "direktno": null,
   "zvezdice": 5,
   "ocena": 9.5,
   "brOcena": 1611,
@@ -1479,6 +1533,7 @@ const HOTELI = [
    "zivost": 100,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 3,
   "ocena": 9.0,
   "brOcena": 392,
@@ -1531,6 +1586,7 @@ const HOTELI = [
    "zivost": 75,
    "pansion": 70
   },
+  "direktno": null,
   "zvezdice": 3,
   "ocena": 9.0,
   "brOcena": 47,
@@ -1585,6 +1641,7 @@ const HOTELI = [
    "zivost": 50,
    "pansion": 70
   },
+  "direktno": null,
   "zvezdice": 4,
   "ocena": 9.4,
   "brOcena": 424,
@@ -1639,6 +1696,7 @@ const HOTELI = [
    "zivost": 75,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 4,
   "ocena": 9.2,
   "brOcena": 525,
@@ -1691,6 +1749,7 @@ const HOTELI = [
    "zivost": 100,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 3,
   "ocena": 9.7,
   "brOcena": 201,
@@ -1743,6 +1802,7 @@ const HOTELI = [
    "zivost": 100,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 4,
   "ocena": 9.0,
   "brOcena": 201,
@@ -1795,6 +1855,7 @@ const HOTELI = [
    "zivost": 50,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 3,
   "ocena": 8.8,
   "brOcena": 266,
@@ -1847,6 +1908,7 @@ const HOTELI = [
    "zivost": 50,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 4,
   "ocena": 9.6,
   "brOcena": 67,
@@ -1899,6 +1961,7 @@ const HOTELI = [
    "zivost": 100,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 2,
   "ocena": 9.5,
   "brOcena": 205,
@@ -1951,6 +2014,7 @@ const HOTELI = [
    "zivost": 25,
    "pansion": 100
   },
+  "direktno": null,
   "zvezdice": 5,
   "ocena": 8.2,
   "brOcena": 313,
@@ -2003,6 +2067,7 @@ const HOTELI = [
    "zivost": 75,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 1,
   "ocena": 9.2,
   "brOcena": 84,
@@ -2055,6 +2120,7 @@ const HOTELI = [
    "zivost": 50,
    "pansion": 70
   },
+  "direktno": null,
   "zvezdice": 4,
   "ocena": 8.5,
   "brOcena": 843,
@@ -2107,6 +2173,7 @@ const HOTELI = [
    "zivost": 100,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 3,
   "ocena": 9.3,
   "brOcena": 504,
@@ -2159,6 +2226,7 @@ const HOTELI = [
    "zivost": 75,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 3,
   "ocena": 9.5,
   "brOcena": 75,
@@ -2211,6 +2279,7 @@ const HOTELI = [
    "zivost": 25,
    "pansion": 70
   },
+  "direktno": null,
   "zvezdice": 3,
   "ocena": 9.6,
   "brOcena": 134,
@@ -2263,6 +2332,7 @@ const HOTELI = [
    "zivost": 100,
    "pansion": 100
   },
+  "direktno": null,
   "zvezdice": 5,
   "ocena": 7.7,
   "brOcena": 347,
@@ -2317,6 +2387,7 @@ const HOTELI = [
    "zivost": 100,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 3,
   "ocena": 8.7,
   "brOcena": 340,
@@ -2369,6 +2440,7 @@ const HOTELI = [
    "zivost": 50,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 4,
   "ocena": 9.2,
   "brOcena": 163,
@@ -2421,6 +2493,7 @@ const HOTELI = [
    "zivost": 100,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 3,
   "ocena": 8.9,
   "brOcena": 644,
@@ -2473,6 +2546,7 @@ const HOTELI = [
    "zivost": 100,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 4,
   "ocena": 9.2,
   "brOcena": 211,
@@ -2525,6 +2599,7 @@ const HOTELI = [
    "zivost": 25,
    "pansion": 70
   },
+  "direktno": null,
   "zvezdice": 5,
   "ocena": 9.4,
   "brOcena": 511,
@@ -2579,6 +2654,7 @@ const HOTELI = [
    "zivost": 25,
    "pansion": 70
   },
+  "direktno": null,
   "zvezdice": 3,
   "ocena": 8.4,
   "brOcena": 522,
@@ -2631,6 +2707,7 @@ const HOTELI = [
    "zivost": 50,
    "pansion": 100
   },
+  "direktno": null,
   "zvezdice": 4,
   "ocena": 8.6,
   "brOcena": 155,
@@ -2685,6 +2762,7 @@ const HOTELI = [
    "zivost": 25,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 2,
   "ocena": 8.1,
   "brOcena": 131,
@@ -2737,6 +2815,7 @@ const HOTELI = [
    "zivost": 75,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 3,
   "ocena": 9.1,
   "brOcena": 383,
@@ -2789,6 +2868,7 @@ const HOTELI = [
    "zivost": 100,
    "pansion": 70
   },
+  "direktno": null,
   "zvezdice": 4,
   "ocena": 8.6,
   "brOcena": 426,
@@ -2843,6 +2923,7 @@ const HOTELI = [
    "zivost": 75,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 4,
   "ocena": 9.0,
   "brOcena": 85,
@@ -2895,6 +2976,7 @@ const HOTELI = [
    "zivost": 100,
    "pansion": 70
   },
+  "direktno": null,
   "zvezdice": null,
   "ocena": 8.7,
   "brOcena": 180,
@@ -2947,6 +3029,7 @@ const HOTELI = [
    "zivost": 25,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 4,
   "ocena": 9.3,
   "brOcena": 442,
@@ -2999,6 +3082,7 @@ const HOTELI = [
    "zivost": 75,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 4,
   "ocena": 8.9,
   "brOcena": 652,
@@ -3051,6 +3135,7 @@ const HOTELI = [
    "zivost": 75,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 2,
   "ocena": 9.0,
   "brOcena": 110,
@@ -3103,6 +3188,7 @@ const HOTELI = [
    "zivost": 50,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 4,
   "ocena": 7.9,
   "brOcena": 193,
@@ -3155,6 +3241,7 @@ const HOTELI = [
    "zivost": 100,
    "pansion": 70
   },
+  "direktno": null,
   "zvezdice": 5,
   "ocena": 9.2,
   "brOcena": 23,
@@ -3209,6 +3296,7 @@ const HOTELI = [
    "zivost": 100,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 4,
   "ocena": 8.5,
   "brOcena": 335,
@@ -3261,6 +3349,7 @@ const HOTELI = [
    "zivost": 25,
    "pansion": 100
   },
+  "direktno": null,
   "zvezdice": null,
   "ocena": 9.0,
   "brOcena": 236,
@@ -3313,6 +3402,7 @@ const HOTELI = [
    "zivost": 25,
    "pansion": 70
   },
+  "direktno": null,
   "zvezdice": 3,
   "ocena": 7.9,
   "brOcena": 44,
@@ -3365,6 +3455,7 @@ const HOTELI = [
    "zivost": 50,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 4,
   "ocena": 8.8,
   "brOcena": 164,
@@ -3417,6 +3508,7 @@ const HOTELI = [
    "zivost": 100,
    "pansion": 70
   },
+  "direktno": null,
   "zvezdice": 3,
   "ocena": 8.6,
   "brOcena": 448,
@@ -3469,6 +3561,7 @@ const HOTELI = [
    "zivost": 50,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": null,
   "ocena": 8.1,
   "brOcena": 514,
@@ -3521,6 +3614,7 @@ const HOTELI = [
    "zivost": 25,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 4,
   "ocena": 9.5,
   "brOcena": 182,
@@ -3573,6 +3667,7 @@ const HOTELI = [
    "zivost": 100,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": null,
   "ocena": 8.5,
   "brOcena": 131,
@@ -3625,6 +3720,7 @@ const HOTELI = [
    "zivost": 50,
    "pansion": 70
   },
+  "direktno": null,
   "zvezdice": 3,
   "ocena": 8.2,
   "brOcena": 229,
@@ -3677,6 +3773,7 @@ const HOTELI = [
    "zivost": 100,
    "pansion": 70
   },
+  "direktno": null,
   "zvezdice": 5,
   "ocena": 8.9,
   "brOcena": 1767,
@@ -3729,6 +3826,7 @@ const HOTELI = [
    "zivost": 25,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": null,
   "ocena": 9.2,
   "brOcena": 528,
@@ -3781,6 +3879,7 @@ const HOTELI = [
    "zivost": 75,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 3,
   "ocena": 8.2,
   "brOcena": 26,
@@ -3833,6 +3932,7 @@ const HOTELI = [
    "zivost": 100,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 3,
   "ocena": 8.8,
   "brOcena": 201,
@@ -3885,6 +3985,7 @@ const HOTELI = [
    "zivost": 25,
    "pansion": 70
   },
+  "direktno": null,
   "zvezdice": 4,
   "ocena": 8.6,
   "brOcena": 227,
@@ -3937,6 +4038,7 @@ const HOTELI = [
    "zivost": 0,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 4,
   "ocena": 9.6,
   "brOcena": 345,
@@ -3989,6 +4091,7 @@ const HOTELI = [
    "zivost": 0,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 4,
   "ocena": 9.2,
   "brOcena": 214,
@@ -4041,6 +4144,7 @@ const HOTELI = [
    "zivost": 50,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 4,
   "ocena": 8.9,
   "brOcena": 319,
@@ -4093,6 +4197,7 @@ const HOTELI = [
    "zivost": 50,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 4,
   "ocena": 9.0,
   "brOcena": 356,
@@ -4145,6 +4250,7 @@ const HOTELI = [
    "zivost": 25,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": 3,
   "ocena": 8.6,
   "brOcena": 132,
@@ -4197,6 +4303,7 @@ const HOTELI = [
    "zivost": 25,
    "pansion": 100
   },
+  "direktno": null,
   "zvezdice": 4,
   "ocena": 7.6,
   "brOcena": 58,
@@ -4249,6 +4356,7 @@ const HOTELI = [
    "zivost": 0,
    "pansion": 40
   },
+  "direktno": null,
   "zvezdice": null,
   "ocena": 1.0,
   "brOcena": 1,

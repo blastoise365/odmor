@@ -78,6 +78,29 @@ Pun pansion je pretražen u svih 17 mesta i **nema ni jedan slobodan hotel** za 
 taj čip i ne pojavljuje — čipovi za pansion se prave iz podataka, da se nikad ne nudi filter koji
 daje nulu.
 
+## Direktan kanal — probano i odbačeno kao izvor cena
+
+Grčki familijarni hoteli često prodaju polupansion **samo direktno**, bez provizije, i to se ne vidi
+kod posrednika. Probano je da se te cene čitaju automatski. **Nije uspelo:**
+
+- Mnogi grčki hoteli koriste **WebHotelier** (`<hotel>.reserve-online.net`). Sistem prima datume
+  preko GET-a (`?fromd=&tod=&nights=&rooms=&adults=&cur_iso=EUR`) i vraća čiste atribute:
+  `data-status` (`AVL` slobodno / `NA` zauzeto), `data-price` = **ukupno za boravak**,
+  `data-smartguest` = cena za članove, `data-room`, a pansion stoji u tekstu odmah posle reda.
+  Ali radi **samo na nekim instalacijama** — Kassandra Palace i Hanioti Village odgovaraju,
+  Parthenon Art / Kriopigi / Naias vraćaju samo naslovnu stranu (~40 kB, bez tabele).
+- **Domen se ne da pogoditi:** od 27 hotela sa uže liste, pogađanjem sluga **0 pogodaka**.
+  Treba jedna pretraga po hotelu. WebHotelier usput sam izlistava okolne hotele sa njihovim
+  slugovima (`app.avl.alternative('<slug>', '<CODE>')`) — to je jedini jeftin način da se otkriju.
+- Gde je sistem odgovorio, **sva četiri hotela su NA za 8 noći**. Provereno da NA stvarno znači
+  zauzeto: isti hotel za 2 noći u istom periodu vraća `AVL` i „Book now“.
+- Provereno i da nije problem **dužina boravka** — nije. Na Booking-u 7 noći daje praktično isto
+  hotela sa polupansionom kao 8 (44 protiv 42, u tri mesta).
+
+Zato **nema kolone sa direktnom cenom**. Ostali su kontakti: `direktno.json` je ručno pisan i sadrži
+mejl, telefon i sajt za 6 hotela; kartica ih prikazuje i nosi oznaku „ima direktan kontakt“.
+Ostali hoteli imaju dugme „Traži hotel direktno“ (Google pretraga), bez ikakve tvrdnje o ceni.
+
 ## Podrazumevani filter
 
 Strana se otvara sa **uključenim filterom „Samo u budžetu“** (do 1.100 €) — 21 od 79 hotela.
@@ -189,6 +212,8 @@ jučerašnje hotele. U headeru se prikazuje datum prikupljanja, da se odmah vidi
 
 Ako Pages zaglavi i ne rebuild-uje, proveri da `.nojekyll` postoji — bez njega Pages provlači sajt
 kroz Jekyll i build je znao da stoji 20+ minuta.
+
+`mesta.json` i `direktno.json` su **ručni** — skrejper ih ne dira.
 
 `kes/`, `ponude.json` i `detalji.json` su međurezultati — ako ne treba da idu na GitHub, dodaj ih u `.gitignore`.
 
