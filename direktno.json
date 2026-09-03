@@ -1,39 +1,26 @@
 {
-  "_": "Rucno. Kontakti hotela provereni 01.09.2026 pretragom i sa zvanicnih sajtova. Grcki familijarni hoteli cesto prodaju polupansion SAMO direktno i bez provizije, pa vredi pitati mejlom. Direktna CENA se ne prikazuje: WebHotelier (reserve-online.net) prima upit preko GET-a samo na nekim instalacijama, a gde je odgovorio sve je bilo NA za 8 noci. Zato ovde stoje samo kontakti, ne cene.",
+  "_": "Rucno. Kontakti provereni 03.09.2026. sa ZVANICNIH sajtova hotela (ne sa posrednika): talia.co.me/en/kontakt, hotelpodostrog.com/en/contact, montenegrostars.com/en/contact, iberostar.com. Gde podatak nije stajao na zvanicnoj strani, ovde ga NEMA — radije rupa nego pogresan broj. Direktna CENA se ne prikazuje ni ovde: u grckoj verziji je automatsko citanje direktnih cena probano i palo (vidi README), a dva dana pred put je telefon ionako brzi od svakog upita mejlom.",
 
-  "rahoni-cronwell-hotel-by-diomedes-group": {
-    "sajt": "https://rahoni.cronwell.gr/en/",
-    "email": "salesgreece@cronwell.com",
-    "telefon": "+30 23740 71977",
-    "napomena": "Adults Only — za njih dvoje prednost, nema dečje vreve."
+  "hotel-talia": {
+    "sajt": "https://talia.co.me/",
+    "telefon": "+382 68 14 99 99",
+    "napomena": "JEDINI all inclusive na listi. Igalo, 29. Decembra 2-4. Mejl na sajtu stoji sakriven iza JavaScript-a, pa ga ovde nema — zvati (broj radi i za Viber i WhatsApp)."
   },
-  "theo-bungalows-boutique-hotel": {
-    "sajt": "https://www.theo-bungalows.com/",
-    "email": "info@theo-bungalows.com",
-    "telefon": "+30 698 150 0050",
-    "napomena": "Sajt izričito navodi polupansion — pitati cenu direktno."
+  "hotel-podostrog-new-comfort-2026": {
+    "sajt": "https://hotelpodostrog.com/",
+    "email": "info@hotelpodostrog.com",
+    "telefon": "+382 67 631 578",
+    "napomena": "Najjeftiniji polupansion na listi. Recepcija ima svoj broj: +382 67 062 172."
   },
-  "haris-hotel-by-diomedes-group": {
-    "sajt": "https://harishotel.gr/",
-    "email": "info@harishotel.gr",
-    "telefon": "+30 2374 020520",
-    "napomena": "300 m do plaže, prilaz mostićem pod glavnim putem."
+  "splendid-conference-spa-resort": {
+    "sajt": "https://montenegrostars.com/en/hotel-splendid",
+    "email": "reservations@montenegrostars.com",
+    "telefon": "+382 33 773 777",
+    "napomena": "Montenegro Stars grupa, 5*, na samoj plazi u Becicima. Ima polupansion ali daleko preko budzeta."
   },
-  "hotel-vizantio": {
-    "sajt": "https://hotel-vizantio.gr/en/",
-    "email": "villa@hotel-vizantio.gr",
-    "telefon": "+30 2351 063173",
-    "napomena": "Familijarni hotel, par koraka od peščane plaže."
-  },
-  "hanioti-hotel": {
-    "sajt": "https://www.haniotihotel.gr/en/",
-    "email": "info@haniotihotel.gr",
-    "telefon": "+30 23740 51323",
-    "napomena": "Mali familijarni hotel u samom Haniotiju."
-  },
-  "parthenon-art-executive-wing-seaside-collection": {
-    "sajt": "https://parthenonarthotel.reserve-online.net/about",
-    "telefon": "+30 23510 63322",
-    "napomena": "Ima svoj booking sistem, ali ne prima upit preko linka — zvati ili pisati."
+  "iberostar-waves-bellevue": {
+    "sajt": "https://www.iberostar.com/en/hotels/budva/iberostar-waves-bellevue/",
+    "email": "bellevue@iberostar.com",
+    "napomena": "Veliki all inclusive na samoj plazi u Becicima. Na Booking-u ga za ove datume NEMA uopste, na Agodi se pojavljuje — vredi pitati direktno. Telefon nije objavljen na iberostar.com; po strukovnim spiskovima je +382 33 425 100, ali to NIJE provereno na izvoru."
   }
 }

@@ -25,6 +25,13 @@ KES = D / "kes"
 UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
       "Chrome/128.0.0.0 Safari/537.36")
 PRAG_KM = 10.0
+
+# Booking na strani hotela navodi i udaljenost do velikog grada i do aerodroma
+# ("85 km from the centre of Thessaloniki" je u grckoj verziji redovno zavaravalo
+# naivni regex). Ovo su nazivi koji NISU mesto u kome je hotel — preskacu se.
+NIJE_MESTO = r"podgorica|dubrovnik|airport|aerodrom"
+# Za Boku je najblizi aerodrom Tivat, za Herceg Novi cesto pise i Dubrovnik.
+AERODROMI = r"(?:Tivat|Podgorica|Dubrovnik)\s+Airport"
 DATUMI = "?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&selected_currency=EUR"
 
 
@@ -50,6 +57,29 @@ def povuci(url, svez=False):
     return r.stdout, False
 
 
+def mesto_iz_mrvica(dom):
+    """Booking-ova sopstvena hijerarhija mesta, iz niza mrvica na vrhu strane:
+       Home > Hotels > Montenegro > Herceg Novi County > Ðenovići
+    Uzima se poslednja stavka. To je kanonsko mesto po Booking-u i pouzdanije je
+    od FAQ-a "X m from the centre of <mesto>", jer FAQ nekad meri od centra vece
+    opstine (Portico Djenovici je po FAQ-u bio bez mesta pa je ispao kao Kumbor).
+
+    PROBANO I ODBACENO: strukturirani PostalAddress na istoj strani. Njegov
+    "addressLocality" je kod vecine hotela ULICA ("Blaža Jovanovića", "Maslinski
+    put"), a ne mesto — od 58 hotela samo par je imalo pravo mesto.
+
+    Napomena koja se ne da zaobici: velike hotele u Becicima (Splendid, Podostrog)
+    Booking i po mrvicama vodi pod BUDVOM. To je njegov podatak i strana ga prati;
+    ne izmislja se premestanje u Becice na osnovu opisa hotela.
+    """
+    bc = re.findall(r'data-testid="breadcrumb-link"[^>]*>(?:<[^>]*>)*([^<]{2,40})<', dom)
+    bc = [html.unescape(x).strip() for x in bc]
+    bc = [x for x in bc if x.lower() not in ("home", "hotels", "montenegro")
+          and not x.lower().startswith("all ")
+          and not x.lower().endswith(" county")]
+    return bc[-1] if bc else None
+
+
 def izvadi(dom):
     t = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", dom)))
 
@@ -71,9 +101,9 @@ def izvadi(dom):
         if m:
             plaza = u_metre(m.group(1), "km" if m.group(2) == "km" else "m")
 
-    # Centar mesta. Booking na istoj strani kaze i "85 km from the centre of Thessaloniki",
+    # Centar mesta. Booking na istoj strani kaze i "42 km from the centre of Podgorica",
     # a pravi odgovor je u FAQ-u gde broj stoji POSLE pitanja:
-    #   "How far is <hotel> from the centre of Hanioti? <hotel> is 1,000 m from the centre"
+    #   "How far is <hotel> from the centre of Becici? <hotel> is 1,000 m from the centre"
     centar, centarMesto = None, None
     m = re.search(r"from the (?:centre|center) of ([A-Z][^?]{1,40}?)\?"
                   r".{0,160}?\bis\s+([\d.,]+)\s*(km|m)\b", t, re.I)
@@ -81,17 +111,17 @@ def izvadi(dom):
         centarMesto = m.group(1).strip()
         centar = u_metre(m.group(2), m.group(3))
     else:
-        # Rezerva: "N km from the centre of X", ali NE ako je X Solun ili aerodrom.
+        # Rezerva: "N km from the centre of X", ali NE ako je X veliki grad ili aerodrom.
         for broj, jed, mesto in re.findall(
                 r"([\d.,]+)\s*(km|m)\b\s*from the (?:centre|center) of\s+([A-Za-z ]{2,30})", t, re.I):
-            if re.search(r"thessalonik|airport", mesto, re.I):
+            if re.search(NIJE_MESTO, mesto, re.I):
                 continue
             v = u_metre(broj, jed)
             if v <= 15000 and (centar is None or v < centar):
                 centar, centarMesto = v, mesto.strip()
 
     aerodrom = None
-    m = re.search(r"Thessaloniki Airport\s+([\d.,]+)\s*(km|m)\b", t, re.I)
+    m = re.search(AERODROMI + r"\s+([\d.,]+)\s*(km|m)\b", t, re.I)
     if m:
         aerodrom = u_metre(m.group(1), m.group(2))
 
@@ -102,6 +132,7 @@ def izvadi(dom):
     # pa je ta rec uvek prisutna i oznaka je bila tacna za sve — dakle bezvredna.
     # "Na plazi" se izvodi iz stvarne udaljenosti, u napravi.py.
     return {"plazaM": plaza, "centarM": centar, "centarMesto": centarMesto,
+            "mestoMrvica": mesto_iz_mrvica(dom),
             "aerodromKm": round(aerodrom / 1000) if aerodrom else None}
 
 

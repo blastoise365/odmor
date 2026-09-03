@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Grčka 05.–13.09.2026 — pregled za mamu i tatu</title>
-<link rel="stylesheet" href="stil.css?v=202609011958">
+<title>Crna Gora 05.–13.09.2026 — pregled za mamu i tatu</title>
+<link rel="stylesheet" href="stil.css?v=202609031201">
 </head>
 <body>
 <div class="wrap">
 
 <header>
-  <h1>Grčka, 05.09 – 13.09.2026</h1>
+  <h1>Crna Gora, 05.09 – 13.09.2026</h1>
   <p>8 noći · 2 osobe · sopstveni auto · budžet oko 1.100 € za smeštaj.
      Sve cene su <strong>ukupno za dvoje za ceo boravak</strong>, ne po osobi.
      Čekiraj kućicu kad hotel obradiš.</p>
@@ -25,17 +25,26 @@
     Menjaju se iz sata u sat — pre uplate klikni na hotel i proveri.</p>
   </div>
 
-  <p><strong>All inclusive ne ulazi u budžet.</strong> Najjeftiniji je 1.978 € za dvoje, pa do preko
-    5.000 €. Polupansiona u budžetu ima tri; sve ostalo u budžetu je sa doručkom, što nije loše —
-    ostaje im novac za večere po tavernama.</p>
+  <p><strong>Traženo je dva dana pred put.</strong> Ovo nije ista pretraga kao da se gleda unapred —
+    ono što je slobodno 03.09. za polazak 05.09. je ostatak, i menja se iz sata u sat. Zato je na
+    listi i okolina dva traženih mesta (Rafailovići, Budva, Sveti Stefan, Pržno · Igalo, Njivice,
+    Đenovići, Kumbor): da lista uopšte ima šta da pokaže. Mesto svakog hotela piše na kartici.</p>
 
-  <p><strong>Kasandra je dalja nego što izgleda.</strong> Hanioti je 109 km od Soluna, Pefkohori 113,
-    a Nea Kalikratija — gde su već bili — samo 42. Paralija Katerini je 73 km. Klizač
-    <em>„Udaljenost od Soluna“</em> je zato prvi filter.</p>
+  <p id="nap-pansion"></p>
 
-  <p><strong>Oznaka ● ● ● ○ ○</strong> na kartici je živost mesta, merena prema Nea Kalikratiji:
-    življi su Hanioti, Pefkohori, Kalitea, Paralija i Nea Moudania; tiši su Posidi, Sani, Nea Fokea,
-    Metamorfosi i Nea Potidea.</p>
+  <p><strong>Bečići i Herceg Novi nisu ista vrsta odmora.</strong> Bečići su otvoreno more i dva
+    kilometra peskovito-šljunkovite plaže, ali su letovalište bez pravog centra. Herceg Novi je
+    prava varoš sa šetnicom i pijacom, ali je u zalivu — voda mirna, plaže betonske platforme i
+    krupan šljunak, bez peska. I bitno za noge: <strong>Herceg Novi je sav u stepenicama</strong>,
+    grad je na strmini. Ako to smeta, Igalo je odmah pored i potpuno ravno.</p>
+
+  <p><strong>Oznaka ● ● ● ○ ○</strong> na kartici je živost mesta, merena prema Budvi kao gornjoj
+    granici: najživlje su Budva i Herceg Novi, pa Bečići, pa Igalo i Rafailovići; najtiši su
+    Sveti Stefan, Pržno, Njivice, Đenovići i Kumbor.</p>
+
+  <p><strong>Druga cena za poređenje.</strong> Pored Booking-a čita se i Agoda. Njena cena je
+    <em>po noći</em> pa pomnožena sa 8 — dakle procena, ne tačan zbir, i ne zna se koji je pansion.
+    Zato ne ulazi u bodove, nego stoji sa strane. Gde je Agoda osetno jeftinija, kartica to kaže.</p>
 
 </section>
 
@@ -48,9 +57,6 @@
   <div class="pansion-filter" id="pansion-filter" role="group" aria-label="Filter po pansionu"></div>
 
   <div class="red">
-    <label class="klizac">Udaljenost od Soluna: <output id="km-vrednost"></output>
-      <input id="km" type="range" min="40" max="125" step="5" value="125">
-    </label>
     <label class="klizac">Ocena gostiju: <output id="ocena-vrednost"></output>
       <input id="ocena" type="range" min="0" max="9.5" step="0.5" value="0">
     </label>
@@ -75,7 +81,6 @@
       <option value="ocena">Sortiraj: najbolja ocena</option>
       <option value="plaza">Sortiraj: bliže plaži</option>
       <option value="centar">Sortiraj: bliže centru mesta</option>
-      <option value="km">Sortiraj: bliže Solunu</option>
       <option value="zivost">Sortiraj: živost mesta</option>
     </select>
     <span class="broj" id="broj"></span>
@@ -84,6 +89,16 @@
 </div>
 
 <div id="lista"></div>
+
+<section class="napomene" id="agoda-blok" hidden>
+  <h2>Ima na Agodi, nema na Booking-u</h2>
+  <p>Ovo <strong>nije</strong> deo liste gore i nema bodove. O ovim smeštajima se zna samo ime,
+    Agodina ocena i procenjena cena (njena cena po noći × 8). <strong>Ne zna se pansion</strong>,
+    ne zna se udaljenost od plaže, a mesto je samo grad po kome ih je Agodina pretraga našla —
+    nije provereno kao kod hotela gore. Vredi pogledati jer su neki jeftini i visoko ocenjeni,
+    ali sve treba proveriti klikom.</p>
+  <div id="agoda-lista"></div>
+</section>
 
 <footer>
   <h2>Šta je broj u kvadratiću</h2>
@@ -103,14 +118,13 @@
 
 </div>
 
-<script src="podaci.js?v=202609011958"></script>
+<script src="podaci.js?v=202609031201"></script>
 <script>
 // Statistika na vrhu se računa iz podataka, da ne može da se raziđe sa listom.
 (function () {
   const uB = HOTELI.filter(h => h.uBudzetu);
   const ai = HOTELI.filter(h => h.cene.AI);
   const aiB = ai.filter(h => h.cene.AI <= BUDZET);
-  const blizu = uB.filter(h => h.km <= 75);
   const naj = Math.min(...HOTELI.map(h => h.najniza));
   document.getElementById("hdr-prikupljeno").textContent = PRIKUPLJENO;
   document.getElementById("statistika").innerHTML = [
@@ -118,10 +132,32 @@
       uB.length ? "dobro" : "lose"],
     [HOTELI.filter(h => h.cene.PP && h.cene.PP <= BUDZET).length,
       "od njih sa polupansionom u budžetu", ""],
-    [aiB.length, "all inclusive u budžetu (najjeftiniji AI je " +
-      Math.min(...ai.map(h => h.cene.AI)).toLocaleString("sr-RS") + " €)", aiB.length ? "dobro" : "lose"],
+    // Math.min() bez argumenata je Infinity — ako nema nijednog AI, pločica bi
+    // pisala "najjeftiniji AI je ∞ €". Zato se tekst grana.
+    [aiB.length, ai.length
+      ? "all inclusive u budžetu (najjeftiniji AI je " +
+        Math.min(...ai.map(h => h.cene.AI)).toLocaleString("sr-RS") + " €)"
+      : "all inclusive — nema nijedan slobodan za ove datume",
+      aiB.length ? "dobro" : "lose"],
+    [HOTELI.filter(h => h.mesto === "Bečići" || h.mesto === "Herceg Novi").length,
+      "u samim Bečićima ili Herceg Novom (ostalo je okolina)", ""],
     [naj.toLocaleString("sr-RS") + " €", "najniža cena na listi, za dvoje", ""],
   ].map(([b, s, k]) => `<div class="sansa ${k}"><b>${b}</b><span>${s}</span></div>`).join("");
+
+  // Napomena o pansionu se sastavlja iz podataka — u grčkoj verziji je bila ukucana
+  // rukom i posle ispravke pansiona ostala da tvrdi netačan broj.
+  const kol = (p, sam) => HOTELI.filter(h => h.cene[p] && (!sam || h.cene[p] <= BUDZET)).length;
+  const naj_p = (p) => { const c = HOTELI.filter(h => h.cene[p]).map(h => h.cene[p]);
+    return c.length ? Math.min(...c).toLocaleString("sr-RS") + " €" : null; };
+  const delovi = [];
+  for (const [p, ime] of [["AI", "all inclusive"], ["FB", "pun pansion"], ["PP", "polupansion"]]) {
+    delovi.push(kol(p) === 0 ? `<strong>${ime}</strong> — nema nijedan slobodan`
+      : `<strong>${ime}</strong> — ${kol(p)} ${kol(p) === 1 ? "hotel" : "hotela"}, ` +
+        `od toga ${kol(p, true) || "nijedan"} u budžetu (najjeftiniji ${naj_p(p)})`);
+  }
+  document.getElementById("nap-pansion").innerHTML =
+    "<strong>Pansion, ono što je traženo:</strong> " + delovi.join("; ") +
+    ". Ostalo na listi je samo doručak — nije loše, ostaje im novac za večeru napolju.";
 
   const IME = { ocena: "ocena gostiju na Booking-u", cena: "koliko je cena ispod budžeta",
     plaza: "blizina plaže (0 m = pun broj, 800 m i dalje = nula)",
@@ -133,6 +169,6 @@
     .map(([k, v]) => `<li><strong>${Math.round(v * 100)}%</strong> — ${IME[k]}</li>`).join("");
 })();
 </script>
-<script src="app.js?v=202609011958"></script>
+<script src="app.js?v=202609031201"></script>
 </body>
 </html>

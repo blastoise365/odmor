@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Direktne ponude za odmor 05.09-13.09.2026 (2 odrasle, 8 noci).
+Direktne ponude za odmor u Crnoj Gori 05.09-13.09.2026 (2 odrasle, 8 noci).
 
 Cita STVARNE cene sa Booking.com preko headless Chrome-a (Booking blokira obican
 curl - vrati 202 i praznu stranicu - ali normalan browser prolazi).
@@ -8,9 +8,9 @@ curl - vrati 202 i praznu stranicu - ali normalan browser prolazi).
 Licna upotreba. Throttle 6 s izmedju upita, opisan User-Agent, HTML se kesira u
 kes/ pa se ponovni run ne obraca sajtu. Za bilo sta komercijalno - partner API.
 
-    ./skrejper.py            # svi gradovi, polupansion + all inclusive
+    ./skrejper.py            # sva mesta, sva cetiri pansiona
     ./skrejper.py --svez     # ignoriši keš
-    ./skrejper.py --grad Hanioti
+    ./skrejper.py --grad Becici
 """
 import argparse, hashlib, json, pathlib, re, subprocess, sys, time, html as htmllib
 from urllib.parse import urlencode
@@ -22,7 +22,7 @@ UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
 
 # Booking-ovi kodovi za pansion. PAZI: lako se zamene. Tacno mapiranje, procitano
 # tako sto se uzme oznaka koja stoji POSLE <input value="mealplan=N"> u istom <label>:
-#   1  = Breakfast included          (samo dorucak — NE koristimo)
+#   1  = Breakfast included          (samo dorucak)
 #   3  = All meals included          (pun pansion)
 #   4  = All-inclusive
 #   9  = Breakfast & dinner included (polupansion)
@@ -35,19 +35,21 @@ PANSION = {"ND": ("1", "noćenje s doručkom", "Breakfast included"),
            "FB": ("3", "pun pansion", "All meals included"),
            "AI": ("4", "all inclusive", "All-inclusive")}
 
-# Mesta: naziv za Booking pretragu -> km od Soluna (izracunato OSRM-om, ne prepisano)
-GRADOVI = {
-    "Nea Kallikratia": 42, "Sozopoli": 48, "Nea Plagia": 50, "Nea Flogita": 55,
-    "Nea Moudania": 61, "Nea Potidea": 68, "Paralia Katerinis": 73,
-    "Nea Fokea": 81, "Sani": 84, "Metamorfosi": 85, "Kriopigi": 89,
-    "Kallithea Halkidiki": 96, "Posidi": 104, "Polychrono": 105,
-    "Hanioti": 109, "Nikiti": 110, "Pefkochori": 113,
-}
+# Mesta za Booking pretragu. Ranije je ovde stajala i km od Soluna; za Crnu Goru
+# je kolona izbacena (primorje je kompaktno, pa udaljenost ne razlikuje ponude).
+# Dva trazena mesta su Becici i Herceg Novi — ostalo su njihovi neposredni susedi,
+# jer dva dana pred put uska pretraga ume da vrati skoro nista.
+GRADOVI = [
+    # Budvanska rivijera
+    "Becici", "Rafailovici", "Budva", "Sveti Stefan", "Przno",
+    # Boka, oko Herceg Novog
+    "Herceg Novi", "Igalo", "Njivice", "Djenovici", "Kumbor",
+]
 
 
 def uri(grad, kod):
     q = {
-        "ss": f"{grad}, Greece", "checkin": DOLAZAK, "checkout": ODLAZAK,
+        "ss": f"{grad}, Montenegro", "checkin": DOLAZAK, "checkout": ODLAZAK,
         "group_adults": OSOBA, "no_rooms": 1, "group_children": 0,
         "selected_currency": "EUR", "order": "price",
         "nflt": f"mealplan={kod}",
@@ -163,7 +165,7 @@ def raspari(dom, grad, pansion):
                     break
 
         out.append({
-            "hotel": ime, "grad": grad, "km": GRADOVI[grad], "pansion": pansion,
+            "hotel": ime, "grad": grad, "pansion": pansion,
             "pansionTekst": ptekst,
             "cena": cena, "ocena": ocena, "brOcena": brOcena, "zvezdice": zvez,
             "udaljenost": udalj, "soba": soba,
@@ -187,7 +189,7 @@ def main():
     gradovi = [x.strip() for x in a.grad.split(",")] if a.grad else list(GRADOVI)
     for g in gradovi:
         if g not in GRADOVI:
-            raise SystemExit(f"Nepoznat grad: {g}. Poznati: {', '.join(GRADOVI)}")
+            raise SystemExit(f"Nepoznato mesto: {g}. Poznata: {', '.join(GRADOVI)}")
     svi, iz_kesa = [], 0
     for grad in gradovi:
         for kljuc, (kod, ime, oznaka) in PANSION.items():

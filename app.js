@@ -54,7 +54,12 @@ function kartica(h) {
   red.push(["Do centra mesta", `<strong>${metriC(h.centarM)}</strong>` +
     (h.centarMesto && h.centarMesto !== h.mesto
       ? ` <span class="mini">— Booking centar računa od ${esc(h.centarMesto)}</span>` : "")]);
-  red.push(["Od Soluna", `${h.km} km, vožnja oko ${esc(h.vozOko)}`]);
+  // Agodina cena je PROCENA (njena cena po noći × broj noći) i ne zna se za koji
+  // je pansion — zato stoji odvojeno od Booking-ovih cena i ne ulazi u bodove.
+  if (h.agoda) red.push(["Za poređenje — Agoda",
+    `<strong class="${h.jeftinijeAgoda ? "suma dobro" : ""}">≈ ${eur(h.agoda.cenaUkupno)}</strong>` +
+    ` <span class="mini">(${eur(h.agoda.cenaNoc)} po noći × ${NOCI})</span>` +
+    `<br><span class="mini">procena, sa taksama; ne zna se koji pansion — proveriti klikom</span>`]);
 
   const raz = Object.entries(h.razrada)
     .map(([k, v]) => `<div class="stub"><span>${esc(RAZRADA_IME[k])}</span>` +
@@ -69,8 +74,8 @@ function kartica(h) {
       `<span class="mini">${esc(dd.napomena || "")}</span>`]);
   }
 
-  const maps = `https://www.google.com/maps/dir/Thessaloniki/${encodeURIComponent(h.hotel + ", " + h.mesto + ", Greece")}`;
-  const trazi = `https://www.google.com/search?q=${encodeURIComponent('"' + h.hotel + '" ' + h.mesto + " Greece official site")}`;
+  const maps = `https://www.google.com/maps/search/${encodeURIComponent(h.hotel + ", " + h.mesto + ", Montenegro")}`;
+  const trazi = `https://www.google.com/search?q=${encodeURIComponent('"' + h.hotel + '" ' + h.mesto + " Montenegro zvanični sajt")}`;
 
   return `
   <div class="card${done ? " done" : ""}">
@@ -80,13 +85,14 @@ function kartica(h) {
       <p class="pos">
         <span class="bod ${bodNivo(h.bodovi)}" title="Bodovi preporuke, vidi objašnjenje na dnu">${h.bodovi}</span>
         ${esc(h.hotel)} ${h.zvezdice ? `<span class="stars">${"★".repeat(h.zvezdice)}</span>` : ""}</p>
-      <p class="firma">${esc(h.mesto)} — ${h.km} km od Soluna</p>
+      <p class="firma">${esc(h.mesto)} — ${esc(h.rivijera)}</p>
 
       <div class="badges">
         ${Object.keys(h.cene).map(p => `<span class="badge p-${p}">${esc(PANSION_IME[p])}</span>`).join("")}
         <span class="badge ${h.uBudzetu ? "ok" : "bad"}">${h.uBudzetu ? "u budžetu" : "preko budžeta"}</span>
         ${h.naPlazi ? '<span class="badge ok">na plaži</span>' : ""}
         ${h.direktno ? '<span class="badge">ima direktan kontakt</span>' : ""}
+        ${h.jeftinijeAgoda ? '<span class="badge ok">jeftinije na Agodi</span>' : ""}
         ${h.takseUkljucene ? '<span class="badge">takse uključene</span>' : '<span class="badge warn">takse se doplaćuju</span>'}
       </div>
 
@@ -109,7 +115,8 @@ function kartica(h) {
         ${h.direktno && h.direktno.sajt
           ? `<a href="${esc(h.direktno.sajt)}" target="_blank" rel="noopener">Sajt hotela ↗</a>`
           : `<a href="${trazi}" target="_blank" rel="noopener">Traži hotel direktno ↗</a>`}
-        <a href="${maps}" target="_blank" rel="noopener">Ruta od Soluna ↗</a>
+        ${h.agoda ? `<a href="${esc(h.agoda.link)}" target="_blank" rel="noopener">Agoda ↗</a>` : ""}
+        <a href="${maps}" target="_blank" rel="noopener">Na mapi ↗</a>
       </div>
     </div>
   </div>`;
@@ -130,7 +137,6 @@ function crtaj() {
   const q = el("q").value.trim().toLowerCase();
   const s = el("sort").value;
   const pans = aktivniPansioni();
-  const maxKm = Number(el("km").value);
   const minOcena = Number(el("ocena").value);
   const maxPlaza = Number(el("plaza").value);
   const maxCentar = Number(el("centar").value);
@@ -144,7 +150,6 @@ function crtaj() {
   };
 
   if (pans.length) lista = lista.filter(h => pans.some(p => h.cene[p]));
-  lista = lista.filter(h => h.km <= maxKm);
   lista = lista.filter(h => !minOcena || (h.ocena || 0) >= minOcena);
   // Hotel bez podatka o plaži se ne izbacuje filterom — bolje ga videti pa proveriti.
   if (maxPlaza < 1500) lista = lista.filter(h => h.plazaM == null || h.plazaM <= maxPlaza);
@@ -158,7 +163,6 @@ function crtaj() {
     : s === "ocena"  ? (b.ocena || 0) - (a.ocena || 0) || b.bodovi - a.bodovi
     : s === "plaza"  ? (a.plazaM ?? 9999) - (b.plazaM ?? 9999) || b.bodovi - a.bodovi
     : s === "centar" ? (a.centarM ?? 9999) - (b.centarM ?? 9999) || b.bodovi - a.bodovi
-    : s === "km"     ? a.km - b.km || b.bodovi - a.bodovi
     : s === "zivost" ? b.zivost - a.zivost || b.bodovi - a.bodovi
     : b.bodovi - a.bodovi);
 
@@ -171,7 +175,6 @@ function crtaj() {
   const brA = HOTELI.filter(h => !obradjen(h)).length;
   el("c-aktivno").textContent   = `(${brA})`;
   el("c-obradjeno").textContent = `(${HOTELI.length - brA})`;
-  el("km-vrednost").textContent    = maxKm >= 125 ? "bez granice" : `do ${maxKm} km`;
   el("ocena-vrednost").textContent = minOcena ? `od ${minOcena.toFixed(1)}` : "sve";
   el("plaza-vrednost").textContent = maxPlaza >= 1500 ? "bez granice" : `do ${maxPlaza} m`;
   el("centar-vrednost").textContent = maxCentar >= 2500 ? "bez granice" : `do ${maxCentar} m`;
@@ -184,7 +187,28 @@ el("lista").addEventListener("change", e => {
   if (!cb || !cb.dataset.id) return;
   stanje[cb.dataset.id] = cb.checked;
   snimi();
-  crtaj();
+  // Tragovi sa Agode. Namerno odvojeno od HOTELI i od bodovanja — vidi napravi.py.
+(function agodaBlok() {
+  if (typeof SAMO_AGODA === "undefined" || !SAMO_AGODA.length) return;
+  el("agoda-blok").hidden = false;
+  el("agoda-lista").innerHTML = `<table class="tragovi">
+    <thead><tr><th>Smeštaj</th><th>Mesto <span class="mini">(Agodino)</span></th>
+      <th>Ocena</th><th>Procena za ${NOCI} noći</th><th></th></tr></thead>
+    <tbody>${SAMO_AGODA.map(a => `<tr>
+      <td>${esc(a.hotel)}</td>
+      <td>${esc(a.mesto)}</td>
+      <td>${a.ocena ?? "—"}</td>
+      <td class="${a.cenaUkupno <= BUDZET ? "suma dobro" : ""}">≈ ${eur(a.cenaUkupno)}
+        <span class="mini">(${eur(a.cenaNoc)}/noć)</span></td>
+      <td>${a.link ? `<a href="${esc(a.link)}" target="_blank" rel="noopener">Agoda ↗</a>` : ""}
+        ${a.direktno ? `<br><a href="${esc(a.direktno.sajt)}" target="_blank" rel="noopener">Sajt ↗</a>
+          ${a.direktno.telefon ? `<br><a href="tel:${esc(a.direktno.telefon.replace(/[^+\d]/g, ""))}">${esc(a.direktno.telefon)}</a>` : ""}
+          ${a.direktno.email ? `<br><a href="mailto:${esc(a.direktno.email)}">${esc(a.direktno.email)}</a>` : ""}
+          <br><span class="mini">${esc(a.direktno.napomena || "")}</span>` : ""}</td>
+    </tr>`).join("")}</tbody></table>`;
+})();
+
+crtaj();
 });
 
 for (const [id, val] of [["tab-aktivno", "aktivno"], ["tab-obradjeno", "obradjeno"]]) {
@@ -192,18 +216,81 @@ for (const [id, val] of [["tab-aktivno", "aktivno"], ["tab-obradjeno", "obradjen
     tab = val;
     el("tab-aktivno").setAttribute("aria-selected", String(val === "aktivno"));
     el("tab-obradjeno").setAttribute("aria-selected", String(val === "obradjeno"));
-    crtaj();
+    // Tragovi sa Agode. Namerno odvojeno od HOTELI i od bodovanja — vidi napravi.py.
+(function agodaBlok() {
+  if (typeof SAMO_AGODA === "undefined" || !SAMO_AGODA.length) return;
+  el("agoda-blok").hidden = false;
+  el("agoda-lista").innerHTML = `<table class="tragovi">
+    <thead><tr><th>Smeštaj</th><th>Mesto <span class="mini">(Agodino)</span></th>
+      <th>Ocena</th><th>Procena za ${NOCI} noći</th><th></th></tr></thead>
+    <tbody>${SAMO_AGODA.map(a => `<tr>
+      <td>${esc(a.hotel)}</td>
+      <td>${esc(a.mesto)}</td>
+      <td>${a.ocena ?? "—"}</td>
+      <td class="${a.cenaUkupno <= BUDZET ? "suma dobro" : ""}">≈ ${eur(a.cenaUkupno)}
+        <span class="mini">(${eur(a.cenaNoc)}/noć)</span></td>
+      <td>${a.link ? `<a href="${esc(a.link)}" target="_blank" rel="noopener">Agoda ↗</a>` : ""}
+        ${a.direktno ? `<br><a href="${esc(a.direktno.sajt)}" target="_blank" rel="noopener">Sajt ↗</a>
+          ${a.direktno.telefon ? `<br><a href="tel:${esc(a.direktno.telefon.replace(/[^+\d]/g, ""))}">${esc(a.direktno.telefon)}</a>` : ""}
+          ${a.direktno.email ? `<br><a href="mailto:${esc(a.direktno.email)}">${esc(a.direktno.email)}</a>` : ""}
+          <br><span class="mini">${esc(a.direktno.napomena || "")}</span>` : ""}</td>
+    </tr>`).join("")}</tbody></table>`;
+})();
+
+crtaj();
   });
 }
 
 el("q").addEventListener("input", crtaj);
 el("sort").addEventListener("change", crtaj);
-for (const id of ["km", "ocena", "plaza", "centar"]) el(id).addEventListener("input", crtaj);
+for (const id of ["ocena", "plaza", "centar"]) el(id).addEventListener("input", crtaj);
 el("samo-budzet").addEventListener("change", crtaj);
 document.querySelectorAll(".pansion-filter input").forEach(i => i.addEventListener("change", crtaj));
 el("reset").addEventListener("click", () => {
   if (!confirm("Vratiti sve hotele u „Aktivno“?")) return;
-  stanje = {}; snimi(); crtaj();
+  stanje = {}; snimi(); // Tragovi sa Agode. Namerno odvojeno od HOTELI i od bodovanja — vidi napravi.py.
+(function agodaBlok() {
+  if (typeof SAMO_AGODA === "undefined" || !SAMO_AGODA.length) return;
+  el("agoda-blok").hidden = false;
+  el("agoda-lista").innerHTML = `<table class="tragovi">
+    <thead><tr><th>Smeštaj</th><th>Mesto <span class="mini">(Agodino)</span></th>
+      <th>Ocena</th><th>Procena za ${NOCI} noći</th><th></th></tr></thead>
+    <tbody>${SAMO_AGODA.map(a => `<tr>
+      <td>${esc(a.hotel)}</td>
+      <td>${esc(a.mesto)}</td>
+      <td>${a.ocena ?? "—"}</td>
+      <td class="${a.cenaUkupno <= BUDZET ? "suma dobro" : ""}">≈ ${eur(a.cenaUkupno)}
+        <span class="mini">(${eur(a.cenaNoc)}/noć)</span></td>
+      <td>${a.link ? `<a href="${esc(a.link)}" target="_blank" rel="noopener">Agoda ↗</a>` : ""}
+        ${a.direktno ? `<br><a href="${esc(a.direktno.sajt)}" target="_blank" rel="noopener">Sajt ↗</a>
+          ${a.direktno.telefon ? `<br><a href="tel:${esc(a.direktno.telefon.replace(/[^+\d]/g, ""))}">${esc(a.direktno.telefon)}</a>` : ""}
+          ${a.direktno.email ? `<br><a href="mailto:${esc(a.direktno.email)}">${esc(a.direktno.email)}</a>` : ""}
+          <br><span class="mini">${esc(a.direktno.napomena || "")}</span>` : ""}</td>
+    </tr>`).join("")}</tbody></table>`;
+})();
+
+crtaj();
 });
+
+// Tragovi sa Agode. Namerno odvojeno od HOTELI i od bodovanja — vidi napravi.py.
+(function agodaBlok() {
+  if (typeof SAMO_AGODA === "undefined" || !SAMO_AGODA.length) return;
+  el("agoda-blok").hidden = false;
+  el("agoda-lista").innerHTML = `<table class="tragovi">
+    <thead><tr><th>Smeštaj</th><th>Mesto <span class="mini">(Agodino)</span></th>
+      <th>Ocena</th><th>Procena za ${NOCI} noći</th><th></th></tr></thead>
+    <tbody>${SAMO_AGODA.map(a => `<tr>
+      <td>${esc(a.hotel)}</td>
+      <td>${esc(a.mesto)}</td>
+      <td>${a.ocena ?? "—"}</td>
+      <td class="${a.cenaUkupno <= BUDZET ? "suma dobro" : ""}">≈ ${eur(a.cenaUkupno)}
+        <span class="mini">(${eur(a.cenaNoc)}/noć)</span></td>
+      <td>${a.link ? `<a href="${esc(a.link)}" target="_blank" rel="noopener">Agoda ↗</a>` : ""}
+        ${a.direktno ? `<br><a href="${esc(a.direktno.sajt)}" target="_blank" rel="noopener">Sajt ↗</a>
+          ${a.direktno.telefon ? `<br><a href="tel:${esc(a.direktno.telefon.replace(/[^+\d]/g, ""))}">${esc(a.direktno.telefon)}</a>` : ""}
+          ${a.direktno.email ? `<br><a href="mailto:${esc(a.direktno.email)}">${esc(a.direktno.email)}</a>` : ""}
+          <br><span class="mini">${esc(a.direktno.napomena || "")}</span>` : ""}</td>
+    </tr>`).join("")}</tbody></table>`;
+})();
 
 crtaj();

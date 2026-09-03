@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
 """
-mesta.json (rucno) + ponude.json (skrejper.py) -> podaci.js
+mesta.json (rucno) + ponude.json (skrejper.py) + agoda.json (agoda.py) -> podaci.js
 
-Spaja ponude istog hotela iz PP i AI pretrage u jednu karticu, dedupira hotele koji
-se pojave u pretrazi vise mesta (Booking siri radijus), i dodaje linkove za
-uporedjivanje cene (Google Hotels, Trivago) sa vec upisanim datumima.
+Spaja ponude istog hotela iz sve cetiri pretrage po pansionu u jednu karticu,
+dedupira hotele koji se pojave u pretrazi vise mesta (Booking siri radijus),
+prilepi Agodinu cenu za poredjenje i doda linkove sa vec upisanim datumima.
+
+Kolone km od polazista NEMA — izbacena je pri selidbi sa Grcke na Crnu Goru
+(crnogorsko primorje je kompaktno, udaljenost ne razlikuje ponude medjusobno).
+Zato je nema ni u mesta.json, ni u bodovanju, ni na strani.
 """
 import json, pathlib, re, sys, urllib.parse as up
 
@@ -18,6 +22,19 @@ pon = json.loads((D / "ponude.json").read_text("utf-8"))
 dir_put = D / "direktno.json"
 dirk = {k: v for k, v in json.loads(dir_put.read_text("utf-8")).items()
         if not k.startswith("_")} if dir_put.exists() else {}
+
+# Agodine cene za poredjenje. NE ulaze u bodovanje — vidi objasnjenje u agoda.py.
+ag_put = D / "agoda.json"
+AGODA = {}
+if ag_put.exists():
+    _ag = json.loads(ag_put.read_text("utf-8"))
+    AGODA_PRIKUPLJENO = _ag["prikupljeno"]
+    for x in _ag["ponude"]:
+        k = re.sub(r"\W+", "", x["hotel"].lower())
+        if x["cenaUkupno"] and (k not in AGODA or x["cenaUkupno"] < AGODA[k]["cenaUkupno"]):
+            AGODA[k] = x
+else:
+    AGODA_PRIKUPLJENO = None
 
 det_put = D / "detalji.json"
 if not det_put.exists():
@@ -83,37 +100,44 @@ def km_ključ(rec):
     return min(rec["gradovi"], key=lambda g: daljina(rec["gradovi"][g]))
 
 
-# Preko ovoliko km od centra pripisanog mesta hotel se NE racuna kao "u mestu":
-# tada km od Soluna nije poznata tacno, jer se ne zna u kom smeru je hotel.
+# Preko ovoliko km od centra pripisanog mesta hotel se NE racuna kao "u mestu".
+# Booking pretraga jednog mesta redovno vrati i hotele iz sire okoline: strana za
+# Becice ima 25 kartica, a sam Booking na njoj pise "Becici: 2 properties found".
 U_MESTU_KM = 3.0
 
 # Booking na strani hotela kaze "X m from the centre of <mesto>" — to je pouzdaniji
-# podatak o mestu od pretrage (pretraga siri radijus). Nazivi se pisu razlicito
-# (Polykhrono/Polychrono, Kallithea Halkidikis/Kallithea Halkidiki), pa se svode
-# na klucove iz mesta.json.
+# podatak o mestu od pretrage (pretraga siri radijus). Nazivi se pisu i latinicom
+# bez dijakritike i sa njom, pa se svode na klucove iz mesta.json.
 ALIJASI = {
-    "polykhrono": "Polychrono", "polichrono": "Polychrono",
-    "kallithea halkidikis": "Kallithea Halkidiki", "kalithea": "Kallithea Halkidiki",
-    "kallithea": "Kallithea Halkidiki",
-    "pefkohori": "Pefkochori", "pefkokhori": "Pefkochori",
-    "chaniotis": "Hanioti", "khanioti": "Hanioti",
-    "nea kalikratia": "Nea Kallikratia", "nea kallikrateia": "Nea Kallikratia",
-    "nea moudhania": "Nea Moudania", "moudania": "Nea Moudania",
-    "paralia katerini": "Paralia Katerinis", "paralia": "Paralia Katerinis",
-    "nea fokaia": "Nea Fokea", "nea phokaia": "Nea Fokea",
-    "posidhi": "Posidi", "possidi": "Posidi",
-    "nikitas": "Nikiti", "nikity": "Nikiti",
-    "kriopiyi": "Kriopigi", "criopigi": "Kriopigi",
-    "metamorphosi": "Metamorfosi", "metamorfosis": "Metamorfosi",
-    "nea potidhaia": "Nea Potidea", "nea potidaia": "Nea Potidea",
-    "nea plagia": "Nea Plagia", "nea flogita": "Nea Flogita",
-    "sozopolis": "Sozopoli", "sani beach": "Sani", "sane": "Sani",
-    "afytos": "Afitos", "athytos": "Afitos", "afitos": "Afitos",
-    "nea potidaea": "Nea Potidea", "nea potidhaea": "Nea Potidea",
-    "olympiaki akti": "Olympiaki Akti", "olympic beach": "Olympiaki Akti",
-    "elia": "Elia Sithonia", "agia paraskevi": "Agia Paraskevi Kassandra",
-    "ayios nikolaos": "Ayios Nikolaos Sithonia", "agios nikolaos": "Ayios Nikolaos Sithonia",
+    # Budvanska rivijera
+    "becici": "Becici", "bečići": "Becici", "becici beach": "Becici",
+    "rafailovici": "Rafailovici", "rafailovići": "Rafailovici",
+    "budva": "Budva", "budva riviera": "Budva",
+    "sveti stefan": "Sveti Stefan", "st. stefan": "Sveti Stefan",
+    "przno": "Przno", "pržno": "Przno", "przno beach": "Przno",
+    # Boka
+    "herceg novi": "Herceg Novi", "herceg-novi": "Herceg Novi",
+    "igalo": "Igalo",
+    "njivice": "Njivice",
+    "djenovici": "Djenovici", "đenovići": "Djenovici", "denovici": "Djenovici",
+    "kumbor": "Kumbor",
+    # Nisu pretrazivani kao polazna mesta, ali ih je Booking prijavio kao pravo
+    # mesto hotela nadjenih u susednoj pretrazi — i oba su unutar istog pojasa.
+    "baosici": "Baosici", "baošići": "Baosici",
+    # Booking-ove mrvice umeju da siđu na nivo kvarta, ne mesta: Španjola je
+    # tvrđava i kraj IZNAD hercegnovskog starog grada, pod Herceg Novi County.
+    "spanjola": "Herceg Novi", "španjola": "Herceg Novi",
+    "suscepan": "Suscepan", "sušćepan": "Suscepan", "sušcepan": "Suscepan",
 }
+
+
+KVACICE = str.maketrans({"č": "c", "ć": "c", "š": "s", "ž": "z", "đ": "d",
+                         "Č": "c", "Ć": "c", "Š": "s", "Ž": "z", "Đ": "d",
+                         "ð": "d", "Ð": "d"})   # Booking Đ ume da posalje kao Ð/ð
+
+
+def bez_kvacica(s):
+    return s.translate(KVACICE).lower().replace("-", " ").strip()
 
 
 def svedi(naziv, mesta):
@@ -128,11 +152,17 @@ def svedi(naziv, mesta):
     for k, v in mesta.items():
         if n == k.lower() or n == v["ime"].lower():
             return k
-    return None
+    # Poslednja mreza: bez kvacica i bez crtice ("Herceg-Novi" -> "herceg novi",
+    # "Ðenovići" -> "denovici"). Booking pise ista mesta na vise nacina.
+    b = bez_kvacica(naziv)
+    for k, v in mesta.items():
+        if b in (bez_kvacica(k), bez_kvacica(v["ime"])):
+            return k
+    return ALIJASI.get(b)
 
 
 def komparator(hotel, grad):
-    q = up.quote_plus(f"{hotel} {mesta[grad]['ime']} Greece")
+    q = up.quote_plus(f"{hotel} {mesta[grad]['ime']} Montenegro")
     return [
         {"naziv": "Google Hotels — uporedi sve", "url":
          f"https://www.google.com/travel/search?q={q}&qs=CAE&ap=MABoAA"},
@@ -196,11 +226,18 @@ for rec in h.values():
     # Booking na strani hotela kaze kog je mesta centar i koliko je od njega.
     # To je pouzdanije od pretrage: pretraga jednog mesta nadje i hotel koji je
     # 8 km od NJEGA a 300 m od svog sopstvenog mesta.
-    pravo = svedi(dd.get("centarMesto"), mesta)
+    # Redosled izvora za MESTO: Booking-ove mrvice (kanonske) pa FAQ pa pretraga.
+    izvorMesta = dd.get("mestoMrvica") or dd.get("centarMesto")
+    pravo = svedi(izvorMesta, mesta)
     if pravo:
         grad, m = pravo, mesta[pravo]
-    elif dd.get("centarMesto"):
-        NEPOZNATA.setdefault(dd["centarMesto"], []).append(rec["hotel"])
+    elif izvorMesta:
+        # Booking zna kog je mesta hotel, a to mesto NIJE na nasoj listi (Bijela,
+        # Baosici, Petrovac, Kotor...). Ranije se takav hotel prikazivao pod imenom
+        # mesta po kome ga je pretraga nasla — dakle sa POGRESNIM mestom. Sad ispada,
+        # a naziv se ispise na kraju da se doda u ALIJASI ako je ipak nase.
+        NEPOZNATA.setdefault(izvorMesta, []).append(rec["hotel"])
+        continue
 
     # Odluka "u mestu ili ne": po Booking-ovom centru ako ga ima, inace po pretrazi.
     uMestu = (centarM <= U_MESTU_KM * 1000) if centarM is not None else (off <= U_MESTU_KM)
@@ -215,10 +252,16 @@ for rec in h.values():
                                 naj <= BUDZET)
     link = rec["link"] or f"https://www.booking.com/searchresults.html?ss={up.quote_plus(rec['hotel'])}"
     sep = "&" if "?" in link else "?"
+
+    # Agodina cena za poredjenje. PROCENA (njena cena po noci x 8), ne tacan zbir
+    # kao kod Booking-a, i ne zna se za koji je pansion — zato NE ulazi u bodove.
+    ag = AGODA.get(re.sub(r"\W+", "", rec["hotel"].lower()))
+    agoda = {"cenaNoc": ag["cenaNoc"], "cenaUkupno": ag["cenaUkupno"],
+             "link": ag["link"], "ocena": ag["ocena"]} if ag else None
     out.append({
         "id": re.sub(r"[^a-z0-9]+", "-", rec["hotel"].lower()).strip("-")[:48],
-        "hotel": rec["hotel"], "grad": grad, "mesto": m["ime"], "km": m["km"],
-        "vozOko": m["vozOko"], "zivost": m["zivost"],
+        "hotel": rec["hotel"], "grad": grad, "mesto": m["ime"],
+        "rivijera": m["rivijera"], "zivost": m["zivost"],
         "plazaM": plazaM, "centarM": centarM,
         # "Na plazi" = Booking-ova izmerena udaljenost do najblize plaze do 50 m.
         "naPlazi": plazaM is not None and plazaM <= 50,
@@ -232,6 +275,10 @@ for rec in h.values():
         "udaljenostOdCentra": udaljTekst,
         "plazaBlizu": rec["plazaBlizu"], "takseUkljucene": rec["takseUkljucene"],
         "uBudzetu": naj <= BUDZET,
+        "agoda": agoda,
+        # "jeftinije na Agodi" tek ako je razlika veca od 3% — ispod toga je to sum
+        # dva razlicita nacina racunanja, ne prava usteda.
+        "jeftinijeAgoda": bool(agoda and agoda["cenaUkupno"] < naj * 0.97),
         "linkovi": [{"naziv": "Booking — datumi upisani", "url":
                      link + sep + "checkin=2026-09-05&checkout=2026-09-13"
                             "&group_adults=2&no_rooms=1&group_children=0"
@@ -240,7 +287,30 @@ for rec in h.values():
 
 out.sort(key=lambda r: -r["bodovi"])
 
-js = f"""// GENERISANO — ne menjaj rukom. Izvor: mesta.json + ponude.json, generator: napravi.py
+# --- tragovi: ima na Agodi, nema na Booking-u ---------------------------------
+# Ovi hoteli se NE mesaju sa glavnom listom i NE dobijaju bodove. O njima se zna
+# samo ime, Agodina ocena i procenjena cena — nema pansiona (Agoda ga ne daje
+# pouzdano), nema udaljenosti od plaze, a "mesto" je samo grad po kome ih je
+# pretraga nasla, ne Booking-ov proveren podatak. Zato su odvojeni i tako oznaceni.
+SAMO_AGODA_MIN_OCENA = 8.5
+SAMO_AGODA_MAX = 3 * BUDZET      # 3x budzet: taman da stane Iberostar Bellevue (~2.440 EUR),
+                                 # jedini veliki all inclusive u Becicima. Dalje od toga je sum.
+_uBookingu = {re.sub(r"\W+", "", x["hotel"].lower()) for x in pon["ponude"]}
+_imena_mesta = {k: v["ime"] for k, v in mesta.items()}
+samoAgoda = sorted(
+    (v for k, v in AGODA.items()
+     if k not in _uBookingu and (v["ocena"] or 0) >= SAMO_AGODA_MIN_OCENA
+     and v["cenaUkupno"] <= SAMO_AGODA_MAX),
+    key=lambda v: (-(v["ocena"] or 0), v["cenaUkupno"]))
+samoAgoda = [{"hotel": v["hotel"], "mesto": _imena_mesta.get(v["grad"], v["grad"]),
+              "ocena": v["ocena"], "cenaNoc": v["cenaNoc"],
+              "cenaUkupno": v["cenaUkupno"], "link": v["link"],
+              # i trag moze da ima rucno proveren kontakt — kljuc je isti slug kao gore
+              "direktno": dirk.get(re.sub(r"[^a-z0-9]+", "-", v["hotel"].lower()).strip("-")[:48])}
+             for v in samoAgoda]
+
+js = f"""// GENERISANO — ne menjaj rukom.
+// Izvor: mesta.json + ponude.json (+ agoda.json), generator: napravi.py
 //
 // Cene su STVARNE cene sa Booking.com-a za 05.09.–13.09.2026, 2 odrasle, 1 soba, EUR,
 // procitane {pon['prikupljeno']} pravim browserom (headless Chrome — Booking obicnom
@@ -248,30 +318,43 @@ js = f"""// GENERISANO — ne menjaj rukom. Izvor: mesta.json + ponude.json, gen
 //
 // STO OVO ZNACI ZA RASPOLOZIVOST: Booking pretraga sa upisanim datumima vraca samo ono sto
 // je slobodno; objekti oznaceni "sold out" su prepoznati po kartici i IZBACENI. Znaci —
-// za razliku od agencijskih cenovnika, ovde prisustvo hotela znaci da je 05.–13.09.
-// stvarno bilo slobodno u trenutku citanja. Cene i slobodne sobe se menjaju iz sata u sat.
+// prisustvo hotela na listi znaci da je 05.–13.09. stvarno bilo slobodno u trenutku
+// citanja. Dva dana pred put to se menja iz sata u sat — pre uplate proveriti.
 //
-// Pansion: PP = Booking filter "Breakfast & dinner included" (mealplan=1)
-//          AI = Booking filter "All-inclusive" (mealplan=9)
-// Kodovi filtera su procitani iz Booking-ovog menija, nisu pogodjeni.
+// Pansion (kodovi procitani iz Booking-ovog menija, nisu pogodjeni):
+//   ND = mealplan=1  "Breakfast included"           samo dorucak
+//   PP = mealplan=9  "Breakfast & dinner included"  polupansion
+//   FB = mealplan=3  "All meals included"           pun pansion
+//   AI = mealplan=4  "All-inclusive"
+// Sam filter se koristi samo kao rezerva — pansion se cita sa kartice hotela, jer je
+// filter "Breakfast included" NADSKUP i vraca i polupansion i all inclusive.
+//
+// AGODA: druga cena, samo za poredjenje. To je Agodina cena PO NOCI sa taksama
+// pomnozena sa {pon['noci']}, dakle PROCENA, i ne zna se za koji je pansion. Zato NE ULAZI
+// U BODOVE — bodovanje je iskljucivo na Booking-ovim brojevima.
 //
 // Google Hotels i Trivago linkovi imaju upisane datume, ali njihov sadrzaj NIJE
-// masinski proveren — oni se ucitavaju JavaScript-om i u headless dump-u vrate praznu
-// skoljku bez cena (Hotels.com odmah trazi captcha). Sluze za rucno uporedjivanje.
+// masinski proveren — ucitavaju se JavaScript-om i u headless dump-u vrate praznu
+// skoljku bez cena. Sluze za rucno uporedjivanje.
 
-const KLJUC = "odmor-grcka-2026-v2";
+const KLJUC = "odmor-crnagora-2026-v1";
 const DOLAZAK = "05.09.2026";
 const ODLAZAK = "13.09.2026";
 const NOCI = {pon['noci']};
 const OSOBA = {pon['osoba']};
 const BUDZET = {BUDZET};
 const PRIKUPLJENO = "{pon['prikupljeno']}";
+const AGODA_PRIKUPLJENO = {json.dumps(AGODA_PRIKUPLJENO)};
 
 const TEZINE = {json.dumps(TEZINE, ensure_ascii=False)};
 
-const MESTA = {json.dumps({m["ime"]: {"km": m["km"], "vozOko": m["vozOko"], "zivost": m["zivost"], "tekst": m["tekst"]} for k, m in mesta.items() if any(r["grad"] == k for r in out)}, ensure_ascii=False, indent=1)};
+const MESTA = {json.dumps({m["ime"]: {"rivijera": m["rivijera"], "zivost": m["zivost"], "tekst": m["tekst"]} for k, m in mesta.items() if any(r["grad"] == k for r in out)}, ensure_ascii=False, indent=1)};
 
 const HOTELI = {json.dumps(out, ensure_ascii=False, indent=1)};
+
+// Tragovi sa Agode kojih na Booking-u NEMA. Bez pansiona, bez udaljenosti od plaze,
+// mesto je samo Agodin grad pretrage. Ne ulaze u listu ni u bodove — vidi napravi.py.
+const SAMO_AGODA = {json.dumps(samoAgoda, ensure_ascii=False, indent=1)};
 """
 (D / "podaci.js").write_text(js, "utf-8")
 
@@ -295,6 +378,9 @@ print(f"  u budžetu (≤{BUDZET} €): {sum(r['uBudzetu'] for r in out)}")
 print(f"  ima all inclusive: {len(ai)}, od toga u budžetu: {sum(r['uBudzetu'] for r in ai)}")
 print(f"  verzija zalepljena na index.html: ?v={verzija}")
 print(f"  sa direktnim kontaktom: {sum(1 for r in out if r['direktno'])}")
+print(f"  sa Agodinom cenom: {sum(1 for r in out if r['agoda'])}"
+      f", jeftinije na Agodi: {sum(1 for r in out if r['jeftinijeAgoda'])}")
+print(f"  tragovi (ima na Agodi, nema na Booking-u): {len(samoAgoda)}")
 print(f"  po pansionu: " + ", ".join(f"{k}={v}" for k, v in sorted(raspodela.items())))
 print(f"  bez podatka o plaži: {len(bezPlaze)}"
       + ("   <-- SVI! detalji.json nije uvezan" if len(bezPlaze) == len(out) else ""))
