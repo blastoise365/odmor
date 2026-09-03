@@ -2,7 +2,7 @@
 // Izvor: mesta.json + ponude.json (+ agoda.json), generator: napravi.py
 //
 // Cene su STVARNE cene sa Booking.com-a za 05.09.–13.09.2026, 2 odrasle, 1 soba, EUR,
-// procitane 2026-09-03 12:01 pravim browserom (headless Chrome — Booking obicnom
+// procitane 2026-09-03 13:00 pravim browserom (headless Chrome — Booking obicnom
 // curl-u vrati 202 i praznu stranicu). Cena je UKUPNO ZA CEO BORAVAK ZA DVOJE, ne po osobi.
 //
 // STO OVO ZNACI ZA RASPOLOZIVOST: Booking pretraga sa upisanim datumima vraca samo ono sto
@@ -32,8 +32,8 @@ const ODLAZAK = "13.09.2026";
 const NOCI = 8;
 const OSOBA = 2;
 const BUDZET = 1100;
-const PRIKUPLJENO = "2026-09-03 12:01";
-const AGODA_PRIKUPLJENO = "2026-09-03 12:15";
+const PRIKUPLJENO = "2026-09-03 13:00";
+const AGODA_PRIKUPLJENO = "2026-09-03 13:01";
 
 const TEZINE = {"ocena": 0.34, "cena": 0.18, "plaza": 0.18, "centar": 0.1, "zivost": 0.1, "pansion": 0.1};
 
@@ -77,6 +77,11 @@ const MESTA = {
   "rivijera": "Boka Kotorska (zaleđe)",
   "zivost": 1,
   "tekst": "Selo IZNAD Herceg Novog, četiri kilometra od mora i uzbrdo — nije primorsko mesto. Mirno i zeleno, ali se do plaže mora autom i van sela nema skoro ničega. Na listi je jer je smeštaj tu osetno jeftiniji; udaljenost od plaže stoji na kartici, gledati je."
+ },
+ "Petrovac": {
+  "rivijera": "Budvanska rivijera",
+  "zivost": 4,
+  "tekst": "Nije susedno mesto ni Bečićima ni Herceg Novom — 17 km je južno od Budve — i na listi je zato što polupansiona drugde skoro da nema. Malo mesto sa borovima do same vode, crvenkastim šljunkom, mletačkom tvrđavicom Kastio i dugom šetnicom punom restorana. Mirnije i porodičnije od Budve, tradicionalno puno naših ljudi, ali radi sve što treba: pijaca, apoteka, prodavnice. Glavna plaža je kratka i preko leta zna da bude puna; Lučice su pet minuta hoda dalje i lepše."
  }
 };
 
@@ -526,6 +531,60 @@ const HOTELI = [
   ]
  },
  {
+  "id": "hotel-danica",
+  "hotel": "Hotel Danica",
+  "grad": "Petrovac na Moru",
+  "mesto": "Petrovac",
+  "rivijera": "Budvanska rivijera",
+  "zivost": 4,
+  "plazaM": 150,
+  "centarM": 500,
+  "naPlazi": false,
+  "centarMesto": "Petrovac na Moru",
+  "aerodromKm": 40,
+  "bodovi": 53,
+  "razrada": {
+   "ocena": 48,
+   "cena": 27,
+   "plaza": 81,
+   "centar": 58,
+   "zivost": 75,
+   "pansion": 40
+  },
+  "direktno": null,
+  "zvezdice": 3,
+  "ocena": 8.0,
+  "brOcena": 123,
+  "cene": {
+   "ND": 964
+  },
+  "najniza": 964,
+  "soba": {
+   "ND": "Double Room with Balcony (2 Adults + 1 Child)"
+  },
+  "najboljiPansion": "ND",
+  "udaljenostOdCentra": "0.6 km from centre",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": true,
+  "agoda": null,
+  "jeftinijeAgoda": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/me/danica.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Hotel+Danica+Petrovac+Montenegro&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Hotel+Danica+Petrovac+Montenegro&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
   "id": "hotel-apartments-hec-residence",
   "hotel": "Hotel & Apartments HEC Residence",
   "grad": "Sveti Stefan",
@@ -914,6 +973,121 @@ const HOTELI = [
   ]
  },
  {
+  "id": "hotel-rivijera",
+  "hotel": "Hotel Rivijera",
+  "grad": "Petrovac na Moru",
+  "mesto": "Petrovac",
+  "rivijera": "Budvanska rivijera",
+  "zivost": 4,
+  "plazaM": 100,
+  "centarM": 200,
+  "naPlazi": false,
+  "centarMesto": "Petrovac na Moru",
+  "aerodromKm": 40,
+  "bodovi": 45,
+  "razrada": {
+   "ocena": 0,
+   "cena": 35,
+   "plaza": 88,
+   "centar": 83,
+   "zivost": 75,
+   "pansion": 70
+  },
+  "direktno": null,
+  "zvezdice": 4,
+  "ocena": 5.1,
+  "brOcena": 312,
+  "cene": {
+   "PP": 1118,
+   "ND": 927
+  },
+  "najniza": 927,
+  "soba": {
+   "PP": "Standard Double Room with Balcony",
+   "ND": "Double Standard"
+  },
+  "najboljiPansion": "PP",
+  "udaljenostOdCentra": "250 m from centre",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": true,
+  "agoda": {
+   "cenaNoc": 117,
+   "cenaUkupno": 936,
+   "link": "https://www.agoda.com/en-gb/hotel-wgrand/hotel/petrovac-me.html",
+   "ocena": 7.0
+  },
+  "jeftinijeAgoda": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/me/rivijera.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Hotel+Rivijera+Petrovac+Montenegro&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Hotel+Rivijera+Petrovac+Montenegro&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "apartments-pod-lozom-with-seaview",
+  "hotel": "Apartments Pod Lozom with Seaview",
+  "grad": "Petrovac na Moru",
+  "mesto": "Petrovac",
+  "rivijera": "Budvanska rivijera",
+  "zivost": 4,
+  "plazaM": null,
+  "centarM": 250,
+  "naPlazi": false,
+  "centarMesto": null,
+  "aerodromKm": null,
+  "bodovi": 45,
+  "razrada": {
+   "ocena": 58,
+   "cena": 25,
+   "plaza": null,
+   "centar": 79,
+   "zivost": 75,
+   "pansion": 40
+  },
+  "direktno": null,
+  "zvezdice": 3,
+  "ocena": 8.3,
+  "brOcena": 19,
+  "cene": {
+   "ND": 976
+  },
+  "najniza": 976,
+  "soba": {
+   "ND": "Superior Apartment with Sea View"
+  },
+  "najboljiPansion": "ND",
+  "udaljenostOdCentra": "250 m from centre",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": true,
+  "agoda": null,
+  "jeftinijeAgoda": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/me/apartments-pod-lozom.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Apartments+Pod+Lozom+with+Seaview+Petrovac+Montenegro&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Apartments+Pod+Lozom+with+Seaview+Petrovac+Montenegro&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
   "id": "dolce-vita",
   "hotel": "Dolce Vita",
   "grad": "Budva",
@@ -1072,6 +1246,60 @@ const HOTELI = [
    {
     "naziv": "Trivago",
     "url": "https://www.trivago.com/en-US/srl?query=Apartments+V%C3%A9+Budva+Montenegro&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "piazza-apartments-1",
+  "hotel": "Piazza Apartments 1",
+  "grad": "Petrovac na Moru",
+  "mesto": "Petrovac",
+  "rivijera": "Budvanska rivijera",
+  "zivost": 4,
+  "plazaM": 0,
+  "centarM": 200,
+  "naPlazi": true,
+  "centarMesto": "Petrovac na Moru",
+  "aerodromKm": 40,
+  "bodovi": 32,
+  "razrada": {
+   "ocena": 97,
+   "cena": 0,
+   "plaza": 100,
+   "centar": 83,
+   "zivost": 75,
+   "pansion": 40
+  },
+  "direktno": null,
+  "zvezdice": 4,
+  "ocena": 9.5,
+  "brOcena": 60,
+  "cene": {
+   "ND": 1328
+  },
+  "najniza": 1328,
+  "soba": {
+   "ND": "Superior One-Bedroom Apartment"
+  },
+  "najboljiPansion": "ND",
+  "udaljenostOdCentra": "300 m from centre",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "agoda": null,
+  "jeftinijeAgoda": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/me/vukotic-obala.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Piazza+Apartments+1+Petrovac+Montenegro&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Piazza+Apartments+1+Petrovac+Montenegro&dr-20260905-20260913=&rc-2="
    }
   ]
  },
@@ -1244,6 +1472,60 @@ const HOTELI = [
    {
     "naziv": "Trivago",
     "url": "https://www.trivago.com/en-US/srl?query=PERLA+Apartments+Budva+Montenegro&dr-20260905-20260913=&rc-2="
+   }
+  ]
+ },
+ {
+  "id": "ambassador-apartments",
+  "hotel": "Ambassador Apartments",
+  "grad": "Petrovac na Moru",
+  "mesto": "Petrovac",
+  "rivijera": "Budvanska rivijera",
+  "zivost": 4,
+  "plazaM": 0,
+  "centarM": 400,
+  "naPlazi": true,
+  "centarMesto": "Petrovac na Moru",
+  "aerodromKm": 40,
+  "bodovi": 27,
+  "razrada": {
+   "ocena": 68,
+   "cena": 0,
+   "plaza": 100,
+   "centar": 67,
+   "zivost": 75,
+   "pansion": 40
+  },
+  "direktno": null,
+  "zvezdice": 4,
+  "ocena": 8.6,
+  "brOcena": 260,
+  "cene": {
+   "ND": 1564
+  },
+  "najniza": 1564,
+  "soba": {
+   "ND": "Two-Bedroom Apartment"
+  },
+  "najboljiPansion": "ND",
+  "udaljenostOdCentra": "450 m from centre",
+  "plazaBlizu": true,
+  "takseUkljucene": true,
+  "uBudzetu": false,
+  "agoda": null,
+  "jeftinijeAgoda": false,
+  "linkovi": [
+   {
+    "naziv": "Booking — datumi upisani",
+    "url": "https://www.booking.com/hotel/me/ambassador-apartments.en-gb.html?checkin=2026-09-05&checkout=2026-09-13&group_adults=2&no_rooms=1&group_children=0&selected_currency=EUR"
+   },
+   {
+    "naziv": "Google Hotels — uporedi sve",
+    "url": "https://www.google.com/travel/search?q=Ambassador+Apartments+Petrovac+Montenegro&qs=CAE&ap=MABoAA"
+   },
+   {
+    "naziv": "Trivago",
+    "url": "https://www.trivago.com/en-US/srl?query=Ambassador+Apartments+Petrovac+Montenegro&dr-20260905-20260913=&rc-2="
    }
   ]
  },
@@ -2046,6 +2328,15 @@ const SAMO_AGODA = [
   "direktno": null
  },
  {
+  "hotel": "Hotel Petrovac",
+  "mesto": "Petrovac",
+  "ocena": 9.8,
+  "cenaNoc": 153,
+  "cenaUkupno": 1224,
+  "link": "https://www.agoda.com/en-gb/hotel-zeta/hotel/all/budva-me.html",
+  "direktno": null
+ },
+ {
   "hotel": "Guest House Cvoro",
   "mesto": "Igalo",
   "ocena": 9.6,
@@ -2082,6 +2373,15 @@ const SAMO_AGODA = [
   "direktno": null
  },
  {
+  "hotel": "Apartments Ivan",
+  "mesto": "Petrovac",
+  "ocena": 9.3,
+  "cenaNoc": 84,
+  "cenaUkupno": 672,
+  "link": "https://www.agoda.com/en-gb/apartments-villa-relax/hotel/all/petrovac-me.html",
+  "direktno": null
+ },
+ {
   "hotel": "Apartments Boka Vista",
   "mesto": "Herceg Novi",
   "ocena": 9.3,
@@ -2109,12 +2409,12 @@ const SAMO_AGODA = [
   "direktno": null
  },
  {
-  "hotel": "Hotel Zeta",
-  "mesto": "Bečići",
-  "ocena": 9.2,
-  "cenaNoc": 150,
-  "cenaUkupno": 1200,
-  "link": "https://www.agoda.com/en-gb/hotel-zeta/hotel/all/budva-me.html",
+  "hotel": "WGrand hotel",
+  "mesto": "Petrovac",
+  "ocena": 9.1,
+  "cenaNoc": 93,
+  "cenaUkupno": 744,
+  "link": "https://www.agoda.com/en-gb/apartment-alexandra/hotel/all/petrovac-me.html",
   "direktno": null
  },
  {
@@ -2124,6 +2424,15 @@ const SAMO_AGODA = [
   "cenaNoc": 37,
   "cenaUkupno": 296,
   "link": "https://www.agoda.com/en-gb/vera/hotel/all/herceg-novi-me.html",
+  "direktno": null
+ },
+ {
+  "hotel": "Mahakala Center",
+  "mesto": "Petrovac",
+  "ocena": 8.9,
+  "cenaNoc": 98,
+  "cenaUkupno": 784,
+  "link": "https://www.agoda.com/en-gb/hotel-petrovac/hotel/all/petrovac-na-moru-me.html",
   "direktno": null
  },
  {

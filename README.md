@@ -25,10 +25,10 @@ Za ove datume, pročitano 03.09.2026:
 | pansion | nađeno |
 |---|---|
 | **all inclusive** | **1 hotel** — HOTEL TALIA 4★, Herceg Novi/Igalo, **1.845 €**. Preko budžeta. |
-| **pun pansion** | **nijedan slobodan** ni u jednom od 10 pretraženih mesta |
-| **polupansion** | **2 hotela** — Hotel Podostrog **1.054 €** (jedini u budžetu) i Splendid 5★ 4.276 € |
+| **pun pansion** | **nijedan slobodan** ni u jednom od 11 pretraženih mesta |
+| **polupansion** | **3 hotela** — Hotel Podostrog **1.054 €** (jedini u budžetu), Hotel Rivijera 1.118 € (Petrovac, ali **ocena 5,1** od 312 gostiju) i Splendid 5★ 4.276 € |
 
-Ostalih 33 su noćenje s doručkom. Doručak nije bezvredan — ostaje im budžet za večeru
+Ostalih 38 su noćenje s doručkom. Doručak nije bezvredan — ostaje im budžet za večeru
 napolju — ali treba znati da traženo nije nađeno u budžetu.
 
 Uz to, na Agodi (ne na Booking-u) postoji i **Iberostar Waves Bellevue**, veliki all
@@ -46,31 +46,38 @@ uopšte**. Vidi „Tragovi sa Agode" niže.
 Prva tri su nezavisna; `detalji.py` čita `ponude.json`, ne `podaci.js`, pa nema kružne
 zavisnosti i `napravi.py` se pokreće samo jednom, na kraju.
 
-- `skrejper.py` — Booking preko **headless Chrome-a**, 10 mesta × 4 pansiona = 40 pretraga.
+- `skrejper.py` — Booking preko **headless Chrome-a**, 11 mesta × 4 pansiona = 44 pretrage.
   Booking običnom `curl`-u vraća 202 i praznu stranicu; pravi browser prolazi bez captcha.
-  Throttle 6 s, opisan User-Agent, sve u `kes/`. Rezultat: **276 ponuda, 69 hotela**.
-- `agoda.py` — druga cena, za poređenje. Vidi celu sekciju niže. **77 ponuda sa cenom.**
+  Throttle 6 s, opisan User-Agent, sve u `kes/`. Rezultat: **304 ponude, 77 hotela**.
+- `agoda.py` — druga cena, za poređenje. Vidi celu sekciju niže. **88 ponuda sa cenom.**
 - `mesta.json` — **ručno**: opis mesta i ocena „živosti". Skrejperi ovo ne diraju.
-- `detalji.py` — čita **stranicu svakog hotela** (58 komada), jer udaljenosti od plaže,
+- `detalji.py` — čita **stranicu svakog hotela** (66 komada), jer udaljenosti od plaže,
   udaljenosti od centra i pravog mesta nema u rezultatima pretrage.
 - `napravi.py` — spaja ponude istog hotela u jednu karticu, dedupira, izbacuje hotele van
-  liste mesta, prilepi Agodinu cenu i računa bodove. Rezultat: **35 hotela iz 8 mesta,
-  18 u budžetu, 8 u samim Bečićima ili Herceg Novom.**
+  liste mesta, prilepi Agodinu cenu i računa bodove. Rezultat: **40 hotela iz 9 mesta,
+  21 u budžetu, 8 u samim Bečićima ili Herceg Novom.**
 - `podaci.js` — **generisano, ne menjati rukom.**
 
 ## Mesta
 
 Traženi su Bečići i Herceg Novi. Dva dana pred put uska pretraga vraća skoro ništa, pa su
 uzeti i njihovi neposredni susedi: **Bečići, Rafailovići, Budva, Sveti Stefan, Pržno**
-(budvanska rivijera) i **Herceg Novi, Igalo, Njivice, Đenovići, Kumbor** (Boka).
+(budvanska rivijera) i **Herceg Novi, Igalo, Njivice, Đenovići, Kumbor** (Boka), plus
+**Petrovac** — vidi niže.
+
 Naknadno su dodati **Baošići** i **Sušćepan**, koje pretraga nije gađala ali ih je Booking
 prijavio kao pravo mesto nađenih hotela — Baošići su tačno u istom nizu između Đenovića i
 Bijele, Sušćepan je selo iznad Herceg Novog.
 
-**Nisu dodati** iako je pretraga tamo našla hotele: Tivat (7 hotela), Petrovac na Moru (2),
-Donja Lastva (1). Petrovac je zanimljiv jer tamo ima polupansiona (Hotel Rivijera), ali je
-17 km južno od Budve i nije susedno mesto ni jednom od dva tražena — odluka je namerno
-ostavljena čoveku, nije se tiho proširivalo.
+**Petrovac na Moru je dodat naknadno i namerno se izdvaja od ostalih.** On *nije* susedno
+mesto — 17 km je južno od Budve — i u prvoj verziji nije bio uzet. Ušao je na izričit zahtev,
+zato što dva dana pred put polupansiona skoro da nema nigde, a u Petrovcu ga ima. Donosi
+5 hotela, od toga jedan polupansion (Hotel Rivijera, 1.118 €, ali ocena 5,1). Ovo je jedini
+izuzetak od pravila „samo Bečići, Herceg Novi i njihovi susedi" i ne treba ga širiti dalje
+bez iste takve potrebe — komentar u `GRADOVI` u `skrejper.py` to i kaže.
+
+**Nisu dodati** iako je pretraga tamo našla hotele: Tivat (7 hotela), Donja Lastva (1),
+Kaluđerac (1), Čanj (1) i Virpazar (1, uopšte nije na moru nego na Skadarskom jezeru).
 
 ### Kolona „km" je izbačena
 
@@ -103,7 +110,7 @@ vidi o čemu je reč.
 
 **Probano i odbačeno:** strukturirani `PostalAddress` sa iste strane. Njegov
 `addressLocality` je kod većine hotela **ulica** („Blaža Jovanovića", „Maslinski put"),
-a ne mesto — od 58 hotela samo par ih je imalo pravo mesto. Zavaralo je to što je baš
+a ne mesto — u trenutku provere, od 58 hotela samo par ih je imalo pravo mesto. Zavaralo je to što je baš
 Splendid, na kome je ideja probana, imao `"addressLocality": "Bečići b.b."`.
 
 ## Pansion — ovde je bila najveća greška
@@ -182,12 +189,12 @@ isključivo sa Booking-a.
 Ona je **procena** (cena po noći × 8, ne tačan zbir kao kod Booking-a) i ne zna se za koji
 je pansion. Mešanje dva izvora u jednu formulu je tiha greška koju posle niko ne primeti.
 Zato stoji odvojeno na kartici, sa oznakom „jeftinije na Agodi" kad je razlika veća od 3% —
-ispod toga je to šum dva različita načina računanja, ne prava ušteda. Trenutno: 7 hotela ima
+ispod toga je to šum dva različita načina računanja, ne prava ušteda. Trenutno: 8 hotela ima
 i Agodinu cenu, 2 su jeftinija tamo.
 
 ### Tragovi: ima na Agodi, nema na Booking-u
 
-**19 smeštaja** postoji na Agodi a ne pojavljuje se u Booking rezultatima. Prikazani su
+**22 smeštaja** postoje na Agodi a ne pojavljuju se u Booking rezultatima. Prikazani su
 **odvojeno, ispod glavne liste, bez bodova**, jer se o njima zna samo ime, Agodina ocena i
 procenjena cena: nema pansiona, nema udaljenosti od plaže, a „mesto" je samo Agodin grad
 pretrage — nije provereno kao gore. To je spisak tragova za proveru klikom, ne lista.
@@ -231,7 +238,7 @@ formulom.
 
 ## Podrazumevani filter
 
-Strana se otvara sa **uključenim filterom „Samo u budžetu"** (do 1.100 €) — 18 od 35
+Strana se otvara sa **uključenim filterom „Samo u budžetu"** (do 1.100 €) — 21 od 40
 hotela. Skuplji nisu izbačeni, samo sklonjeni; isključivanjem kućice se pojave svi, sa
 oznakom „preko budžeta".
 
@@ -245,7 +252,7 @@ oznakom „preko budžeta".
   znači da je 05.–13.09. **stvarno bilo slobodno u trenutku čitanja.** Dva dana pred put to
   se menja iz sata u sat.
 - **Udaljenost od plaže i od centra, i mesto** — pročitani sa stranice svakog hotela
-  pojedinačno (u rezultatima pretrage ih nema). Za 57 od 58 hotela ima podatak o plaži.
+  pojedinačno (u rezultatima pretrage ih nema). Za 64 od 66 hotela ima podatak o plaži.
 - **Agodina cena** — po noći, sa taksama; oboje potvrđeno mašinski, vidi gore.
 - **Kontakti hotela** — sa zvaničnih sajtova, pojedinačno.
 - **Boravišna taksa** — [budva.travel](https://budva.travel/registration-fee) kaže
@@ -314,5 +321,8 @@ Sve su bile prave greške u podacima, ne u kodu — i sve su ostavile trag u skr
   Strana to prikazuje rečima („na samoj plaži").
 - **Ne traži „Beachfront" u tekstu strane** — Booking na svakoj strani nosi rečnik prevoda,
   pa je ta reč uvek prisutna i oznaka je bila tačna za sve, dakle bezvredna.
+- **`--grad` prepisuje ceo `ponude.json` samo tim mestom.** I `skrejper.py` i `agoda.py`
+  na kraju pišu ceo fajl, pa run za jedno mesto obriše sve ostalo. Posle dodavanja mesta
+  uvek ide **pun run** — sve ostalo je ionako u kešu, pa traje sekund.
 - **Dva skrejpera nikad paralelno nad istim kešom.** `agoda.py` zato ima svoj `kes-agoda/`,
   ne deli `kes/` sa Booking-om.

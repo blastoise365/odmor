@@ -42,6 +42,10 @@ PANSION = {"ND": ("1", "noćenje s doručkom", "Breakfast included"),
 GRADOVI = [
     # Budvanska rivijera
     "Becici", "Rafailovici", "Budva", "Sveti Stefan", "Przno",
+    # Petrovac je 17 km juzno od Budve i nije susedno mesto ni Becicima ni Herceg
+    # Novom. Dodat je naknadno, na izricit zahtev: dva dana pred put polupansiona
+    # skoro da nema, a u Petrovcu ga ima. Ne prosirivati listu bez takve potrebe.
+    "Petrovac na Moru",
     # Boka, oko Herceg Novog
     "Herceg Novi", "Igalo", "Njivice", "Djenovici", "Kumbor",
 ]

@@ -115,6 +115,7 @@ ALIJASI = {
     "budva": "Budva", "budva riviera": "Budva",
     "sveti stefan": "Sveti Stefan", "st. stefan": "Sveti Stefan",
     "przno": "Przno", "pržno": "Przno", "przno beach": "Przno",
+    "petrovac na moru": "Petrovac na Moru", "petrovac": "Petrovac na Moru",
     # Boka
     "herceg novi": "Herceg Novi", "herceg-novi": "Herceg Novi",
     "igalo": "Igalo",

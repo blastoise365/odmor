@@ -37,6 +37,7 @@ UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
 SLUGOVI = {
     "Becici": "becici", "Rafailovici": "rafailovici", "Budva": "budva",
     "Sveti Stefan": "sveti-stefan", "Przno": "przno",
+    "Petrovac na Moru": "petrovac",
     "Herceg Novi": "herceg-novi", "Igalo": "igalo", "Njivice": "njivice",
     "Djenovici": "djenovici", "Kumbor": "kumbor",
 }
